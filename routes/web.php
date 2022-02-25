@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +20,28 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//users
+Route::get('users', 'UsersController@index');
+Route::get('users/{user}', 'UsersController@show');
+Route::post('users/create', 'UsersController@store');
+Route::put('users/update/{user}', 'UsersController@update');
+Route::delete('users/delete/{user}', 'UsersController@destroy');
+Route::get('/users/roles/{id}', 'UsersController@getUserPermissions');
+
+//departments
+Route::post('departments/create', 'DepartmentsController@store');
+Route::get('department-documents/{department}', 'DocumentsController@filterDepartmentDocuments');
+Route::get('departments/{department}', 'DepartmentsController@');
+Route::put('departments/update/{department}', 'DepartmentsController@update');
+Route::delete('departments/delete/{department}', 'DepartmentsController@destroy');
+
+//categories
+Route::get('categories', 'CategoriesController@index');
+Route::get('categories/{category}', 'CategoriesController@show');
+Route::post('categories/create', 'CategoriesController@store');
+Route::put('categories/update/{category}', 'CategoriesController@update');
+Route::delete('categories/delete/{category}', 'CategoriesController@destroy');
+
+

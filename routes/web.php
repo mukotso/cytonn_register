@@ -24,22 +24,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //users
 Route::get('users', 'UsersController@index');
-Route::get('users/{user}', 'UsersController@show');
-Route::post('users/create', 'UsersController@store');
-Route::put('users/update/{user}', 'UsersController@update');
-Route::delete('users/delete/{user}', 'UsersController@destroy');
+Route::post('user', 'UsersController@store');
+Route::put('user/{user}', 'UsersController@update');
+Route::delete('users/{user}', 'UsersController@destroy');
 
 //departments
 Route::get('departments', 'DepartmentsController@index');
-Route::post('departments/create', 'DepartmentsController@store');
-Route::put('departments/update/{department}', 'DepartmentsController@update');
-Route::delete('departments/delete/{department}', 'DepartmentsController@destroy');
+Route::post('department', 'DepartmentsController@store');
+Route::put('department/{department}', 'DepartmentsController@update');
+Route::delete('department/{department}', 'DepartmentsController@destroy');
 
-//categories
+// event categories
 Route::get('categories', 'CategoriesController@index');
-Route::get('categories/{category}', 'CategoriesController@show');
-Route::post('categories/create', 'CategoriesController@store');
-Route::put('categories/update/{category}', 'CategoriesController@update');
-Route::delete('categories/delete/{category}', 'CategoriesController@destroy');
+Route::post('category', 'CategoriesController@store');
+Route::put('category/{category}', 'CategoriesController@update');
+Route::delete('category/{category}', 'CategoriesController@destroy');
 
 

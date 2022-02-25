@@ -28,12 +28,10 @@ Route::get('users/{user}', 'UsersController@show');
 Route::post('users/create', 'UsersController@store');
 Route::put('users/update/{user}', 'UsersController@update');
 Route::delete('users/delete/{user}', 'UsersController@destroy');
-Route::get('/users/roles/{id}', 'UsersController@getUserPermissions');
 
 //departments
+Route::get('departments', 'DepartmentsController@index');
 Route::post('departments/create', 'DepartmentsController@store');
-Route::get('department-documents/{department}', 'DocumentsController@filterDepartmentDocuments');
-Route::get('departments/{department}', 'DepartmentsController@');
 Route::put('departments/update/{department}', 'DepartmentsController@update');
 Route::delete('departments/delete/{department}', 'DepartmentsController@destroy');
 

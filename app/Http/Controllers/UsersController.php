@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\User;
 use App\Http\Requests\addUserRequest;
 use App\Http\Requests\editUserRequest;
 use App\Interfaces\UserRepositoryInterface;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class UsersController extends Controller
 {
@@ -20,44 +19,45 @@ class UsersController extends Controller
     public function index()
     {
         $users = $this->userRepository->getAllUsers();
-        if(request()->expectsJson()){
+        if (request()->expectsJson()) {
             return response()->json($users, 200);
-        }else{
-            return  redirect()->route('users.index', compact('users'));
+        } else {
+            return redirect()->route('users.index', compact('users'));
         }
-
     }
 
     public function store(addUserRequest $request)
     {
 
         $user = $this->userRepository->createUser($request->all());
-        if(request()->expectsJson()) {
+        if (request()->expectsJson()) {
 
             return response()->json($user, 201);
-        }else{
-           return  redirect()->route('users.index');
+        } else {
+            return redirect()->route('users.index');
         }
-
-
-    }
-
-    public function show( $user)
-    {
-        $user = $this->userRepository->showUser($user);
-        return response()->json($user);
     }
 
     public function update(editUserRequest $request, User $user)
     {
         $user = $this->userRepository->updateUser($user, $request->all());
-        return response()->json($user, 201);
+        if (request()->expectsJson()) {
+            return response()->json($user, 201);
+        } else {
+            return redirect()->route('users.index');
+        }
+
     }
 
     public function destroy(User $user)
     {
         $this->userRepository->deleteUser($user->id);
-        return response()->json(200);
+        if (request()->expectsJson()) {
+            return response()->json(200);
+        } else {
+            return redirect()->route('users.index');
+        }
+
     }
 
 

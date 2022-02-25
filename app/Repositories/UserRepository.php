@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Http\Models\User;
 use App\Interfaces\UserRepositoryInterface;
 use App\Mail\UserRegistration;
+use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Exception;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -17,10 +17,6 @@ class UserRepository implements UserRepositoryInterface
         return User::all();
     }
 
-    public function deleteUser($userId)
-    {
-        return User::destroy($userId);
-    }
 
     public function createUser(array $userDetails)
     {
@@ -32,7 +28,7 @@ class UserRepository implements UserRepositoryInterface
                 $userDetails['password'] = $hashedPassword;
                 $userDetails['phone_number'] = '+254' . $userDetails['phone_number'];
                 $userDetails['email'] = strtolower(trim($userDetails['email']));
-//
+
                 $user = User::create($userDetails);
                 $details = [
                     'name' => $user->name,
@@ -44,9 +40,8 @@ class UserRepository implements UserRepositoryInterface
 
                 return $user;
             } catch (Exception $ex) {
-                dd($ex);
                 DB::rollBack();
-                return response()->json($ex,'400');
+                return response()->json('error', '400');
             }
         }, 2);
     }
@@ -56,10 +51,8 @@ class UserRepository implements UserRepositoryInterface
         return $user->update($newDetails);
     }
 
-    public function showUser($user)
+    public function deleteUser($userId)
     {
-        return User::where('id', $user)->with('department')->get();
+        return User::destroy($userId);
     }
-
-
 }

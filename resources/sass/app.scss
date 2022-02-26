@@ -4,3 +4,24 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+}
+//.container {
+//    margin: auto;
+//}
+
+
+//login
+@import "login";
+
+//media queries
+@import "mediaQueries";

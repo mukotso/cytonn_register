@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('users', 'UsersController@index');
 Route::post('user', 'UsersController@store');
 Route::put('user/{user}', 'UsersController@update');
-Route::delete('users/{user}', 'UsersController@destroy');
+Route::delete('user/{user}', 'UsersController@destroy');
 
 //departments
 Route::get('departments', 'DepartmentsController@index')->name('departments.index');

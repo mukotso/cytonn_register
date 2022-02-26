@@ -30,8 +30,7 @@ class UsersController extends Controller
 
         $user = $this->userRepository->createUser($request->all());
         if (request()->expectsJson()) {
-
-            return response()->json($user, 201);
+            return response()->json($user, 200);
         } else {
             return redirect()->route('users.index');
         }
@@ -41,7 +40,7 @@ class UsersController extends Controller
     {
         $user = $this->userRepository->updateUser($user, $request->all());
         if (request()->expectsJson()) {
-            return response()->json($user, 201);
+            return response()->json($user, 200);
         } else {
             return redirect()->route('users.index');
         }

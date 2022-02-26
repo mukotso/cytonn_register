@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="container mx-auto">
-        <h1>
-           USERS
-        </h1>
+        <users :users="{{$users}}">
+        </users>
     </div>
 @endsection

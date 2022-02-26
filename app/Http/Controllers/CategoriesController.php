@@ -32,7 +32,7 @@ class CategoriesController extends Controller
     {
         $category = $this->categoryRepository->createCategory($request->all());
         if(request()->expectsJson()) {
-            return response()->json($category, 201);
+            return response()->json($category, 200);
         }else{
             return  redirect()->route('categories.index');
         }
@@ -43,7 +43,7 @@ class CategoriesController extends Controller
     {
         $category = $this->categoryRepository->updateCategory($category, $request->all());
         if(request()->expectsJson()) {
-            return response()->json($category, 201);
+            return response()->json($category, 200);
         }else{
             return  redirect()->route('categories.index');
         }

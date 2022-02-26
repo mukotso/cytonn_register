@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="container mx-auto">
-        <h1>
-            CATEGORIES
-        </h1>
+        <category :categories="{{$categories}}">
+        </category>
     </div>
 @endsection

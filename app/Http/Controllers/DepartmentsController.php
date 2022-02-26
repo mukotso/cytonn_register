@@ -22,7 +22,7 @@ class DepartmentsController extends Controller
         if(request()->expectsJson()) {
             return response()->json($departments, 200);
         }else{
-            return  redirect()->route('departments.index');
+            return  view('departments.index', compact('departments'));
         }
 
     }
@@ -30,11 +30,11 @@ class DepartmentsController extends Controller
     public function store(DepartmentRequest $request)
     {
         $department = $this->departmentRepository->createDepartment($request->all());
-        if(request()->expectsJson()) {
-            return response()->json($department, 201);
-        }else{
+//        if(request()->expectsJson()) {
+//            return response()->json($department, 200);
+//        }else{
             return  redirect()->route('departments.index');
-        }
+//        }
 
     }
 
@@ -42,7 +42,7 @@ class DepartmentsController extends Controller
     {
         $department = $this->departmentRepository->updateDepartment($department, $request->all());
         if(request()->expectsJson()) {
-            return response()->json($department, 201);
+            return response()->json($department, 200);
         }else{
             return  redirect()->route('departments.index');
         }

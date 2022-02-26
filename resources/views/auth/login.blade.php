@@ -1,7 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.defaultLayout')
 @section('content')
 
+
                     <form id="loginForm" method="POST" action="{{ route('login') }}" class="m-auto">
+                        <img  src="{{ url('/images/logo2.png') }} " alt="logo">
                         @csrf
 
                         <div>

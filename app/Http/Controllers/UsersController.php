@@ -22,10 +22,9 @@ class UsersController extends Controller
         if (request()->expectsJson()) {
             return response()->json($users, 200);
         } else {
-            return redirect()->route('users.index', compact('users'));
+            return view('users.index', compact('users'));
         }
     }
-
     public function store(addUserRequest $request)
     {
 

@@ -21638,18 +21638,6 @@ video {
           animation: bounce 1s infinite;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  height: 100%;
-  font-family: "Lato", sans-serif;
-  overflow-x: hidden;
-}
-
 input,
 select,
 textarea {
@@ -21657,20 +21645,24 @@ textarea {
   background-color: white;
   border-radius: 0.25rem;
   padding: 10px;
-  margin-bottom: 3px;
-  width: 60%;
+  margin: 0% 5%;
+  width: 90%;
 }
 
 label {
   font-size: 22px;
   color: #000;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin: 2% 5%;
 }
 
 #loginForm {
   width: 50%;
   margin: auto;
+}
+
+#loginForm img {
+  margin: 5% 15%;
 }
 
 #loginForm #loginBtn {
@@ -21696,6 +21688,44 @@ label {
   .loginForm {
     width: 40%;
   }
+}
+
+nav {
+  background-image: linear-gradient(to bottom right, teal, lightgreen);
+}
+
+nav a {
+  font-weight: bold;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: larger;
+  color: #2E201B;
+}
+
+.btn {
+  background-color: #0B8A89;
+  color: #fff;
+  padding: 15px 60px;
+  font-weight: bolder;
+}
+
+.btn-submit {
+  background-color: #3AC100;
+  color: #fff;
+  padding: 15px 60px;
+  font-weight: bolder;
+  margin: 5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: "Lato", sans-serif;
+  overflow-x: hidden;
 }
 
 @media (min-width: 640px) {

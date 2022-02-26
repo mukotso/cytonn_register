@@ -29,7 +29,7 @@ Route::put('user/{user}', 'UsersController@update');
 Route::delete('users/{user}', 'UsersController@destroy');
 
 //departments
-Route::get('departments', 'DepartmentsController@index');
+Route::get('departments', 'DepartmentsController@index')->name('departments.index');
 Route::post('department', 'DepartmentsController@store');
 Route::put('department/{department}', 'DepartmentsController@update');
 Route::delete('department/{department}', 'DepartmentsController@destroy');

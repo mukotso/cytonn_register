@@ -23,7 +23,7 @@ class CategoriesController extends Controller
         if(request()->expectsJson()) {
             return response()->json($categories, 200);
         }else{
-            return  redirect()->route('categories.index');
+            return  view('categories.index', compact('categories'));
         }
 
     }

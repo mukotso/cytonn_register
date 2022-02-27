@@ -49931,8 +49931,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/F-Project/cytonn_register/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/F-Project/cytonn_register/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kmukotso/Desktop/projects/F-PROJECT/cytonn_register/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kmukotso/Desktop/projects/F-PROJECT/cytonn_register/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

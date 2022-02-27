@@ -41,3 +41,11 @@ Route::put('category/{category}', 'CategoriesController@update');
 Route::delete('category/{category}', 'CategoriesController@destroy');
 
 
+// events
+Route::get('events', 'EventsController@index');
+Route::post('event', 'EventsController@store');
+Route::put('event/{event}', 'EventsController@update');
+Route::delete('event/{event}', 'EventsController@destroy');
+
+//event frequencies
+Route::get('frequencies', 'FrequenciesController@index');

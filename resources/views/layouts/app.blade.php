@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Cytonn_register') }}</title>
+    <title>{{ config('app.name', 'Cytonn-register') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,7 +25,7 @@
     <nav-bar inline-template v-cloak>
         <div class="font-sans antialiased">
             <nav class="flex items-center justify-between flex-wrap p-6">
-                <div class="flex items-center flex-no-shrink text-blue-400 mr-6">
+                <div class="flex items-center flex-no-shrink  mr-6">
                     <span class="font-bold text-2xl tracking-tight">CYTONN REGISTER</span>
                 </div>
                 <div class="block sm:hidden">
@@ -71,7 +71,7 @@
                             My Events
                         </a>
 
-                        <a @click=""
+                        <a href="/events"
                            class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
                             <i class="mdi mdi-home text-blue-400 "></i>
                             All Events

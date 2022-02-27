@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +20,32 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//users
+Route::get('users', 'UsersController@index');
+Route::post('user', 'UsersController@store');
+Route::put('user/{user}', 'UsersController@update');
+Route::delete('user/{user}', 'UsersController@destroy');
+
+//departments
+Route::get('departments', 'DepartmentsController@index')->name('departments.index');
+Route::post('department', 'DepartmentsController@store');
+Route::put('department/{department}', 'DepartmentsController@update');
+Route::delete('department/{department}', 'DepartmentsController@destroy');
+
+// event categories
+Route::get('categories', 'CategoriesController@index');
+Route::post('category', 'CategoriesController@store');
+Route::put('category/{category}', 'CategoriesController@update');
+Route::delete('category/{category}', 'CategoriesController@destroy');
+
+
+// events
+Route::get('events', 'EventsController@index');
+Route::post('event', 'EventsController@store');
+Route::put('event/{event}', 'EventsController@update');
+Route::delete('event/{event}', 'EventsController@destroy');
+
+//event frequencies
+Route::get('frequencies', 'FrequenciesController@index');

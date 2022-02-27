@@ -1,0 +1,41 @@
+input,
+select,
+textarea {
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 0.25rem;
+    padding: 10px;
+    margin:0% 5%;
+    width: 90%;
+}
+label{
+    font-size:22px;
+    color:$black;
+    font-weight: bold;
+    margin:4% 5%;
+}
+
+#loginForm{
+    width:50%;
+    margin: auto;
+    img{
+        margin: 5% 15%;
+    }
+    #loginBtn {
+        @include button;
+    }
+    .login-btn-div{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 1080px) {
+    .loginForm{
+        width: 40%;
+    }
+}
+
+
+

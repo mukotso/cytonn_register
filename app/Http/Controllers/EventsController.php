@@ -29,7 +29,6 @@ class EventsController extends Controller
 
     public function store(EventRequest $request)
     {
-        dd($request->all());
         $event = $this->eventRepository->createEvent($request->all());
         if(request()->expectsJson()) {
             return response()->json($event, 200);

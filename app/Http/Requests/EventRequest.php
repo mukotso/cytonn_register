@@ -25,7 +25,6 @@ class EventRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'required',
         ];
     }
 
@@ -33,8 +32,7 @@ class EventRequest extends FormRequest
     {
         return [
             'name.required' => 'The  name input is required',
-            'description.required' => 'The category `description is required',
-        ];
+            ];
     }
 }
 

@@ -3,7 +3,7 @@
         <button v-if="showEvents"
                 class="btn"
                 type="button" @click="toggleAddEventForm">
-            <i class="fa fa-plus "></i> New Event
+            <i class="fa fa-plus "></i>New Event
         </button>
 
         <button v-if="isShowAddEventForm"
@@ -41,7 +41,7 @@
                                     <span>Venue</span>
                                 </div>
                                 <div>
-                                    <span>Date</span>
+                                    <span>Event Date</span>
                                 </div>
                                 <div>
                                     <span>Department(s)</span>
@@ -108,41 +108,31 @@ export default {
             showEvents: true,
             isEditEvent: false,
             form: {
-                eventForm: {
                     id:'',
                     name: '',
                     venue: '',
                     category_id: '',
                     frequency_id: '',
-                    start_date: '',
                     event_date: '',
-                    lead_time: '',
-                },
-                activityForm: {
+                    lead_date: '',
                     description: '',
-                    status: '',
-                },
-                eventTeamMemberForm: {
-                    user_id: '',
-                    is_owner: '',
-                    designation: '',
-                }
+
             }
         }
 
     },
     mounted() {
-        this.form.eventForm.name = '',
-        this.form.eventForm.venue = '',
-        this.form.eventForm.category_id = '',
-        this.form.eventForm.frequency_id = '',
-        this.form.eventForm.start_date = '',
-        this.form.eventForm.event_date = '',
-        this.form.activityForm.description = '',
-        this.form.activityForm.status = '',
-        this.form.eventTeamMemberForm.user_id = '',
-        this.form.eventTeamMemberForm.is_owner = '',
-        this.form.eventTeamMemberForm.desgnation = ''
+        this.form.name = '',
+        this.form.venue = '',
+        this.form.category_id = '',
+        this.form.frequency_id = '',
+        this.form.start_date = '',
+        this.form.event_date = '',
+        this.form.description = '',
+        this.form.status = 'active',
+        this.form.user_id = '',
+        this.form.is_owner = '',
+        this.form.designation = ''
     },
 
     methods: {

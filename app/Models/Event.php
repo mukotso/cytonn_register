@@ -15,4 +15,11 @@ class Event extends Model
         'event_date',
         'lead_time'
         ];
+
+    public function activities(){
+        return $this->hasMany(Activity::class,'event_id');
+    }
+    public function teamMembers(){
+        return $this->hasMany(EventTeamMember::class,'event_id');
+    }
 }

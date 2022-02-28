@@ -67,7 +67,12 @@
                                     <div>
                                         <span>{{ event.department_id }}</span>
                                     </div>
-                                    <div class="flex mt-5">
+                                    <div class="flex mt-2">
+                                        <button
+                                            class="m-3 block text-white bg-green-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                                            @click.prevent="showEvent(event)">
+                                            VIEW MORE
+                                        </button>
 
                                         <button @click="editEvent(event)"
                                                 class=" m-3 block text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -151,6 +156,21 @@ export default {
             this.isShowAddEventForm = true;
             this.showEvents = false;
             this.form = event;
+        },
+
+        showEvent(event) {
+            window.location.href = "/event/"+event.id;
+
+            // axios.get('/event/'+event.id).then((response) => {
+            //     console.log(response)
+            //     if (response.status === 200) {
+            //         this.eventDetails=response.data;
+            //         this.showEvent=true;
+            //     }
+            //     this.isShowAddEventForm = false;
+            // }).catch((error) => {
+            //     // console.log(error);
+            // })
         },
 
         deleteEvent(event) {

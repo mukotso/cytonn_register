@@ -22,4 +22,10 @@ class Event extends Model
     public function teamMembers(){
         return $this->hasMany(EventTeamMember::class,'event_id');
     }
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    public function frequency(){
+        return $this->belongsTo(Frequency::class);
+    }
 }

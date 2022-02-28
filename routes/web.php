@@ -45,6 +45,7 @@ Route::delete('category/{category}', 'CategoriesController@destroy');
 Route::get('events', 'EventsController@index');
 Route::post('event', 'EventsController@store');
 Route::put('event/{event}', 'EventsController@update');
+Route::get('event/{event}', 'EventsController@show');
 Route::delete('event/{event}', 'EventsController@destroy');
 
 //event frequencies

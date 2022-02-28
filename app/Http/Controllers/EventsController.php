@@ -49,6 +49,17 @@ class EventsController extends Controller
 
     }
 
+    public function show($event)
+    {
+
+       $event= $this->eventRepository->getEventById($event);
+
+//        $event = response()->json($event, 200);
+            return  view('events.show', compact('event'));
+
+
+    }
+
     public function destroy(Event $event)
     {
         $this->eventRepository->deleteEvent($event->id);

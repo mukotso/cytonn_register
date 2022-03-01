@@ -14,10 +14,8 @@ class UserRepository implements UserRepositoryInterface
 {
     public function getAllUsers()
     {
-        return User::all();
+        return User::with('department')->get();
     }
-
-
     public function createUser(array $userDetails)
     {
         return DB::transaction(function () use ($userDetails) {

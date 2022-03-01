@@ -65,16 +65,10 @@
                             Users
                         </a>
 
-                        <a @click=""
-                           class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
-                            <i class="fa fa-users text-blue-400 "></i>
-                            My Events
-                        </a>
-
                         <a href="/events"
                            class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
                             <i class="mdi mdi-home text-blue-400 "></i>
-                            All Events
+                            Events
                         </a>
 
 {{--                        <a class="nav-item dropdown">--}}

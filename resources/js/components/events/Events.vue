@@ -23,77 +23,44 @@
 
 
         <div v-if="showEvents" class="p-4">
-            <div class="bg-white p-4 rounded-md">
-                <div>
-                    <h2 class="mb-4 text-xl font-bold text-gray-700">Events</h2>
-                    <div>
-                        <div>
-                            <div
-                                class="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
-                                <div>
-                                    <span>Event Name</span>
-                                </div>
+            <table>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Category</th>
+                    <th>Venue</th>
+                    <th>Event Date</th>
+                    <th>Frequency</th>
+                    <th>Actions</th>
+                </tr>
+                <tr v-for="(event, index) in events">
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.category.name }}</td>
+                    <td>{{ event.venue }}</td>
+                    <td>{{ event.event_date }}</td>
+                    <td>{{ event.frequency.name }}</td>
+                    <td><div class="flex mt-2">
+                        <button
+                            class=" m-4 block text-white bg-green-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
+                            @click.prevent="showEvent(event)">
+                            VIEW MORE
+                        </button>
 
-                                <div>
-                                    <span>Category</span>
-                                </div>
-                                <div>
-                                    <span>Venue</span>
-                                </div>
-                                <div>
-                                    <span>Event Date</span>
-                                </div>
-                                <div>
-                                    <span>Department(s)</span>
-                                </div>
-                                <div>
-                                    <span>ACTION</span>
-                                </div>
-                            </div>
-                            <div v-for="(event, index) in events">
-                                <div class="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
-                                    <div class="px-2 flex">
-                                        <span>{{ event.name }}</span>
-                                    </div>
-                                    <div>
-                                        <span>{{ event.category_id }}</span>
-                                    </div>
-                                    <div>
-                                        <span>{{ event.venue }}</span>
-                                    </div>
-                                    <div>
-                                        <span>{{ event.date }}</span>
-                                    </div>
-                                    <div>
-                                        <span>{{ event.department_id }}</span>
-                                    </div>
-                                    <div class="flex mt-2">
-                                        <button
-                                            class="m-3 block text-white bg-green-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                                            @click.prevent="showEvent(event)">
-                                            VIEW MORE
-                                        </button>
+                        <button @click="editEvent(event)"
+                                class="m-4 block text-white bg-blue-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center"
+                        >
+                            EDIT
+                        </button>
 
-                                        <button @click="editEvent(event)"
-                                                class=" m-3 block text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                        >
-                                            EDIT
-                                        </button>
+                        <button
+                            class=" m-4 block text-white bg-red-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
+                            @click.prevent="deleteEvent(event)">
+                            DELETE
+                        </button>
+                    </div></td>
+                </tr>
 
-                                        <button
-                                            class="m-3 block text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                            @click.prevent="deleteEvent(event)">
-                                            DELETE
-                                        </button>
-                                    </div>
-                                </div>
+            </table>
 
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -152,25 +119,11 @@ export default {
         },
 
         editEvent(event) {
-            this.isEditEvent = true;
-            this.isShowAddEventForm = true;
-            this.showEvents = false;
-            this.form = event;
+            window.location.href = "/event/"+event.id+"/edit";
         },
 
         showEvent(event) {
             window.location.href = "/event/"+event.id;
-
-            // axios.get('/event/'+event.id).then((response) => {
-            //     console.log(response)
-            //     if (response.status === 200) {
-            //         this.eventDetails=response.data;
-            //         this.showEvent=true;
-            //     }
-            //     this.isShowAddEventForm = false;
-            // }).catch((error) => {
-            //     // console.log(error);
-            // })
         },
 
         deleteEvent(event) {

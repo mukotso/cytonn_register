@@ -21716,6 +21716,43 @@ nav a {
   margin: 5%;
 }
 
+.statusActive {
+  border-radius: 50%;
+  padding: 5px 8px;
+  margin: 5px;
+  background-color: green;
+}
+
+.statusInactive {
+  border-radius: 50%;
+  padding: 5px 8px;
+  margin: 5px;
+  background-color: Red;
+}
+
+.statusDelayed {
+  border-radius: 50%;
+  padding: 5px 8px;
+  margin: 5px;
+  background-color: Orange;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: gainsboro;
+}
+
 * {
   margin: 0;
   padding: 0;

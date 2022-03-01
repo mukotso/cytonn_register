@@ -92,8 +92,6 @@ export default {
                 phone_number: '',
                 department_id: '',
                 id: '',
-
-
             }
         }
 

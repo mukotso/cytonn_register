@@ -60,3 +60,8 @@ Route::get('event/activity-not-happening/{activity}', 'EventActivitiesController
 
 //event frequencies
 Route::get('frequencies', 'FrequenciesController@index');
+
+
+//Profile Page
+Route::get('profile', 'UserProfileController@index');
+Route::post('profile/update-password', 'UserProfileController@updatePassword');

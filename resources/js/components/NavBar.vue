@@ -6,6 +6,7 @@
 <script>
 export default {
     name: "NavBar",
+    props:['user'],
     data(){
     return{
     open: false,

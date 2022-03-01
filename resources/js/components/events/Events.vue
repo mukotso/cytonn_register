@@ -22,13 +22,14 @@
         </div>
 
 
-        <div v-if="showEvents" class="p-4">
+        <div v-if="showEvents" class=" md:mx-20  p-4">
             <table>
                 <tr>
                     <th>Event Name</th>
                     <th>Category</th>
                     <th>Venue</th>
                     <th>Event Date</th>
+                    <th> No. Activities</th>
                     <th>Frequency</th>
                     <th>Actions</th>
                 </tr>
@@ -37,6 +38,7 @@
                     <td>{{ event.category.name }}</td>
                     <td>{{ event.venue }}</td>
                     <td>{{ event.event_date }}</td>
+                    <td>{{ event.activities.length }}</td>
                     <td>{{ event.frequency.name }}</td>
                     <td><div class="flex mt-2">
                         <button

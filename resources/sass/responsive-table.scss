@@ -2,12 +2,16 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding: 4px;
+    width: 100%;
 }
 
 tr:nth-child(even) {

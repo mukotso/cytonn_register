@@ -1,7 +1,6 @@
 <template>
-    <form class=" md:container md:mx-auto md:w-full sm:w-full" action="#">
-        <h3>
-            {{ isEditEvent ? "UPDATE EVENT DETAILS" : "CREATE A NEW EVENT" }}</h3>
+    <form @submit.prevent=" createEvent()" class=" md:container md:mx-auto md:w-full sm:w-full" action="#">
+        <h3>{{ "CREATE A NEW EVENT" }}</h3>
         <br>
         <label>EVENT DETAILS</label>
         <br>
@@ -23,7 +22,7 @@
         <div class="md:flex">
             <div class="sm:w-full md:w-1/2 ">
                 <label>Select Category</label>
-                <select v-model="form.category_id">
+                <select v-model="form.category_id" required>
                     <option v-model="form.category_id" v-for="category in categories" :key="category.id"
                             :value="category.id">{{ category.name }}
                     </option>
@@ -32,7 +31,7 @@
 
             <div class="sm:w-full md:w-1/2 ">
                 <label>After How long Does it Happen</label>
-                <select v-model="form.frequency_id">
+                <select v-model="form.frequency_id" required>
                     <option v-model="form.frequency_id" v-for="frequency in frequencies" :key="frequency.id"
                             :value="frequency.id">{{ frequency.name }}
                     </option>
@@ -43,7 +42,7 @@
             <div class="sm:w-full md:w-1/2 ">
 
                 <label>Add Department(s)</label>
-                <select v-model="form.department_id">
+                <select v-model="form.department_id" required>
                     <option v-model="form.department_id" v-for="department in departments" :key="department.id"
                             :value="department.id">{{ department.name }}
                     </option>
@@ -68,24 +67,30 @@
         <br>
         <hr>
 
-        <div class="md:flex">
-            <div class="md:w-3/4">
-                <label>Activity Description</label>
-                <textarea type="text" rows="3" required v-model="newActivity.description"></textarea>
-            </div>
+        <form @submit.prevent="saveActivity">
+            <div class="md:flex">
+                <div class="md:w-3/4">
+                    <label>Activity Description</label>
+                    <textarea type="text" rows="3" required v-model="newActivity.description"></textarea>
+                </div>
 
-            <div class="md:w-1/4">
-                <button @click="saveActivity" class="btn-submit">SAVE</button>
+                <div class="md:w-1/4">
+                    <button class="btn-submit">SAVE</button>
+                </div>
             </div>
-        </div>
-        <table>
+        </form>
+        <table v-if="activities.length >0">
             <tr>
                 <th>Activity</th>
                 <th>Action</th>
             </tr>
             <tr v-for="(activity, index) in activities">
-                <td>{{ activity.description}}</td>
-                <td><button  @click.prevent="removeActivity(activity,index)" class="bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold">Remove</button></td>
+                <td>{{ activity.description }}</td>
+                <td>
+                    <button @click.prevent="removeActivity(activity,index)"
+                            class="bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold">Remove
+                    </button>
+                </td>
             </tr>
 
         </table>
@@ -95,45 +100,33 @@
         <br>
         <hr>
 
-        <div class="md:flex">
-            <div class="md:w-1/3">
-                <label>Select Member</label>
-                <select v-model="newTeamMember.user">
-                    <option v-for="user in users" :key="user.id"
-                            :value="user">{{ user.first_name }} {{ user.last_name }}
-                    </option>
-                </select>
-            </div>
+        <form @submit.prevent="saveTeamMember">
+            <div class="md:flex">
+                <div class="md:w-1/3">
+                    <label>Select Member</label>
+                    <select v-model="newTeamMember.user" required>
+                        <option v-for="user in users" :key="user.id"
+                                :value="user">{{ user.first_name }} {{ user.last_name }}
+                        </option>
+                    </select>
+                </div>
 
-            <div class="md:w-1/3">
+                <div class="md:w-1/3">
 
-                <label>Designation</label>
-                <input type="text"
-                       placeholder="e.g secretary,organizing secretary" required
-                       v-model="newTeamMember.designation">
-            </div>
+                    <label>Designation</label>
+                    <input type="text"
+                           placeholder="e.g secretary,organizing secretary" required
+                           v-model="newTeamMember.designation">
+                </div>
 
-            <div class="md:w-1/3">
-                <button @click="saveTeamMember" class="btn-submit">SAVE</button>
+                <div class="md:w-1/3">
+                    <button  class="btn-submit">SAVE</button>
+                </div>
             </div>
-        </div>
+        </form>
 
         <div class="flex">
-
-            <!--                <table>-->
-            <!--                    <tbody>-->
-            <!--                    <tr>-->
-            <!--                        <th>Name</th>-->
-            <!--                        <th>Designation</th>-->
-            <!--                    </tr>-->
-            <!--                    <tr v-for="(teamMember, index) in teamMembers">-->
-            <!--                    <td>{{teamMember.user.first_name}}</td>-->
-            <!--                    <td>{{teamMember.designation}}</td>-->
-            <!--                    </tr>-->
-            <!--                    </tbody>-->
-            <!--                </table>-->
-
-            <table>
+            <table v-if="teamMembers.length > 0">
                 <tr>
                     <th>Name</th>
                     <th>Designation</th>
@@ -142,7 +135,11 @@
                 <tr v-for="(teamMember, index) in teamMembers">
                     <td>{{ teamMember.user.first_name }}</td>
                     <td>{{ teamMember.designation }}</td>
-                    <td><button  @click="removeTeamMember(index)" class="bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold">Remove</button></td>
+                    <td>
+                        <button @click="removeTeamMember(index)"
+                                class="bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold">Remove
+                        </button>
+                    </td>
                 </tr>
 
             </table>
@@ -152,9 +149,9 @@
         <hr>
         <br>
 
-        <button type="submit" @click.prevent="isEditEvent ? updateEvent() : createEvent()"
+        <button type="submit"
                 class="btn-submit">
-            {{ isEditEvent ? "UPDATE EVENT DETAILS" : "SAVE EVENT" }}
+            {{ "SAVE EVENT" }}
         </button>
 
     </form>
@@ -173,7 +170,7 @@ export default {
             categories: '',
             users: '',
             newTeamMember: {},
-            newActivity:{},
+            newActivity: {},
             activities: [],
             teamMembers: []
         }
@@ -234,10 +231,9 @@ export default {
         },
 
 
-
         saveActivity() {
             this.activities.push(this.newActivity);
-            this.newActivity={};
+            this.newActivity = {};
         },
 
         removeActivity(index) {
@@ -268,6 +264,10 @@ export default {
                         text: 'Event added successfully',
                         icon: 'success',
                         confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/events";
+                        }
                     })
 
                 }
@@ -277,20 +277,7 @@ export default {
             })
         },
 
-        updateEvent() {
-            axios.put('/user/' + this.form.id, this.form).then((response) => {
-                if (response.status === 200) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'User Details Updated successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    })
-                }
-            }).catch((error) => {
-                console.log(error);
-            })
-        },
+
     }
 }
 </script>

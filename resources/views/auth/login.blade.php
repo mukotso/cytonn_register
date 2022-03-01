@@ -13,9 +13,9 @@
                                 <input id="email" type="email"  name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <p class="text-red-500 text-xs italic mt-4">
+                                    {{ $message }}
+                                </p>
                                 @enderror
                             </div>
                         </div>

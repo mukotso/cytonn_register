@@ -284,6 +284,10 @@ export default {
                         text: 'Event Details Updated successfully',
                         icon: 'success',
                         confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/events";
+                        }
                     })
 
                 }

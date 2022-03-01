@@ -1,5 +1,5 @@
 <template>
-    <form class=" container mx-auto" action="#">
+    <form @submit.prevent="isEditCategory ? updateCategory() : createCategory()" class=" container mx-auto" action="#">
         <h3>
             {{ isEditCategory ? "UPDATE CATEGORY DETAILS" : "CREATE A NEW EVENT CATEGORY" }}</h3>
         <div>
@@ -12,12 +12,12 @@
             <label >Description</label>
             <textarea type="text" v-model="form.description"
                       placeholder="brief category description"
-                      required name="description" rows="5"></textarea>
+                      required name="description" rows="5" required></textarea>
 
         </div>
 
 
-        <button type="submit" @click.prevent="isEditCategory ? updateCategory() : createCategory()"
+        <button type="submit"
                 class="btn-submit">
             {{ isEditCategory ? "UPDATE DETAILS" : "SUBMIT" }}
         </button>
@@ -44,6 +44,10 @@ export default {
                         text: 'Category added successfully',
                         icon: 'success',
                         confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/categories";
+                        }
                     })
 
                 }
@@ -62,6 +66,10 @@ export default {
                         text: 'Category Details Updated successfully',
                         icon: 'success',
                         confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/categories";
+                        }
                     })
                 }
             }).catch((error) => {

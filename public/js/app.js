@@ -1986,6 +1986,10 @@ __webpack_require__.r(__webpack_exports__);
             text: 'Category added successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/categories";
+            }
           });
         }
 
@@ -2002,6 +2006,10 @@ __webpack_require__.r(__webpack_exports__);
             text: 'Category Details Updated successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/categories";
+            }
           });
         }
       })["catch"](function (error) {
@@ -2025,11 +2033,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddCategory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddCategory */ "./resources/js/components/categories/AddCategory.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2366,6 +2369,10 @@ __webpack_require__.r(__webpack_exports__);
             text: 'Department added successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/departments";
+            }
           });
         }
 
@@ -2382,6 +2389,10 @@ __webpack_require__.r(__webpack_exports__);
             text: 'Department Details Updated successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/departments";
+            }
           });
         }
       })["catch"](function (error) {
@@ -2404,9 +2415,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
 //
 //
 //
@@ -2662,25 +2670,15 @@ __webpack_require__.r(__webpack_exports__);
             text: 'Event added successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/events";
+            }
           });
         }
 
         _this5.isShowAddEventForm = false;
       })["catch"](function (error) {// console.log(error);
-      });
-    },
-    updateEvent: function updateEvent() {
-      axios.put('/user/' + this.form.id, this.form).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'User Details Updated successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          });
-        }
-      })["catch"](function (error) {
-        console.log(error);
       });
     }
   }
@@ -2999,6 +2997,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             text: 'Event Details Updated successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/events";
+            }
           });
         }
 
@@ -3305,12 +3307,16 @@ __webpack_require__.r(__webpack_exports__);
     completeActivity: function completeActivity(activity) {
       axios.get('/event/complete-activity/' + activity.id).then(function (response) {
         if (response.status === 200) {
-          window.location.href = "/event/" + activity.event_id; // Swal.fire({
-          //     title: 'Success!',
-          //     text: 'Activity completed successfully',
-          //     icon: 'success',
-          //     confirmButtonText: 'Ok'
-          // })
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Success!',
+            text: 'Activity completed successfully',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/event/" + activity.event_id;
+            }
+          });
         }
       })["catch"](function (error) {
         console.log(error);
@@ -3319,12 +3325,16 @@ __webpack_require__.r(__webpack_exports__);
     activityNotHappening: function activityNotHappening(activity) {
       axios.get('/event/activity-not-happening/' + activity.id).then(function (response) {
         if (response.status === 200) {
-          window.location.href = "/event/" + activity.event_id; // Swal.fire({
-          //     title: 'Success!',
-          //     text: 'Updated successfully',
-          //     icon: 'success',
-          //     confirmButtonText: 'Ok'
-          // })
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Success!',
+            text: 'Updated successfully',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/event/" + activity.event_id;
+            }
+          });
         }
       })["catch"](function (error) {
         console.log(error);
@@ -3670,6 +3680,10 @@ __webpack_require__.r(__webpack_exports__);
             text: 'User added successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/users";
+            }
           });
         }
 
@@ -3686,6 +3700,10 @@ __webpack_require__.r(__webpack_exports__);
             text: 'User Details Updated successfully',
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/users";
+            }
           });
         }
       })["catch"](function (error) {
@@ -43597,7 +43615,16 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "form",
-    { staticClass: " container mx-auto", attrs: { action: "#" } },
+    {
+      staticClass: " container mx-auto",
+      attrs: { action: "#" },
+      on: {
+        submit: function ($event) {
+          $event.preventDefault()
+          _vm.isEditCategory ? _vm.updateCategory() : _vm.createCategory()
+        },
+      },
+    },
     [
       _c("h3", [
         _vm._v(
@@ -43658,6 +43685,7 @@ var render = function () {
             required: "",
             name: "description",
             rows: "5",
+            required: "",
           },
           domProps: { value: _vm.form.description },
           on: {
@@ -43671,26 +43699,13 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn-submit",
-          attrs: { type: "submit" },
-          on: {
-            click: function ($event) {
-              $event.preventDefault()
-              _vm.isEditCategory ? _vm.updateCategory() : _vm.createCategory()
-            },
-          },
-        },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.isEditCategory ? "UPDATE DETAILS" : "SUBMIT") +
-              "\n    "
-          ),
-        ]
-      ),
+      _c("button", { staticClass: "btn-submit", attrs: { type: "submit" } }, [
+        _vm._v(
+          "\n        " +
+            _vm._s(_vm.isEditCategory ? "UPDATE DETAILS" : "SUBMIT") +
+            "\n    "
+        ),
+      ]),
     ]
   )
 }
@@ -44020,7 +44035,16 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "form",
-    { staticClass: " container mx-auto", attrs: { action: "#" } },
+    {
+      staticClass: " container mx-auto",
+      attrs: { action: "#" },
+      on: {
+        submit: function ($event) {
+          $event.preventDefault()
+          _vm.isEditDepartment ? _vm.updateDepartment() : _vm.createDepartment()
+        },
+      },
+    },
     [
       _c("h3", [
         _vm._v(
@@ -44063,28 +44087,13 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn-submit",
-          attrs: { type: "submit" },
-          on: {
-            click: function ($event) {
-              $event.preventDefault()
-              _vm.isEditDepartment
-                ? _vm.updateDepartment()
-                : _vm.createDepartment()
-            },
-          },
-        },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.isEditDepartment ? "UPDATE DETAILS" : "SUBMIT") +
-              "\n    "
-          ),
-        ]
-      ),
+      _c("button", { staticClass: "btn-submit", attrs: { type: "submit" } }, [
+        _vm._v(
+          "\n        " +
+            _vm._s(_vm.isEditDepartment ? "UPDATE DETAILS" : "SUBMIT") +
+            "\n    "
+        ),
+      ]),
     ]
   )
 }
@@ -44115,16 +44124,15 @@ var render = function () {
     {
       staticClass: " md:container md:mx-auto md:w-full sm:w-full",
       attrs: { action: "#" },
+      on: {
+        submit: function ($event) {
+          $event.preventDefault()
+          return _vm.createEvent()
+        },
+      },
     },
     [
-      _c("h3", [
-        _vm._v(
-          "\n        " +
-            _vm._s(
-              _vm.isEditEvent ? "UPDATE EVENT DETAILS" : "CREATE A NEW EVENT"
-            )
-        ),
-      ]),
+      _c("h3", [_vm._v(_vm._s("CREATE A NEW EVENT"))]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -44201,6 +44209,7 @@ var render = function () {
                   expression: "form.category_id",
                 },
               ],
+              attrs: { required: "" },
               on: {
                 change: function ($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -44254,6 +44263,7 @@ var render = function () {
                   expression: "form.frequency_id",
                 },
               ],
+              attrs: { required: "" },
               on: {
                 change: function ($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -44309,6 +44319,7 @@ var render = function () {
                   expression: "form.department_id",
                 },
               ],
+              attrs: { required: "" },
               on: {
                 change: function ($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -44409,71 +44420,84 @@ var render = function () {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("div", { staticClass: "md:flex" }, [
-        _c("div", { staticClass: "md:w-3/4" }, [
-          _c("label", [_vm._v("Activity Description")]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.newActivity.description,
-                expression: "newActivity.description",
-              },
-            ],
-            attrs: { type: "text", rows: "3", required: "" },
-            domProps: { value: _vm.newActivity.description },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.newActivity, "description", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "md:w-1/4" }, [
-          _c(
-            "button",
-            { staticClass: "btn-submit", on: { click: _vm.saveActivity } },
-            [_vm._v("SAVE")]
-          ),
-        ]),
-      ]),
-      _vm._v(" "),
       _c(
-        "table",
+        "form",
+        {
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.saveActivity.apply(null, arguments)
+            },
+          },
+        },
         [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.activities, function (activity, index) {
-            return _c("tr", [
-              _c("td", [_vm._v(_vm._s(activity.description))]),
+          _c("div", { staticClass: "md:flex" }, [
+            _c("div", { staticClass: "md:w-3/4" }, [
+              _c("label", [_vm._v("Activity Description")]),
               _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
+              _c("textarea", {
+                directives: [
                   {
-                    staticClass:
-                      "bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold",
-                    on: {
-                      click: function ($event) {
-                        $event.preventDefault()
-                        return _vm.removeActivity(activity, index)
-                      },
-                    },
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newActivity.description,
+                    expression: "newActivity.description",
                   },
-                  [_vm._v("Remove")]
-                ),
-              ]),
-            ])
-          }),
-        ],
-        2
+                ],
+                attrs: { type: "text", rows: "3", required: "" },
+                domProps: { value: _vm.newActivity.description },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.newActivity,
+                      "description",
+                      $event.target.value
+                    )
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+          ]),
+        ]
       ),
+      _vm._v(" "),
+      _vm.activities.length > 0
+        ? _c(
+            "table",
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._l(_vm.activities, function (activity, index) {
+                return _c("tr", [
+                  _c("td", [_vm._v(_vm._s(activity.description))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold",
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.removeActivity(activity, index)
+                          },
+                        },
+                      },
+                      [_vm._v("Remove\n                ")]
+                    ),
+                  ]),
+                ])
+              }),
+            ],
+            2
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -44483,123 +44507,143 @@ var render = function () {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("div", { staticClass: "md:flex" }, [
-        _c("div", { staticClass: "md:w-1/3" }, [
-          _c("label", [_vm._v("Select Member")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.saveTeamMember.apply(null, arguments)
+            },
+          },
+        },
+        [
+          _c("div", { staticClass: "md:flex" }, [
+            _c("div", { staticClass: "md:w-1/3" }, [
+              _c("label", [_vm._v("Select Member")]),
+              _vm._v(" "),
+              _c(
+                "select",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.newTeamMember.user,
-                  expression: "newTeamMember.user",
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newTeamMember.user,
+                      expression: "newTeamMember.user",
+                    },
+                  ],
+                  attrs: { required: "" },
+                  on: {
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.newTeamMember,
+                        "user",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
                 },
-              ],
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.newTeamMember,
-                    "user",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                _vm._l(_vm.users, function (user) {
+                  return _c(
+                    "option",
+                    { key: user.id, domProps: { value: user } },
+                    [
+                      _vm._v(
+                        _vm._s(user.first_name) +
+                          " " +
+                          _vm._s(user.last_name) +
+                          "\n                    "
+                      ),
+                    ]
                   )
+                }),
+                0
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "md:w-1/3" }, [
+              _c("label", [_vm._v("Designation")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newTeamMember.designation,
+                    expression: "newTeamMember.designation",
+                  },
+                ],
+                attrs: {
+                  type: "text",
+                  placeholder: "e.g secretary,organizing secretary",
+                  required: "",
                 },
-              },
-            },
-            _vm._l(_vm.users, function (user) {
-              return _c("option", { key: user.id, domProps: { value: user } }, [
-                _vm._v(
-                  _vm._s(user.first_name) +
-                    " " +
-                    _vm._s(user.last_name) +
-                    "\n                "
-                ),
-              ])
-            }),
-            0
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "md:w-1/3" }, [
-          _c("label", [_vm._v("Designation")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.newTeamMember.designation,
-                expression: "newTeamMember.designation",
-              },
-            ],
-            attrs: {
-              type: "text",
-              placeholder: "e.g secretary,organizing secretary",
-              required: "",
-            },
-            domProps: { value: _vm.newTeamMember.designation },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.newTeamMember, "designation", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "md:w-1/3" }, [
-          _c(
-            "button",
-            { staticClass: "btn-submit", on: { click: _vm.saveTeamMember } },
-            [_vm._v("SAVE")]
-          ),
-        ]),
-      ]),
+                domProps: { value: _vm.newTeamMember.designation },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.newTeamMember,
+                      "designation",
+                      $event.target.value
+                    )
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _vm._m(2),
+          ]),
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "flex" }, [
-        _c(
-          "table",
-          [
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._l(_vm.teamMembers, function (teamMember, index) {
-              return _c("tr", [
-                _c("td", [_vm._v(_vm._s(teamMember.user.first_name))]),
+        _vm.teamMembers.length > 0
+          ? _c(
+              "table",
+              [
+                _vm._m(3),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(teamMember.designation))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold",
-                      on: {
-                        click: function ($event) {
-                          return _vm.removeTeamMember(index)
+                _vm._l(_vm.teamMembers, function (teamMember, index) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(teamMember.user.first_name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(teamMember.designation))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold",
+                          on: {
+                            click: function ($event) {
+                              return _vm.removeTeamMember(index)
+                            },
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("Remove")]
-                  ),
-                ]),
-              ])
-            }),
-          ],
-          2
-        ),
+                        [_vm._v("Remove\n                    ")]
+                      ),
+                    ]),
+                  ])
+                }),
+              ],
+              2
+            )
+          : _vm._e(),
       ]),
       _vm._v(" "),
       _c("br"),
@@ -44608,26 +44652,9 @@ var render = function () {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn-submit",
-          attrs: { type: "submit" },
-          on: {
-            click: function ($event) {
-              $event.preventDefault()
-              _vm.isEditEvent ? _vm.updateEvent() : _vm.createEvent()
-            },
-          },
-        },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.isEditEvent ? "UPDATE EVENT DETAILS" : "SAVE EVENT") +
-              "\n    "
-          ),
-        ]
-      ),
+      _c("button", { staticClass: "btn-submit", attrs: { type: "submit" } }, [
+        _vm._v("\n        " + _vm._s("SAVE EVENT") + "\n    "),
+      ]),
     ]
   )
 }
@@ -44636,10 +44663,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/4" }, [
+      _c("button", { staticClass: "btn-submit" }, [_vm._v("SAVE")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", [_vm._v("Activity")]),
       _vm._v(" "),
       _c("th", [_vm._v("Action")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c("button", { staticClass: "btn-submit" }, [_vm._v("SAVE")]),
     ])
   },
   function () {
@@ -46125,7 +46168,16 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "form",
-    { staticClass: " container mx-auto", attrs: { action: "#" } },
+    {
+      staticClass: " container mx-auto",
+      attrs: { action: "#" },
+      on: {
+        submit: function ($event) {
+          $event.preventDefault()
+          _vm.isEditUser ? _vm.updateUser() : _vm.createUser()
+        },
+      },
+    },
     [
       _c("h3", [
         _vm._v(
@@ -46240,7 +46292,7 @@ var render = function () {
               },
             ],
             attrs: {
-              type: "email",
+              type: "number",
               name: "email",
               placeholder: "e.g 07895674324",
               required: "",
@@ -46272,7 +46324,7 @@ var render = function () {
                 expression: "form.department_id",
               },
             ],
-            attrs: { id: "department" },
+            attrs: { id: "department", required: "" },
             on: {
               change: function ($event) {
                 var $$selectedVal = Array.prototype.filter
@@ -46312,26 +46364,13 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn-submit",
-          attrs: { type: "submit" },
-          on: {
-            click: function ($event) {
-              $event.preventDefault()
-              _vm.isEditUser ? _vm.updateUser() : _vm.createUser()
-            },
-          },
-        },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.isEditUser ? "UPDATE USER DETAILS" : "SAVE USER") +
-              "\n    "
-          ),
-        ]
-      ),
+      _c("button", { staticClass: "btn-submit", attrs: { type: "submit" } }, [
+        _vm._v(
+          "\n        " +
+            _vm._s(_vm.isEditUser ? "UPDATE USER DETAILS" : "SAVE USER") +
+            "\n    "
+        ),
+      ]),
     ]
   )
 }

@@ -21770,6 +21770,44 @@ tr:nth-child(even) {
   background-color: gainsboro;
 }
 
+#header {
+  background-image: linear-gradient(to bottom right, lightblue, lightblue);
+  background-size: cover;
+  height: 100vh;
+  margin-top: -20px;
+}
+
+.welcome {
+  font-family: sans-serif;
+}
+
+.welcome p {
+  margin-bottom: 4%;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 581px) and (max-width: 780px) {
+  .welcome p {
+    margin-bottom: 17%;
+    font-size: 22px;
+  }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 580px) {
+  .welcome p {
+    margin-bottom: 7%;
+    font-size: 22px;
+  }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 780px) {
+  .welcome {
+    margin-left: 10px;
+    font-size: 22px;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

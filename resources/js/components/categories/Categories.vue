@@ -1,10 +1,5 @@
 <template>
     <div>
-
-
-        <!--        <div class="max-w-2xl mx-auto">-->
-
-
         <div v-if="user.is_admin ==1">
             <button v-if="showCategories"
                     class="btn"

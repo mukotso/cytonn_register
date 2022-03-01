@@ -122,13 +122,17 @@ export default {
         completeActivity(activity){
             axios.get('/event/complete-activity/'+activity.id).then((response) => {
                 if (response.status === 200) {
-                    window.location.href = "/event/"+activity.event_id;
-                    // Swal.fire({
-                    //     title: 'Success!',
-                    //     text: 'Activity completed successfully',
-                    //     icon: 'success',
-                    //     confirmButtonText: 'Ok'
-                    // })
+
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Activity completed successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/event/"+activity.event_id;
+                        }
+                    })
 
                 }
 
@@ -139,13 +143,17 @@ export default {
         activityNotHappening(activity){
             axios.get('/event/activity-not-happening/'+activity.id).then((response) => {
                 if (response.status === 200) {
-                    window.location.href = "/event/"+activity.event_id;
-                    // Swal.fire({
-                    //     title: 'Success!',
-                    //     text: 'Updated successfully',
-                    //     icon: 'success',
-                    //     confirmButtonText: 'Ok'
-                    // })
+
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Updated successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/event/"+activity.event_id;
+                        }
+                    })
                 }
             }).catch((error) => {
                 console.log(error);

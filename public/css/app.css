@@ -21657,12 +21657,13 @@ label {
 }
 
 #loginForm {
-  width: 50%;
+  width: 100%;
   margin: auto;
 }
 
 #loginForm img {
   margin: 5% 15%;
+  max-width: 80%;
 }
 
 #loginForm #loginBtn {
@@ -21679,13 +21680,25 @@ label {
 }
 
 #loginForm .login-btn-div {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
-@media only screen and (min-width: 1080px) {
-  .loginForm {
+@media (min-width: 768px) {
+  #loginForm {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1000px) {
+  #loginForm {
+    width: 55%;
+  }
+}
+
+@media (min-width: 1040px) {
+  #loginForm {
     width: 40%;
   }
 }

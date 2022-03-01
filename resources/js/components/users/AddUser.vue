@@ -2,31 +2,34 @@
     <form class=" container mx-auto" action="#">
         <h3>
             {{ isEditUser ? "UPDATE USER DETAILS" : "CREATE A NEW USER" }}</h3>
-        <div>
-            <label >First Name</label>
-            <input type="text" name="first_name"
-                   placeholder="first name" required v-model="form.first_name">
-        </div>
+       <div class="md:flex">
+           <div class="md:w-1/2">
+               <label >First Name</label>
+               <input type="text" name="first_name"
+                      placeholder="first name" required v-model="form.first_name">
+           </div>
 
-        <div>
-            <label >Last Name</label>
-            <input type="text" name="last_name"
-                   placeholder=" last name" required v-model="form.last_name">
-        </div>
+           <div class="md:w-1/2">
+               <label >Last Name</label>
+               <input type="text" name="last_name"
+                      placeholder=" last name" required v-model="form.last_name">
+           </div>
+       </div>
 
-        <div>
+        <div class="md:flex">
+            <div class="md:w-1/2">
             <label >Email Address</label>
             <input type="email" name="email"
                    placeholder="email@gmail.com" required v-model="form.email">
         </div>
 
-        <div>
+            <div class="md:w-1/2">
             <label >Phone Number</label>
             <input type="email" name="email"
                    placeholder="e.g 07895674324" required v-model="form.phone_number">
         </div>
-
-        <div>
+        </div>
+        <div class="md:w-1/2">
             <label>Department</label>
             <select v-model="form.department_id" id="department">
                 <option  v-model="form.department_id" v-for="department in departments" :key="department.id" :value="department.id">{{ department.name }}</option>

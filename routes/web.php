@@ -45,7 +45,23 @@ Route::delete('category/{category}', 'CategoriesController@destroy');
 Route::get('events', 'EventsController@index');
 Route::post('event', 'EventsController@store');
 Route::put('event/{event}', 'EventsController@update');
+Route::get('event/{event}', 'EventsController@show');
+Route::get('event/{event}/edit', 'EventsController@edit');
 Route::delete('event/{event}', 'EventsController@destroy');
+
+//team members
+Route::get('event/remove-team-member/{eventTeamMember}', 'EventTeamMembersController@destroy');
+
+//event activities
+Route::get('event/remove-activity/{activity}', 'EventActivitiesController@destroy');
+Route::get('event/complete-activity/{activity}', 'EventActivitiesController@complete');
+Route::get('event/activity-not-happening/{activity}', 'EventActivitiesController@activityNotHappening');
+
 
 //event frequencies
 Route::get('frequencies', 'FrequenciesController@index');
+
+
+//Profile Page
+Route::get('profile', 'UserProfileController@index');
+Route::post('profile/update-password', 'UserProfileController@updatePassword');

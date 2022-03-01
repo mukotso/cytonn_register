@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"  />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -22,7 +22,7 @@
 </head>
 <body>
 <div id="app">
-    <nav-bar inline-template v-cloak>
+    <nav-bar  :user="{{Auth::user()}}" inline-template v-cloak>
         <div class="font-sans antialiased">
             <nav class="flex items-center justify-between flex-wrap p-6">
                 <div class="flex items-center flex-no-shrink  mr-6">
@@ -41,17 +41,19 @@
 
 
 
-                        <a @click=""
+                        <a href="/home"
                            class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
                             <span class="material-icons"></span>
                             Home
                         </a>
 
+                    @if(Auth()->user()->is_admin==1)
                         <a href="/departments"
                            class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
                             <i class="fa fa-users text-blue-400 "></i>
                             Departments
                         </a>
+                    @endif
 
                         <a href="/categories"
                            class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
@@ -59,29 +61,31 @@
                             Categories
                         </a>
 
+                    @if(Auth()->user()->is_admin==1)
                         <a href="/users"
                            class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
                             <i class="fa fa-cutlery"></i>
                             Users
                         </a>
-
-                        <a @click=""
-                           class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
-                            <i class="fa fa-users text-blue-400 "></i>
-                            My Events
-                        </a>
+                    @endif
 
                         <a href="/events"
                            class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
                             <i class="mdi mdi-home text-blue-400 "></i>
-                            All Events
+                            Events
                         </a>
+
+                    <a href="/profile"
+                       class=" text-2xl no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4">
+                        <i class="mdi mdi-home text-blue-400 "></i>
+                        Profile
+                    </a>
 
 {{--                        <a class="nav-item dropdown">--}}
 {{--                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
 {{--                               data-toggle="dropdown"--}}
 {{--                               aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                                {{ Auth::user()->email }} <span class="caret"></span>--}}
+{{--                                {{ Auth::user()->first_name }} <span class="caret"></span>--}}
 {{--                            </a>--}}
 
 
@@ -90,7 +94,7 @@
 
                             <a  href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                          document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
 

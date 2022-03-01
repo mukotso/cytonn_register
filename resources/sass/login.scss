@@ -16,25 +16,37 @@ label{
 }
 
 #loginForm{
-    width:50%;
+    width:100%;
     margin: auto;
     img{
         margin: 5% 15%;
+        max-width: 80%;
     }
     #loginBtn {
         @include button;
     }
     .login-btn-div{
-        width: 50%;
+        width: 100%;
         display: flex;
         justify-content: center;
     }
 }
 
-@media only screen and (min-width: 1080px) {
-    .loginForm{
-        width: 40%;
+@media (min-width: 768px) {
+    #loginForm{
+        width: 60%;
     }
+}
+
+@media (min-width: 1000px) {
+    #loginForm {
+        width: 55%;
+    }
+}
+    @media (min-width: 1040px) {
+        #loginForm{
+            width: 40%;
+        }
 }
 
 

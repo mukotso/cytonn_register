@@ -29,7 +29,6 @@ class EventsController extends Controller
 
     public function store(EventRequest $request)
     {
-        dd($request->all());
         $event = $this->eventRepository->createEvent($request->all());
         if(request()->expectsJson()) {
             return response()->json($event, 200);
@@ -39,7 +38,7 @@ class EventsController extends Controller
 
     }
 
-    public function update(EventRequest $request, Event $event)
+    public function update(EventRequest $request, $event)
     {
         $event = $this->eventRepository->updateEvent($event, $request->all());
         if(request()->expectsJson()) {
@@ -48,6 +47,19 @@ class EventsController extends Controller
             return  redirect()->route('events.index');
         }
 
+    }
+
+    public function show($event)
+    {
+
+       $event= $this->eventRepository->getEventById($event);
+            return  view('events.show', compact('event'));
+    }
+
+    public function edit($event)
+    {
+        $event= $this->eventRepository->getEventById($event);
+        return  view('events.edit', compact('event'));
     }
 
     public function destroy(Event $event)
@@ -60,4 +72,6 @@ class EventsController extends Controller
         }
 
     }
+
+
 }

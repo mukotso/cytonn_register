@@ -1,7 +1,7 @@
 <template>
     <form class=" md:container md:mx-auto md:w-full sm:w-full" action="#">
         <h3>
-            {{ isEditEvent ? "UPDATE EVENT DETAILS" : "CREATE A NEW EVENT" }}</h3>
+            {{ "UPDATE EVENT DETAILS"}}</h3>
         <br>
         <label>EVENT DETAILS</label>
         <br>
@@ -59,7 +59,7 @@
         <div class="flex">
             <div class="sm:w-full md:w-1/2 ">
                 <label>Lead Date</label>
-                <input type="datetime-local" required v-model="form.lead_date">
+                <input type="datetime-local" required v-model="form.lead_time">
             </div>
         </div>
 
@@ -67,7 +67,6 @@
         <label>EVENT ACTIVITIES</label>
         <br>
         <hr>
-
         <div class="md:flex">
             <div class="md:w-3/4">
                 <label>Activity Description</label>
@@ -75,9 +74,10 @@
             </div>
 
             <div class="md:w-1/4">
-                <button @click="saveActivity" class="btn-submit">SAVE</button>
+                <button @click.prevent="saveActivity" class="btn-submit">SAVE</button>
             </div>
         </div>
+
         <table>
             <tr>
                 <th>Activity</th>
@@ -114,25 +114,11 @@
             </div>
 
             <div class="md:w-1/3">
-                <button @click="saveTeamMember" class="btn-submit">SAVE</button>
+                <button @click.prevent="saveTeamMember" class="btn-submit">SAVE</button>
             </div>
         </div>
 
         <div class="flex">
-
-            <!--                <table>-->
-            <!--                    <tbody>-->
-            <!--                    <tr>-->
-            <!--                        <th>Name</th>-->
-            <!--                        <th>Designation</th>-->
-            <!--                    </tr>-->
-            <!--                    <tr v-for="(teamMember, index) in teamMembers">-->
-            <!--                    <td>{{teamMember.user.first_name}}</td>-->
-            <!--                    <td>{{teamMember.designation}}</td>-->
-            <!--                    </tr>-->
-            <!--                    </tbody>-->
-            <!--                </table>-->
-
             <table>
                 <tr>
                     <th>Name</th>
@@ -140,9 +126,9 @@
                     <th>Action</th>
                 </tr>
                 <tr v-for="(teamMember, index) in teamMembers">
-                    <td>{{ teamMember.user.first_name }}</td>
+                    <td>{{ teamMember.user.first_name }} {{ teamMember.user.last_name }}</td>
                     <td>{{ teamMember.designation }}</td>
-                    <td><button  @click="removeTeamMember(index)" class="bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold">Remove</button></td>
+                    <td><button  @click.prevent="removeTeamMember(teamMember,index)" class="bg-red-600 px-2 py-1 rounded text-2xl text-white text-bold">Remove</button></td>
                 </tr>
 
             </table>
@@ -152,9 +138,9 @@
         <hr>
         <br>
 
-        <button type="submit" @click.prevent="isEditEvent ? updateEvent() : createEvent()"
+        <button type="submit" @click.prevent=" updateEvent()"
                 class="btn-submit">
-            {{ isEditEvent ? "UPDATE EVENT DETAILS" : "SAVE EVENT" }}
+            {{ "UPDATE EVENT DETAILS"  }}
         </button>
 
     </form>
@@ -165,7 +151,7 @@ import Swal from "sweetalert2";
 
 export default {
     name: "addEvent",
-    props: ['form', 'isEditEvent'],
+    props: ['event'],
     data() {
         return {
             departments: '',
@@ -173,16 +159,26 @@ export default {
             categories: '',
             users: '',
             newTeamMember: {},
-            newActivity:{},
             activities: [],
-            teamMembers: []
+            newActivity: {},
+            teamMembers: [],
+            form:{}
         }
     },
     beforeMount() {
+        this.form=this.event[0];
+        for ( const activity  of this.event[0].activities) {
+            this.activities.push(activity);
+        }
+
+        this.teamMembers=this.event[0].team_members;
         this.getDepartments();
         this.getCategories();
         this.getFrequencies();
         this.getUsers();
+    },
+    mounted() {
+        console.log(this.event)
     },
 
     methods: {
@@ -233,39 +229,59 @@ export default {
                 })
         },
 
-
-
         saveActivity() {
             this.activities.push(this.newActivity);
             this.newActivity={};
         },
 
-        removeActivity(index) {
-            this.activities.splice(index, 1);
-            // console.log(this.activities);
+        removeActivity(activity,index) {
+            axios.get('/event/remove-activity/'+activity.id).then((response) => {
+                if (response.status === 200) {
+                     this.activities.splice(index, 1);
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Activity Removed successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            }).catch((error) => {
+                 console.log(error);
+            })
+
         },
 
         saveTeamMember() {
             this.teamMembers.push(this.newTeamMember);
             this.newTeamMember = {}
-            // console.log(this.teamMembers);
         },
 
-        removeTeamMember(index) {
-            this.teamMembers.splice(index, 1);
-            // console.log(this.teamMembers);
+        removeTeamMember(teamMember,index) {
+            axios.get('/event/remove-team-member/'+teamMember.id).then((response) => {
+                if (response.status === 200) {
+                    this.teamMembers.splice(index, 1);
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Member Removed successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            }).catch((error) => {
+                // console.log(error);
+            })
         },
 
-        createEvent() {
+        updateEvent() {
             this.form.activities = this.activities;
             this.form.teamMembers = this.teamMembers;
-            // console.log(this.form)
-            axios.post('/event', this.form).then((response) => {
+            console.log(this.form);
+            axios.put('/event/'+this.form.id, this.form).then((response) => {
                 console.log(response)
                 if (response.status === 200) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Event added successfully',
+                        text: 'Event Details Updated successfully',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     })
@@ -277,26 +293,12 @@ export default {
             })
         },
 
-        updateEvent() {
-            axios.put('/user/' + this.form.id, this.form).then((response) => {
-                if (response.status === 200) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'User Details Updated successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    })
-                }
-            }).catch((error) => {
-                console.log(error);
-            })
-        },
     }
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>
+
 
 

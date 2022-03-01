@@ -14,10 +14,8 @@ class UserRepository implements UserRepositoryInterface
 {
     public function getAllUsers()
     {
-        return User::all();
+        return User::with('department')->get();
     }
-
-
     public function createUser(array $userDetails)
     {
         return DB::transaction(function () use ($userDetails) {
@@ -28,10 +26,10 @@ class UserRepository implements UserRepositoryInterface
                 $userDetails['password'] = $hashedPassword;
                 $userDetails['phone_number'] = '+254' . $userDetails['phone_number'];
                 $userDetails['email'] = strtolower(trim($userDetails['email']));
-
+                $userDetails['is_admin'] = false;
                 $user = User::create($userDetails);
                 $details = [
-                    'name' => $user->name,
+                    'name' => $user->first_name,
                     'email' => $user->email,
                     'password' => $randomPassword,
                 ];

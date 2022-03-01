@@ -13,4 +13,9 @@ class EventTeamMember extends Model
         'designation'
 
     ];
+    protected $table='event_team_members';
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 }

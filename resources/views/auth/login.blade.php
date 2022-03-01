@@ -2,7 +2,7 @@
 @section('content')
 
 
-                    <form id="loginForm" method="POST" action="{{ route('login') }}" class="m-auto">
+                    <form id="loginForm" method="POST" action="{{ route('login') }}" class="container mx-auto">
                         <img  src="{{ url('/images/logo2.png') }} " alt="logo">
                         @csrf
 

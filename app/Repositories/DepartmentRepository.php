@@ -4,27 +4,51 @@ namespace App\Repositories;
 
 use App\Interfaces\DepartmentRepositoryInterface;
 use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmentRepository implements DepartmentRepositoryInterface
 {
     public function getAllDepartments()
     {
-        return Department::orderBy('created_at', 'DESC')->get();
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return Department::orderBy('created_at', 'DESC')->get();
+        }else {
+            abort(401);
+        }
+
     }
 
     public function deleteDepartment($departmentId)
     {
-        return Department::destroy($departmentId);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return Department::destroy($departmentId);
+        }else {
+            abort(401);
+        }
+
     }
 
     public function createDepartment(array $departmentDetails)
     {
-        return Department::create($departmentDetails);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return Department::create($departmentDetails);
+        }else {
+            abort(401);
+        }
+
     }
 
     public function updateDepartment($department, $newDetails)
     {
-        return $department->update($newDetails);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return $department->update($newDetails);
+        }else {
+            abort(401);
+        }
     }
 
 

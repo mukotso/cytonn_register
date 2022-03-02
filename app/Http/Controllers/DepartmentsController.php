@@ -18,6 +18,7 @@ class DepartmentsController extends Controller
 
     public function index()
     {
+//        $this->authorize('update');
         $departments = $this->departmentRepository->getAllDepartments();
         if(request()->expectsJson()) {
             return response()->json($departments, 200);
@@ -29,17 +30,19 @@ class DepartmentsController extends Controller
 
     public function store(DepartmentRequest $request)
     {
+//        $this->authorize('update');
         $department = $this->departmentRepository->createDepartment($request->all());
-//        if(request()->expectsJson()) {
-//            return response()->json($department, 200);
-//        }else{
+       if(request()->expectsJson()) {
+            return response()->json($department, 200);
+        }else{
             return  redirect()->route('departments.index');
-//        }
+        }
 
     }
 
     public function update(DepartmentRequest $request, Department $department)
     {
+//        $this->authorize('update');
         $department = $this->departmentRepository->updateDepartment($department, $request->all());
         if(request()->expectsJson()) {
             return response()->json($department, 200);
@@ -51,6 +54,7 @@ class DepartmentsController extends Controller
 
     public function destroy(Department $department)
     {
+//        $this->authorize('update');
         $this->departmentRepository->deleteDepartment($department->id);
         if(request()->expectsJson()) {
             return response()->json(200);

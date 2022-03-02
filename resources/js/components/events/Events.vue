@@ -23,6 +23,7 @@
 
 
         <div v-if="showEvents" class=" md:mx-20  p-4">
+
             <table>
                 <tr>
                     <th>Event Name</th>
@@ -47,14 +48,14 @@
                             VIEW MORE
                         </button>
 
-                        <button @click="editEvent(event)"
+                        <button v-if=" user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)" @click="editEvent(event)"
                                 class="m-4 block text-white bg-blue-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center"
                         >
                             EDIT
                         </button>
 
-                        <button
-                            class=" m-4 block text-white bg-red-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
+                        <button v-if=" user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)"
+                            class="  m-4 block text-white bg-red-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
                             @click.prevent="deleteEvent(event)">
                             DELETE
                         </button>
@@ -73,7 +74,7 @@ import Swal from "sweetalert2";
 
 export default {
     name: "Events",
-    props: ['events'],
+    props: ['events','user'],
     components: {addEvent},
 
     data() {
@@ -90,12 +91,12 @@ export default {
                     event_date: '',
                     lead_date: '',
                     description: '',
-
             }
         }
 
     },
-    mounted() {
+    beforeMount() {
+        this.getTeamMembersUserIds();
         this.form.name = '',
         this.form.venue = '',
         this.form.category_id = '',
@@ -121,11 +122,19 @@ export default {
         },
 
         editEvent(event) {
-            window.location.href = "/event/"+event.id+"/edit";
+            window.location.href = "/event/" + event.id + "/edit";
         },
-
         showEvent(event) {
-            window.location.href = "/event/"+event.id;
+            window.location.href = "/event/" + event.id;
+        },
+        getTeamMembersUserIds() {
+            this.events.forEach(event => {
+                let teamMembersUserIds=[];
+                event.team_members.forEach(teamMembers => {
+                        teamMembersUserIds.push(teamMembers.user_id);
+                    });
+                event.teamMembersUserIds=teamMembersUserIds;
+            });
         },
 
         deleteEvent(event) {

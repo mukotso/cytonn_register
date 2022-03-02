@@ -7,15 +7,14 @@ use Tests\TestCase;
 use App\Models\User;
 
 
+
 class LoginTest extends TestCase
 {
 
     public function testUserCanViewLoginForm()
     {
-        //make request to /login
+
         $response = $this->get('/login');
-        //if request successful
-        //check if we have served the correct view
         $response->assertSuccessful();
         $response->assertViewIs('auth.login');
     }

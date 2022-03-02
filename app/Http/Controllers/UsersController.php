@@ -6,6 +6,7 @@ use App\Http\Requests\addUserRequest;
 use App\Http\Requests\editUserRequest;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -18,16 +19,19 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = $this->userRepository->getAllUsers();
-        if (request()->expectsJson()) {
-            return response()->json($users, 200);
-        } else {
-            return view('users.index', compact('users'));
-        }
+
+            $users = $this->userRepository->getAllUsers();
+            if (request()->expectsJson()) {
+                return response()->json($users, 200);
+            } else {
+                return view('users.index', compact('users'));
+            }
+
+
     }
     public function store(addUserRequest $request)
     {
-
+//        $this->authorize('update');
         $user = $this->userRepository->createUser($request->all());
         if (request()->expectsJson()) {
             return response()->json($user, 200);
@@ -38,6 +42,7 @@ class UsersController extends Controller
 
     public function update(editUserRequest $request, User $user)
     {
+//        $this->authorize('update');
         $user = $this->userRepository->updateUser($user, $request->all());
         if (request()->expectsJson()) {
             return response()->json($user, 200);
@@ -49,6 +54,7 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
+//        $this->authorize('update');
         $this->userRepository->deleteUser($user->id);
         if (request()->expectsJson()) {
             return response()->json(200);

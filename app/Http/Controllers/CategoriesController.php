@@ -30,6 +30,7 @@ class CategoriesController extends Controller
 
     public function store(CategoryRequest $request)
     {
+//        $this->authorize('update');
         $category = $this->categoryRepository->createCategory($request->all());
         if(request()->expectsJson()) {
             return response()->json($category, 200);
@@ -41,6 +42,7 @@ class CategoriesController extends Controller
 
     public function update(CategoryRequest $request, Category $category)
     {
+//        $this->authorize('update');
         $category = $this->categoryRepository->updateCategory($category, $request->all());
         if(request()->expectsJson()) {
             return response()->json($category, 200);
@@ -52,6 +54,7 @@ class CategoriesController extends Controller
 
     public function destroy(Category $category)
     {
+//        $this->authorize('update');
         $this->categoryRepository->deleteCategory($category->id);
         if(request()->expectsJson()) {
             return response()->json(200);

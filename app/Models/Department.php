@@ -10,4 +10,9 @@ class Department extends Model
         'name'
     ];
 
+    public function events(){
+        return $this->belongsToMany(Event::class, 'department_events',
+            'department_id', 'event_id');
+    }
+
 }

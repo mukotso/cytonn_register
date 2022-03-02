@@ -3094,11 +3094,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Events",
-  props: ['events'],
+  props: ['events', 'user'],
   components: {
     addEvent: _AddEvent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -3119,7 +3120,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
+    this.getTeamMembersUserIds();
     this.form.name = '', this.form.venue = '', this.form.category_id = '', this.form.frequency_id = '', this.form.start_date = '', this.form.event_date = '', this.form.description = '', this.form.status = 'active', this.form.user_id = '', this.form.is_owner = '', this.form.designation = '';
   },
   methods: {
@@ -3136,6 +3138,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     showEvent: function showEvent(event) {
       window.location.href = "/event/" + event.id;
+    },
+    getTeamMembersUserIds: function getTeamMembersUserIds() {
+      this.events.forEach(function (event) {
+        var teamMembersUserIds = [];
+        event.team_members.forEach(function (teamMembers) {
+          teamMembersUserIds.push(teamMembers.user_id);
+        });
+        event.teamMembersUserIds = teamMembersUserIds;
+      });
     },
     deleteEvent: function deleteEvent(event) {
       var _this = this;
@@ -45377,42 +45388,48 @@ var render = function () {
                         ]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "m-4 block text-white bg-blue-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center",
-                          on: {
-                            click: function ($event) {
-                              return _vm.editEvent(event)
+                      _vm.user.is_admin == 1 ||
+                      event.teamMembersUserIds.includes(_vm.user.id)
+                        ? _c(
+                            "button",
+                            {
+                              staticClass:
+                                "m-4 block text-white bg-blue-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.editEvent(event)
+                                },
+                              },
                             },
-                          },
-                        },
-                        [
-                          _vm._v(
-                            "\n                        EDIT\n                    "
-                          ),
-                        ]
-                      ),
+                            [
+                              _vm._v(
+                                "\n                        EDIT\n                    "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            " m-4 block text-white bg-red-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center ",
-                          on: {
-                            click: function ($event) {
-                              $event.preventDefault()
-                              return _vm.deleteEvent(event)
+                      _vm.user.is_admin == 1 ||
+                      event.teamMembersUserIds.includes(_vm.user.id)
+                        ? _c(
+                            "button",
+                            {
+                              staticClass:
+                                "  m-4 block text-white bg-red-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center ",
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.deleteEvent(event)
+                                },
+                              },
                             },
-                          },
-                        },
-                        [
-                          _vm._v(
-                            "\n                        DELETE\n                    "
-                          ),
-                        ]
-                      ),
+                            [
+                              _vm._v(
+                                "\n                        DELETE\n                    "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
                     ]),
                   ]),
                 ])

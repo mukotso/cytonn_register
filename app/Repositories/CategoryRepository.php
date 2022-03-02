@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -14,17 +16,35 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function deleteCategory($CategoryId)
     {
-        return Category::destroy($CategoryId);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return Category::destroy($CategoryId);
+        }else {
+            abort(401);
+        }
+
     }
 
     public function createCategory(array $CategoryDetails)
     {
-        return Category::create($CategoryDetails);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return Category::create($CategoryDetails);
+        }else {
+            abort(401);
+        }
+
     }
 
     public function updateCategory($Category, $newDetails)
     {
-        return $Category->update($newDetails);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return $Category->update($newDetails);
+        }else {
+            abort(401);
+        }
+
     }
 
 

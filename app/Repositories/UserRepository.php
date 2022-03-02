@@ -6,6 +6,7 @@ use App\Interfaces\UserRepositoryInterface;
 use App\Mail\UserRegistration;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -14,10 +15,19 @@ class UserRepository implements UserRepositoryInterface
 {
     public function getAllUsers()
     {
-        return User::with('department')->get();
+        $user=Auth::user();
+        if($user->is_admin==1){
+           return  User::with('department')->get();
+        }else {
+         abort(401);
+        }
+
     }
     public function createUser(array $userDetails)
     {
+
+        $user=Auth::user();
+        if($user->is_admin==1){
         return DB::transaction(function () use ($userDetails) {
 
             try {
@@ -42,15 +52,30 @@ class UserRepository implements UserRepositoryInterface
                 return response()->json('error', '400');
             }
         }, 2);
+
+        }else {
+            abort(401);
+        }
     }
 
     public function updateUser($user, $newDetails)
     {
-        return $user->update($newDetails);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return $user->update($newDetails);
+        }else {
+            abort(401);
+        }
+
     }
 
     public function deleteUser($userId)
     {
-        return User::destroy($userId);
+        $user=Auth::user();
+        if($user->is_admin==1){
+            return User::destroy($userId);
+        }else {
+            abort(401);
+        }
     }
 }

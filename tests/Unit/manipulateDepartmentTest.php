@@ -7,28 +7,28 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class manipulateDepartmentTest extends TestCase
 {
-    public function testUserCanViewDepartmentsPage()
+//    use RefreshDatabase;
+    public function test_authenticated_user_can_view_departments_page()
     {
-        //make request to /login
+        $this->signIn();
         $response = $this->get('/departments');
         $response->assertSuccessful();
         $response->assertViewIs('departments.index');
     }
 
-    public function testUserCanAddDepartment()
+    public function test_authenticated_user_can_create_departments()
     {
-        //make request to /login
-        $response = $this->get('/departments');
-        $response->assertSuccessful();
-        $response->assertViewIs('departments.index');
+        $this->signIn();
+        $department=create('App\Models\Department');
+        $this->get('/departments')->assertSee($department->name);
     }
 
-    public function testUserCanDeleteDepartment()
+    public function test_guest_user_cannot_create_departments()
     {
-        //make request to /login
-        $response = $this->get('/departments');
-        $response->assertSuccessful();
-        $response->assertViewIs('departments.index');
+        create('App\Models\Department');
+        $this->get('/departments')
+            ->assertRedirect('/login');
     }
+
 }
 

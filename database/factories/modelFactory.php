@@ -38,9 +38,26 @@ $factory->define(App\Models\Department::class, function ($faker){
 
 $factory->define(App\Models\Category::class, function ($faker){
     $name=$this->faker->word;
-    $description=$this->faker->sntence;
+    $description=$this->faker->sentence;
     return [
         'name'=>$name,
         'description'=>$description,
+    ];
+});
+
+$factory->define(App\Models\Event::class, function (Faker $faker){
+    return [
+        'category_id'=>function(){
+            return  factory('App\Models\Category')->create()->id;
+        },
+        'user_id'=>function(){
+            return  factory('App\Models\User')->create()->id;
+        },
+        'frequency_id'=>1,
+        'name'=>$faker->name,
+        'venue'=>$faker->name,
+        'start_date'=>$faker->dateTime,
+        'event_date'=>$faker->dateTime,
+        'lead_time'=>$faker->dateTime,
     ];
 });

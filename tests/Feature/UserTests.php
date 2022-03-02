@@ -3,37 +3,32 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use function create;
 
 class UserTests extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function canViewUsersPage()
+    public function test_authenticated_user_can_view_users()
+    {
+        $response = $this->get('/users');
+        $response->assertStatus(200);
+    }
+    public function test_guest_user_cannot_view_users()
     {
         $response = $this->get('/users');
         $response->assertStatus(200);
     }
 
-    public function canCreateUser()
+    public function test_authenticated_user_can_create_user()
     {
-        $response = $this->get('/users');
-        $response->assertStatus(200);
+        $this->signIn();
+        $user=create('App\Models\User');
+        $this->get('/users')->assertSee($user->name);
     }
 
-    public function canEditUser()
+    public function test_guest_user_cannot_create_user()
     {
-        $response = $this->get('/users');
-        $response->assertStatus(200);
+        create('App\Models\User');
+        $this->get('/users')->assertRedirect('/login');
     }
 
-    public function canDeleteUser()
-    {
-        $response = $this->get('/users');
-        $response->assertStatus(200);
-    }
 }

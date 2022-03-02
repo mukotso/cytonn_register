@@ -18,7 +18,6 @@ class DepartmentsController extends Controller
 
     public function index()
     {
-//        $this->authorize('update');
         $departments = $this->departmentRepository->getAllDepartments();
         if(request()->expectsJson()) {
             return response()->json($departments, 200);

@@ -2,16 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\User;
-
-
 
 class LoginTest extends TestCase
 {
-
-    public function testUserCanViewLoginForm()
+    public function test_user_can_view_login_form()
     {
 
         $response = $this->get('/login');
@@ -19,7 +14,7 @@ class LoginTest extends TestCase
         $response->assertViewIs('auth.login');
     }
 
-    public function testUserCannotViewLoginFormWhenAuthenticated()
+    public function test_user_cannot_view_login_form_when_authenticated()
     {
         $user = factory('App\Models\User')->make();
         $response = $this->actingAs($user)->get('/login');
@@ -27,7 +22,7 @@ class LoginTest extends TestCase
         $response->assertRedirect('/home');
     }
 
-    public function testUserLoginWithCorrectCredentials()
+    public function test_user_login_with_correct_credentials()
     {
         $password = "myPassword@2020";
         $user = factory('App\Models\User')->create([
@@ -44,7 +39,7 @@ class LoginTest extends TestCase
     }
 
 
-    public function testCannotLoginIfUserDontExist()
+    public function test_cannot_login_if_user_dont_exist()
     {
 
         $response = $this->post(route('login'), [
@@ -57,7 +52,7 @@ class LoginTest extends TestCase
         $this->assertGuest();
     }
 
-    public function testUserLogout()
+    public function test_user_logout()
     {
         $user =factory('App\Models\User')->create();
         $this->be($user);

@@ -96,12 +96,15 @@ export default {
     beforeMount() {
         axios.get('/departments')
             .then((response) => {
-                if(response.status===200){
                     this.departments = response.data;
-                }
             })
             .catch(function (error) {
-                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
     },
 
@@ -111,13 +114,22 @@ export default {
                 if (response.status === 200) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Profile Updated successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/profile";
+                        }
                     })
                 }
             }).catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
         updatePassword() {
@@ -127,10 +139,13 @@ export default {
                         text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/profile";
+                        }
                     })
 
             }).catch((error) => {
-                // console.log(error.response.data)
                 Swal.fire({
                     title: 'Error!',
                     text: Object.values(error.response.data.errors)[0],

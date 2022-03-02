@@ -17,7 +17,8 @@ class DepartmentRepository implements DepartmentRepositoryInterface
     {
         $user=Auth::user();
         if($user->is_admin==1){
-            return Department::destroy($departmentId);
+             Department::destroy($departmentId);
+            return response()->json(['message' => "Department Deleted successfully"], 200);
         }else {
             abort(401);
         }
@@ -28,7 +29,8 @@ class DepartmentRepository implements DepartmentRepositoryInterface
     {
         $user=Auth::user();
         if($user->is_admin==1){
-            return Department::create($departmentDetails);
+             Department::create($departmentDetails);
+            return response()->json(['message' => "Department Created successfully"], 200);
         }else {
             abort(401);
         }
@@ -39,7 +41,8 @@ class DepartmentRepository implements DepartmentRepositoryInterface
     {
         $user=Auth::user();
         if($user->is_admin==1){
-            return $department->update($newDetails);
+             $department->update($newDetails);
+            return response()->json(['message' => "Department Details updated successfully"], 200);
         }else {
             abort(401);
         }

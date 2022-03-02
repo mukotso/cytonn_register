@@ -56,11 +56,14 @@ class EventRepository implements EventRepositoryInterface
                 $departmentEvent->department_id = $departmentId;
                 $departmentEvent->save();
             }
+            return response()->json(['message' => "Event Created successfully"], 200);
 
         } catch (Exception $ex) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'An error occured Task completion failed');;
-        }
+            return response()->json([
+                'errors' => json_decode('{ "error": "An error occurred Please Try again" }'),
+            ], 400);
+             }
     }
 
     public function getAllEvents()
@@ -138,7 +141,7 @@ class EventRepository implements EventRepositoryInterface
                     $eventTeamMember->save();
                 }
             }
-
+            return response()->json(['message' => "Event Details Updated successfully"], 200);
 
         } else {
                 abort(401);
@@ -156,7 +159,8 @@ class EventRepository implements EventRepositoryInterface
         $teamMembersUserIds = $this->getEventTeamMembers($eventId);
         $user = Auth::user();
         if (in_array($user->id, $teamMembersUserIds) || $user->is_admin == 1) {
-            return Event::destroy($eventId);
+             Event::destroy($eventId);
+            return response()->json(['message' => "Event Deleted successfully"], 200);
         } else {
             abort(401);
         }

@@ -59,9 +59,7 @@ export default {
     beforeMount() {
         axios.get('/departments')
             .then((response) => {
-                if(response.status===200){
                     this.departments = response.data;
-                }
             })
             .catch(function (error) {
                 console.log(error);
@@ -73,10 +71,10 @@ export default {
         createUser() {
             console.log(this.form);
             axios.post('/user', this.form).then((response) => {
-                if(response.status===200){
+
                     Swal.fire({
                         title: 'Success!',
-                        text: 'User added successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -84,21 +82,23 @@ export default {
                             window.location.href = "/users";
                         }
                     })
-
-                }
                 this.isShowAddUserForm =false;
             }).catch((error) => {
-
-                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
 
         updateUser() {
             axios.put('/user/'+this.form.id, this.form).then((response) => {
-                if (response.status === 200) {
+
                     Swal.fire({
                         title: 'Success!',
-                        text: 'User Details Updated successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -106,9 +106,13 @@ export default {
                             window.location.href = "/users";
                         }
                     })
-                }
             }).catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
     }

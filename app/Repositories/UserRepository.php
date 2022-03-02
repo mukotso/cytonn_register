@@ -15,15 +15,11 @@ class UserRepository implements UserRepositoryInterface
 {
     public function getAllUsers()
     {
-
         return User::with('department')->get();
-
-
     }
 
     public function createUser(array $userDetails)
     {
-
         $user = Auth::user();
         if ($user->is_admin == 1) {
             return DB::transaction(function () use ($userDetails) {
@@ -44,10 +40,12 @@ class UserRepository implements UserRepositoryInterface
 
                     Mail::to($user->email)->send(new UserRegistration($details));
 
-                    return $user;
+                    return response()->json(['message' => "User Created successfully"], 200);
                 } catch (Exception $ex) {
                     DB::rollBack();
-                    return response()->json('error', '400');
+                    return response()->json([
+                        'errors' => json_decode('{ "error": "An error occurred Please Try again" }'),
+                    ], 400);
                 }
             }, 2);
 
@@ -60,7 +58,8 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = Auth::user();
         if ($user->is_admin == 1) {
-            return $user->update($newDetails);
+            $user->update($newDetails);
+            return response()->json(['message' => "Details Updated successfully"], 200);
         } else {
             abort(401);
         }
@@ -71,7 +70,8 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = Auth::user();
         if ($user->is_admin == 1) {
-            return User::destroy($userId);
+            User::destroy($userId);
+            return response()->json(['message' => "User Removed successfully"], 200);
         } else {
             abort(401);
         }

@@ -236,17 +236,22 @@ export default {
 
         removeActivity(activity,index) {
             axios.get('/event/remove-activity/'+activity.id).then((response) => {
-                if (response.status === 200) {
+
                      this.activities.splice(index, 1);
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Activity Removed successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     })
-                }
+
             }).catch((error) => {
-                 console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
 
         },
@@ -258,17 +263,22 @@ export default {
 
         removeTeamMember(teamMember,index) {
             axios.get('/event/remove-team-member/'+teamMember.id).then((response) => {
-                if (response.status === 200) {
+
                     this.teamMembers.splice(index, 1);
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Member Removed successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     })
-                }
+
             }).catch((error) => {
-                // console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
 
@@ -278,10 +288,9 @@ export default {
             console.log(this.form);
             axios.put('/event/'+this.form.id, this.form).then((response) => {
                 console.log(response)
-                if (response.status === 200) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Event Details Updated successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -290,10 +299,14 @@ export default {
                         }
                     })
 
-                }
                 this.isShowAddEventForm = false;
             }).catch((error) => {
-                // console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
 

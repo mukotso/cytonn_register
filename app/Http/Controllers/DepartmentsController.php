@@ -30,37 +30,16 @@ class DepartmentsController extends Controller
 
     public function store(DepartmentRequest $request)
     {
-//        $this->authorize('update');
-        $department = $this->departmentRepository->createDepartment($request->all());
-       if(request()->expectsJson()) {
-            return response()->json($department, 200);
-        }else{
-            return  redirect()->route('departments.index');
-        }
-
+        return $this->departmentRepository->createDepartment($request->all());
     }
 
     public function update(DepartmentRequest $request, Department $department)
     {
-//        $this->authorize('update');
-        $department = $this->departmentRepository->updateDepartment($department, $request->all());
-        if(request()->expectsJson()) {
-            return response()->json($department, 200);
-        }else{
-            return  redirect()->route('departments.index');
-        }
-
+        return $this->departmentRepository->updateDepartment($department, $request->all());
     }
 
     public function destroy(Department $department)
     {
-//        $this->authorize('update');
-        $this->departmentRepository->deleteDepartment($department->id);
-        if(request()->expectsJson()) {
-            return response()->json(200);
-        }else{
-            return  redirect()->route('departments.index');
-        }
-
+       return $this->departmentRepository->deleteDepartment($department->id);
     }
 }

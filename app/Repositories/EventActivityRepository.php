@@ -8,17 +8,21 @@ class EventActivityRepository implements EventActivityRepositoryInterface
 {
     public function deleteActivity($activity)
     {
-        return Activity::destroy($activity);
+        Activity::destroy($activity);
+        return response()->json(['message' => "Activity Deleted successfully"], 200);
     }
     public function completeActivity($activity)
     {
-        return Activity::where('id',$activity)
+         Activity::where('id',$activity)
             ->update(['status'=>'completed']);
+        return response()->json(['message' => "Activity Completed successfully"], 200);
+
     }
     public function activityNotHappening($activity)
     {
-        return Activity::where('id',$activity)
+         Activity::where('id',$activity)
             ->update(['status'=>'inactive']);
+        return response()->json(['message' => "Activity Cancelled successfully"], 200);
     }
 }
 

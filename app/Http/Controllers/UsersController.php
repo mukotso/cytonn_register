@@ -20,48 +20,30 @@ class UsersController extends Controller
     public function index()
     {
 
-            $users = $this->userRepository->getAllUsers();
-            if (request()->expectsJson()) {
-                return response()->json($users, 200);
-            } else {
-                return view('users.index', compact('users'));
-            }
+        $users = $this->userRepository->getAllUsers();
+        if (request()->expectsJson()) {
+            return response()->json($users, 200);
+        } else {
+            return view('users.index', compact('users'));
+        }
 
 
     }
+
     public function store(addUserRequest $request)
     {
-//        $this->authorize('update');
-        $user = $this->userRepository->createUser($request->all());
-        if (request()->expectsJson()) {
-            return response()->json($user, 200);
-        } else {
-            return redirect()->route('users.index');
-        }
+        return $this->userRepository->createUser($request->all());
+
     }
 
     public function update(editUserRequest $request, User $user)
     {
-//        $this->authorize('update');
-        $user = $this->userRepository->updateUser($user, $request->all());
-        if (request()->expectsJson()) {
-            return response()->json($user, 200);
-        } else {
-            return redirect()->route('users.index');
-        }
-
+        return $this->userRepository->updateUser($user, $request->all());
     }
 
     public function destroy(User $user)
     {
-//        $this->authorize('update');
-        $this->userRepository->deleteUser($user->id);
-        if (request()->expectsJson()) {
-            return response()->json(200);
-        } else {
-            return redirect()->route('users.index');
-        }
-
+        return $this->userRepository->deleteUser($user->id);
     }
 
 

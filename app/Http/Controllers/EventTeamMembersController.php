@@ -17,8 +17,7 @@ class EventTeamMembersController extends Controller
     public function destroy($teamMember)
     {
 
-        $this->eventTeamMemberRepository->deleteMember($teamMember);
-            return response()->json(200);
+        return $this->eventTeamMemberRepository->deleteMember($teamMember);
 
     }
 }

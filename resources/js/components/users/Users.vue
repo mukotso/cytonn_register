@@ -135,19 +135,22 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('user/'+user.id).then((response) => {
-                        if (response.status === 200) {
+
                             this.users = this.users.filter(response => response.id !== user.id)
-                            Swal.fire('Deleted!', 'User has been deleted.', 'success')
-                        } else {
                             Swal.fire({
-                                title: 'Error!',
-                                text: 'Something went wrong',
-                                icon: 'error',
+                                title: 'Deleted!',
+                                text: response.data['message'],
+                                icon: 'success',
                                 confirmButtonText: 'Ok'
                             })
-                        }
+
                     }).catch((error) => {
-                        console.log('An error occured');
+                        Swal.fire({
+                            title: 'Error!',
+                            text: Object.values(error.response.data.errors)[0],
+                            icon: 'error',
+                            confirmButtonText: 'Try Again'
+                        })
                     })
                 }
             })

@@ -15,21 +15,17 @@ class EventActivitiesController extends Controller
 
     public function destroy($activity)
     {
-        $this->eventActivityRepository->deleteActivity($activity);
-        return response()->json(200);
-
+        return $this->eventActivityRepository->deleteActivity($activity);
     }
 
     public function complete($activity)
     {
-        $this->eventActivityRepository->completeActivity($activity);
-        return response()->json('',200);
+        return $this->eventActivityRepository->completeActivity($activity);
     }
 
     public function activityNotHappening($activity)
     {
-        $this->eventActivityRepository->activityNotHappening($activity);
-        return response()->json('',200);
+        return $this->eventActivityRepository->activityNotHappening($activity);
     }
 }
 

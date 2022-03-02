@@ -64,15 +64,6 @@
             </div>
             <span>Checked names: {{ departmentIds }}</span>
 
-<!--            <label>Add Department(s)</label>-->
-<!--            <div class="md:flex">-->
-<!--                <div class="md:w-1/4">-->
-<!--            <span  >-->
-<!--                <input type="checkbox" v-model="departmentIds"-->
-<!--                       :value="department.id">-->
-<!--                </span>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
 
         <br>
@@ -273,10 +264,10 @@ export default {
             this.form.departmentIds = this.departmentIds;
             axios.post('/event', this.form).then((response) => {
                 console.log(response)
-                if (response.status === 200) {
+
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Event added successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -285,10 +276,15 @@ export default {
                         }
                     })
 
-                }
+
                 this.isShowAddEventForm = false;
             }).catch((error) => {
-                // console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
 

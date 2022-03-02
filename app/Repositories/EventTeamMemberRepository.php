@@ -8,8 +8,8 @@ class EventTeamMemberRepository implements EventTeamMemberRepositoryInterface
 {
     public function deleteMember($teamMember)
     {
-
-        return EventTeamMember::destroy($teamMember);
+         EventTeamMember::destroy($teamMember);
+        return response()->json(['message' => "Member Removed successfully"], 200);
     }
 
 }

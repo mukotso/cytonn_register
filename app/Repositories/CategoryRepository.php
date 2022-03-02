@@ -18,7 +18,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $user=Auth::user();
         if($user->is_admin==1){
-            return Category::destroy($CategoryId);
+            Category::destroy($CategoryId);
+            return response()->json(['message' => "Category Deleted successfully"], 200);
         }else {
             abort(401);
         }
@@ -29,7 +30,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $user=Auth::user();
         if($user->is_admin==1){
-            return Category::create($CategoryDetails);
+             Category::create($CategoryDetails);
+            return response()->json(['message' => "Category Created successfully"], 200);
         }else {
             abort(401);
         }
@@ -40,7 +42,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $user=Auth::user();
         if($user->is_admin==1){
-            return $Category->update($newDetails);
+             $Category->update($newDetails);
+            return response()->json(['message' => "Category Details Updated successfully"], 200);
         }else {
             abort(401);
         }

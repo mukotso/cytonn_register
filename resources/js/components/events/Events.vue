@@ -149,19 +149,16 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('event/' + event.id).then((response) => {
-                        if (response.status === 200) {
                             this.events = this.events.filter(response => response.id !== event.id)
                             Swal.fire('Deleted!', 'Event has been deleted.', 'success')
-                        } else {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Something went wrong',
-                                icon: 'error',
-                                confirmButtonText: 'Ok'
-                            })
-                        }
+
                     }).catch((error) => {
-                        console.log('An error occured');
+                        Swal.fire({
+                            title: 'Error!',
+                            text: Object.values(error.response.data.errors)[0],
+                            icon: 'error',
+                            confirmButtonText: 'Try Again'
+                        })
                     })
                 }
             })

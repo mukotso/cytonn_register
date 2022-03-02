@@ -55,15 +55,23 @@
                 <td>{{ activity.description }}</td>
                 <td v-if="activity.status=='active'"><span class="statusActive"></span> On time</td>
                 <td v-if="activity.status=='inactive'"><span class="statusInactive"></span>Not happpening</td>
-                <td v-if="activity.status=='completed'"><del><span class="statusDone"></span>Done </del></td>
+                <td v-if="activity.status=='completed'">
+                    <del><span class="statusDone"></span>Done</del>
+                </td>
                 <td v-if="user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)">
                     <button v-if="activity.status=='active'"
-                        @click.prevent="completeActivity(activity)" class="bg-green-400 text-white text-bold px-2 py-1">Mark As Completed</button>
+                            @click.prevent="completeActivity(activity)"
+                            class="bg-green-400 text-white text-bold px-2 py-1">Mark As Completed
+                    </button>
                     <button v-if="activity.status=='active'"
-                        @click.prevent="activityNotHappening(activity)" class="bg-red-400 text-white text-bold px-2 py-1">Not Happening</button>
+                            @click.prevent="activityNotHappening(activity)"
+                            class="bg-red-400 text-white text-bold px-2 py-1">Not Happening
+                    </button>
 
-                <h2 v-if="activity.status=='completed' " class="text-bold text-green-400 text-bold px-2 py-1">DONE</h2>
-                    <h2 v-if="activity.status=='inactive'" class="text-bold text-red-400 text-bold px-2 py-1">NOT HAPPENING</h2>
+                    <h2 v-if="activity.status=='completed' " class="text-bold text-green-400 text-bold px-2 py-1">
+                        DONE</h2>
+                    <h2 v-if="activity.status=='inactive'" class="text-bold text-red-400 text-bold px-2 py-1">NOT
+                        HAPPENING</h2>
                 </td>
 
             </tr>
@@ -80,21 +88,21 @@
         <div class="flex">
             <div class="md:w-1/3">
                 <h1>Name</h1>
-                <h2>{{event[0].creator.first_name}} {{event[0].creator.last_name}}</h2>
+                <h2>{{ event[0].creator.first_name }} {{ event[0].creator.last_name }}</h2>
             </div>
 
             <div class="md:w-1/3">
                 <h1>Email</h1>
-                <h2>{{event[0].creator.email}}</h2>
+                <h2>{{ event[0].creator.email }}</h2>
             </div>
 
             <div class="md:w-1/3">
                 <h1>Tel</h1>
-                <h2>{{event[0].creator.phone_number}}</h2>
+                <h2>{{ event[0].creator.phone_number }}</h2>
             </div>
 
         </div>
-<hr>
+        <hr>
         <br>
         <h1 class="heading">Members</h1>
         <br>
@@ -126,65 +134,76 @@ import Swal from "sweetalert2";
 
 export default {
     name: "showEvent",
-    props: ['event','user'],
+    props: ['event', 'user'],
 
     beforeMount() {
         this.getTeamMembersUserIds();
         console.log(this.event);
     },
-    methods:{
-        completeActivity(activity){
-            axios.get('/event/complete-activity/'+activity.id).then((response) => {
-                if (response.status === 200) {
-
+    methods: {
+        completeActivity(activity) {
+            axios.get('/event/complete-activity/' + activity.id).then((response) => {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Activity completed successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "/event/"+activity.event_id;
+                            window.location.href = "/event/" + activity.event_id;
                         }
                     })
 
                 }
+            ).catch((error) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
 
-            }).catch((error) => {
-                 console.log(error);
             })
-        },
-        activityNotHappening(activity){
-            axios.get('/event/activity-not-happening/'+activity.id).then((response) => {
-                if (response.status === 200) {
+                },
+                activityNotHappening(activity)
+            {
+                axios.get('/event/activity-not-happening/' + activity.id).then((response) => {
 
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Updated successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "/event/"+activity.event_id;
+                            window.location.href = "/event/" + activity.event_id;
                         }
                     })
-                }
-            }).catch((error) => {
-                console.log(error);
-            })
 
-        },
+                }).catch((error) => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: Object.values(error.response.data.errors)[0],
+                        icon: 'error',
+                        confirmButtonText: 'Try Again'
+                    })
+                })
 
-        getTeamMembersUserIds() {
-                let teamMembersUserIds=[];
+
+            },
+
+            getTeamMembersUserIds()
+            {
+                let teamMembersUserIds = [];
                 this.event[0].team_members.forEach(teamMember => {
                     teamMembersUserIds.push(teamMember.user_id);
                 });
-                this.event.teamMembersUserIds=teamMembersUserIds;
-        },
+                this.event.teamMembersUserIds = teamMembersUserIds;
+            },
 
+
+        }
     }
-}
 </script>
 
 <style scoped>
@@ -195,8 +214,9 @@ h1 {
     font-weight: bold;
     font-size: 20px;
 }
-.heading{
-    color:black !important;
+
+.heading {
+    color: black !important;
 }
 
 h2 {

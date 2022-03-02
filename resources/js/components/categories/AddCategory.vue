@@ -38,10 +38,10 @@ export default {
 
         createCategory() {
             axios.post('/category', this.form).then((response) => {
-                if(response.status===200){
+
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Category added successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -50,20 +50,22 @@ export default {
                         }
                     })
 
-                }
                 this.isShowAddCategoryForm =false;
             }).catch((error) => {
-
-                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
 
         updateCategory() {
             axios.put('/category/'+this.form.id, this.form).then((response) => {
-                if (response.status === 200) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Category Details Updated successfully',
+                        text: response.data['message'],
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -71,9 +73,14 @@ export default {
                             window.location.href = "/categories";
                         }
                     })
-                }
+
             }).catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: Object.values(error.response.data.errors)[0],
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                })
             })
         },
     }

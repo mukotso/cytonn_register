@@ -29,29 +29,16 @@ class EventsController extends Controller
 
     public function store(EventRequest $request)
     {
-        $event = $this->eventRepository->createEvent($request->all());
-        if(request()->expectsJson()) {
-            return response()->json($event, 200);
-        }else{
-            return  redirect()->route('events.index');
-        }
-
+        return $this->eventRepository->createEvent($request->all());
     }
 
     public function update(EventRequest $request, $event)
     {
-        $event = $this->eventRepository->updateEvent($event, $request->all());
-        if(request()->expectsJson()) {
-            return response()->json($event, 200);
-        }else{
-            return  redirect()->route('events.index');
-        }
-
+        return $this->eventRepository->updateEvent($event, $request->all());
     }
 
     public function show($event)
     {
-
        $event= $this->eventRepository->getEventById($event);
             return  view('events.show', compact('event'));
     }
@@ -64,13 +51,7 @@ class EventsController extends Controller
 
     public function destroy(Event $event)
     {
-        $this->eventRepository->deleteEvent($event->id);
-        if(request()->expectsJson()) {
-            return response()->json(200);
-        }else{
-            return  redirect()->route('events.index');
-        }
-
+        return $this->eventRepository->deleteEvent($event->id);
     }
 
 

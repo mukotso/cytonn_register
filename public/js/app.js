@@ -2574,6 +2574,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addEvent",
@@ -2587,7 +2598,8 @@ __webpack_require__.r(__webpack_exports__);
       newTeamMember: {},
       newActivity: {},
       activities: [],
-      teamMembers: []
+      teamMembers: [],
+      departmentIds: []
     };
   },
   beforeMount: function beforeMount() {
@@ -2595,6 +2607,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getCategories();
     this.getFrequencies();
     this.getUsers();
+    console.log(this.departments);
   },
   methods: {
     getDepartments: function getDepartments() {
@@ -2659,8 +2672,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       this.form.activities = this.activities;
-      this.form.teamMembers = this.teamMembers; // console.log(this.form)
-
+      this.form.teamMembers = this.teamMembers;
+      this.form.departmentIds = this.departmentIds;
       axios.post('/event', this.form).then(function (response) {
         console.log(response);
 
@@ -3298,20 +3311,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "showEvent",
-  props: ['event'],
+  props: ['event', 'user'],
   beforeMount: function beforeMount() {
+    this.getTeamMembersUserIds();
     console.log(this.event);
   },
   methods: {
@@ -3350,6 +3355,13 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    getTeamMembersUserIds: function getTeamMembersUserIds() {
+      var teamMembersUserIds = [];
+      this.event[0].team_members.forEach(function (teamMember) {
+        teamMembersUserIds.push(teamMember.user_id);
+      });
+      this.event.teamMembersUserIds = teamMembersUserIds;
     }
   }
 });
@@ -44253,7 +44265,7 @@ var render = function () {
                     expression: "form.category_id",
                   },
                 },
-                [_vm._v(_vm._s(category.name) + "\n                ")]
+                [_vm._v(_vm._s(category.name) + "\n                    ")]
               )
             }),
             0
@@ -44307,7 +44319,7 @@ var render = function () {
                     expression: "form.frequency_id",
                   },
                 },
-                [_vm._v(_vm._s(frequency.name) + "\n                ")]
+                [_vm._v(_vm._s(frequency.name) + "\n                    ")]
               )
             }),
             0
@@ -44317,57 +44329,28 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "md:flex" }, [
         _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
-          _c("label", [_vm._v("Add Department(s)")]),
+          _c("label", [_vm._v("Lead Date")]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.department_id,
-                  expression: "form.department_id",
-                },
-              ],
-              attrs: { required: "" },
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.form,
-                    "department_id",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.lead_date,
+                expression: "form.lead_date",
+              },
+            ],
+            attrs: { type: "datetime-local", required: "" },
+            domProps: { value: _vm.form.lead_date },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "lead_date", $event.target.value)
               },
             },
-            _vm._l(_vm.departments, function (department) {
-              return _c(
-                "option",
-                {
-                  key: department.id,
-                  domProps: { value: department.id },
-                  model: {
-                    value: _vm.form.department_id,
-                    callback: function ($$v) {
-                      _vm.$set(_vm.form, "department_id", $$v)
-                    },
-                    expression: "form.department_id",
-                  },
-                },
-                [_vm._v(_vm._s(department.name) + "\n                ")]
-              )
-            }),
-            0
-          ),
+          }),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
@@ -44396,32 +44379,61 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex" }, [
-        _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
-          _c("label", [_vm._v("Lead Date")]),
+      _c(
+        "div",
+        { staticClass: "md:flex  " },
+        [
+          _c("br"),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.lead_date,
-                expression: "form.lead_date",
-              },
-            ],
-            attrs: { type: "datetime-local", required: "" },
-            domProps: { value: _vm.form.lead_date },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "lead_date", $event.target.value)
-              },
-            },
+          _vm._l(_vm.departments, function (department) {
+            return _c("div", { key: department.id, staticClass: "md:w-1/3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.departmentIds,
+                    expression: "departmentIds",
+                  },
+                ],
+                attrs: { type: "checkbox" },
+                domProps: {
+                  value: department.id,
+                  checked: Array.isArray(_vm.departmentIds)
+                    ? _vm._i(_vm.departmentIds, department.id) > -1
+                    : _vm.departmentIds,
+                },
+                on: {
+                  change: function ($event) {
+                    var $$a = _vm.departmentIds,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = department.id,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.departmentIds = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.departmentIds = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.departmentIds = $$c
+                    }
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(department.name))]),
+            ])
           }),
-        ]),
-      ]),
+          _vm._v(" "),
+          _c("span", [_vm._v("Checked names: " + _vm._s(_vm.departmentIds))]),
+        ],
+        2
+      ),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -44500,7 +44512,7 @@ var render = function () {
                           },
                         },
                       },
-                      [_vm._v("Remove\n                ")]
+                      [_vm._v("Remove\n                    ")]
                     ),
                   ]),
                 ])
@@ -44574,7 +44586,7 @@ var render = function () {
                         _vm._s(user.first_name) +
                           " " +
                           _vm._s(user.last_name) +
-                          "\n                    "
+                          "\n                        "
                       ),
                     ]
                   )
@@ -44646,7 +44658,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Remove\n                    ")]
+                        [_vm._v("Remove\n                        ")]
                       ),
                     ]),
                   ])
@@ -44664,7 +44676,7 @@ var render = function () {
       _c("br"),
       _vm._v(" "),
       _c("button", { staticClass: "btn-submit", attrs: { type: "submit" } }, [
-        _vm._v("\n        " + _vm._s("SAVE EVENT") + "\n    "),
+        _vm._v("\n            " + _vm._s("SAVE EVENT") + "\n        "),
       ]),
     ]
   )
@@ -45529,19 +45541,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "md:flex" }, [
         _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
-          _c("h1", [_vm._v("Add Department(s)")]),
-          _vm._v(" "),
-          _c("h2", [_vm._v(_vm._s(_vm.event[0].department_id))]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
           _c("h1", [_vm._v("Event Date")]),
           _vm._v(" "),
           _c("h2", [_vm._v(_vm._s(_vm.event[0].event_date))]),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex" }, [
+        _vm._v(" "),
         _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
           _c("h1", [_vm._v("Lead Date")]),
           _vm._v(" "),
@@ -45560,7 +45564,16 @@ var render = function () {
       _c(
         "table",
         [
-          _vm._m(0),
+          _c("tr", [
+            _c("th", [_vm._v("Activity")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Status")]),
+            _vm._v(" "),
+            _vm.user.is_admin == 1 ||
+            _vm.event.teamMembersUserIds.includes(_vm.user.id)
+              ? _c("th", [_vm._v("Action")])
+              : _vm._e(),
+          ]),
           _vm._l(_vm.event[0].activities, function (activity, index) {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(activity.description))]),
@@ -45580,66 +45593,69 @@ var render = function () {
                 : _vm._e(),
               _vm._v(" "),
               activity.status == "completed"
-                ? _c("td", [_vm._m(1, true)])
+                ? _c("td", [_vm._m(0, true)])
                 : _vm._e(),
               _vm._v(" "),
-              _c("td", [
-                activity.status == "active"
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "bg-green-400 text-white text-bold px-2 py-1",
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.completeActivity(activity)
+              _vm.user.is_admin == 1 ||
+              _vm.event.teamMembersUserIds.includes(_vm.user.id)
+                ? _c("td", [
+                    activity.status == "active"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-green-400 text-white text-bold px-2 py-1",
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.completeActivity(activity)
+                              },
+                            },
                           },
-                        },
-                      },
-                      [_vm._v("Mark As Completed")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                activity.status == "active"
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "bg-red-400 text-white text-bold px-2 py-1",
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.activityNotHappening(activity)
+                          [_vm._v("Mark As Completed")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    activity.status == "active"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-red-400 text-white text-bold px-2 py-1",
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.activityNotHappening(activity)
+                              },
+                            },
                           },
-                        },
-                      },
-                      [_vm._v("Not Happening")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                activity.status == "completed"
-                  ? _c(
-                      "h2",
-                      {
-                        staticClass:
-                          "text-bold text-green-400 text-bold px-2 py-1",
-                      },
-                      [_vm._v("DONE")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                activity.status == "inactive"
-                  ? _c(
-                      "h2",
-                      {
-                        staticClass:
-                          "text-bold text-red-400 text-bold px-2 py-1",
-                      },
-                      [_vm._v("NOT HAPPENING")]
-                    )
-                  : _vm._e(),
-              ]),
+                          [_vm._v("Not Happening")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    activity.status == "completed"
+                      ? _c(
+                          "h2",
+                          {
+                            staticClass:
+                              "text-bold text-green-400 text-bold px-2 py-1",
+                          },
+                          [_vm._v("DONE")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    activity.status == "inactive"
+                      ? _c(
+                          "h2",
+                          {
+                            staticClass:
+                              "text-bold text-red-400 text-bold px-2 py-1",
+                          },
+                          [_vm._v("NOT HAPPENING")]
+                        )
+                      : _vm._e(),
+                  ])
+                : _vm._e(),
             ])
           }),
         ],
@@ -45658,7 +45674,7 @@ var render = function () {
         _c(
           "table",
           [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _vm._l(_vm.event[0].team_members, function (teamMember, index) {
               return _c("tr", [
@@ -45687,18 +45703,6 @@ var render = function () {
   )
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Activity")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Status")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Action")]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

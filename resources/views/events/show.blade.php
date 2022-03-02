@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    <show-event :event="{{$event}}"></show-event>
+    <show-event :event="{{$event}}" :user="{{Auth()->user()}}"></show-event>
 @endsection

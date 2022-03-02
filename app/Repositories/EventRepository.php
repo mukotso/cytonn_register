@@ -55,10 +55,13 @@ class EventRepository implements EventRepositoryInterface
                 $eventTeamMember->designation = $teamMember['designation'];
                 $eventTeamMember->save();
             }
-            $departmentEvent = new DepartmentEvent();
-            $departmentEvent->event_id = $event->id;
-            $departmentEvent->department_id = $eventDetails['department_id'];
-            $departmentEvent->save();
+
+            foreach ($eventDetails['departmentIds'] as $departmentId) {
+                $departmentEvent = new DepartmentEvent();
+                $departmentEvent->event_id = $event->id;
+                $departmentEvent->department_id = $departmentId;
+                $departmentEvent->save();
+            }
 
         } catch (Exception $ex) {
             DB::rollBack();
@@ -71,7 +74,7 @@ class EventRepository implements EventRepositoryInterface
         $departmentId = Auth::user()->department_id;
         if (Auth()->user()->is_admin == 1) {
             return Event::whereHas('department')
-                ->with('teamMembers.user')->orderBy('created_at', 'DESC')->get();
+                ->with('department','teamMembers.user')->orderBy('created_at', 'DESC')->get();
 
         } else {
             return Event::whereHas('department', function ($query) use ($departmentId) {

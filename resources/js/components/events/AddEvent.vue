@@ -37,16 +37,13 @@
                     </option>
                 </select>
             </div>
+
         </div>
         <div class="md:flex">
-            <div class="sm:w-full md:w-1/2 ">
 
-                <label>Add Department(s)</label>
-                <select v-model="form.department_id" required>
-                    <option v-model="form.department_id" v-for="department in departments" :key="department.id"
-                            :value="department.id">{{ department.name }}
-                    </option>
-                </select>
+            <div class="sm:w-full md:w-1/2 ">
+                <label>Lead Date</label>
+                <input type="datetime-local" required v-model="form.lead_date">
             </div>
 
             <div class="sm:w-full md:w-1/2 ">
@@ -55,11 +52,25 @@
             </div>
         </div>
 
-        <div class="flex">
-            <div class="sm:w-full md:w-1/2 ">
-                <label>Lead Date</label>
-                <input type="datetime-local" required v-model="form.lead_date">
+        <div class="md:flex  ">
+            <br>
+
+            <div v-for="department in departments" :key="department.id" class="md:w-1/3" >
+                <input type="checkbox"  :value="department.id" v-model="departmentIds">
+                <span>{{ department.name }}</span>
+
             </div>
+            <span>Checked names: {{ departmentIds }}</span>
+
+<!--            <label>Add Department(s)</label>-->
+<!--            <div class="md:flex">-->
+<!--                <div class="md:w-1/4">-->
+<!--            <span  >-->
+<!--                <input type="checkbox" v-model="departmentIds"-->
+<!--                       :value="department.id">-->
+<!--                </span>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <br>
@@ -120,7 +131,7 @@
                 </div>
 
                 <div class="md:w-1/3">
-                    <button  class="btn-submit">SAVE</button>
+                    <button class="btn-submit">SAVE</button>
                 </div>
             </div>
         </form>
@@ -172,7 +183,8 @@ export default {
             newTeamMember: {},
             newActivity: {},
             activities: [],
-            teamMembers: []
+            teamMembers: [],
+            departmentIds: []
         }
     },
     beforeMount() {
@@ -180,6 +192,7 @@ export default {
         this.getCategories();
         this.getFrequencies();
         this.getUsers();
+        console.log(this.departments);
     },
 
     methods: {
@@ -255,7 +268,7 @@ export default {
         createEvent() {
             this.form.activities = this.activities;
             this.form.teamMembers = this.teamMembers;
-            // console.log(this.form)
+            this.form.departmentIds = this.departmentIds;
             axios.post('/event', this.form).then((response) => {
                 console.log(response)
                 if (response.status === 200) {

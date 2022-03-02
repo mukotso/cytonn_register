@@ -10,13 +10,7 @@ class DepartmentRepository implements DepartmentRepositoryInterface
 {
     public function getAllDepartments()
     {
-        $user=Auth::user();
-        if($user->is_admin==1){
             return Department::orderBy('created_at', 'DESC')->get();
-        }else {
-            abort(401);
-        }
-
     }
 
     public function deleteDepartment($departmentId)

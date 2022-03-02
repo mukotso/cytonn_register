@@ -30,24 +30,15 @@
         </div>
         <div class="md:flex">
             <div class="sm:w-full md:w-1/2 ">
-
-                <h1>Add Department(s)</h1>
-                <h2>{{ event[0].department_id }}</h2>
-            </div>
-
-            <div class="sm:w-full md:w-1/2 ">
                 <h1>Event Date</h1>
                 <h2>{{ event[0].event_date }}</h2>
             </div>
-        </div>
 
-        <div class="flex">
             <div class="sm:w-full md:w-1/2 ">
                 <h1>Lead Date</h1>
                 <h2>{{ event[0].lead_time }}</h2>
             </div>
         </div>
-
         <br>
         <h1>EVENT ACTIVITIES</h1>
         <br>
@@ -57,7 +48,7 @@
             <tr>
                 <th>Activity</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th v-if="user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)">Action</th>
 
             <tr v-for="(activity, index) in event[0].activities">
 
@@ -65,13 +56,13 @@
                 <td v-if="activity.status=='active'"><span class="statusActive"></span> On time</td>
                 <td v-if="activity.status=='inactive'"><span class="statusInactive"></span>Not happpening</td>
                 <td v-if="activity.status=='completed'"><del><span class="statusDone"></span>Done </del></td>
-                <td>
+                <td v-if="user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)">
                     <button v-if="activity.status=='active'"
                         @click.prevent="completeActivity(activity)" class="bg-green-400 text-white text-bold px-2 py-1">Mark As Completed</button>
                     <button v-if="activity.status=='active'"
                         @click.prevent="activityNotHappening(activity)" class="bg-red-400 text-white text-bold px-2 py-1">Not Happening</button>
 
-                <h2 v-if="activity.status=='completed'" class="text-bold text-green-400 text-bold px-2 py-1">DONE</h2>
+                <h2 v-if="activity.status=='completed' " class="text-bold text-green-400 text-bold px-2 py-1">DONE</h2>
                     <h2 v-if="activity.status=='inactive'" class="text-bold text-red-400 text-bold px-2 py-1">NOT HAPPENING</h2>
                 </td>
 
@@ -113,9 +104,10 @@ import Swal from "sweetalert2";
 
 export default {
     name: "showEvent",
-    props: ['event'],
+    props: ['event','user'],
 
     beforeMount() {
+        this.getTeamMembersUserIds();
         console.log(this.event);
     },
     methods:{
@@ -158,6 +150,16 @@ export default {
             }).catch((error) => {
                 console.log(error);
             })
+
+        },
+
+        getTeamMembersUserIds() {
+
+                let teamMembersUserIds=[];
+                this.event[0].team_members.forEach(teamMember => {
+                    teamMembersUserIds.push(teamMember.user_id);
+                });
+                this.event.teamMembersUserIds=teamMembersUserIds;
 
         },
 

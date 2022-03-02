@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
 {
-    protected $with=['activities','category','frequency'];
+    protected $with=['activities','category','frequency','creator'];
     protected $fillable=[
         'category-id',
         'frequency_id',
@@ -31,6 +31,10 @@ class Event extends Model
 //    }
     public function teamMembers(){
         return $this->hasMany(EventTeamMember::class,'event_id');
+    }
+
+    public function creator(){
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function category(){
         return $this->belongsTo(Category::class);

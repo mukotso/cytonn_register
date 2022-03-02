@@ -21,6 +21,7 @@ class EventRepository implements EventRepositoryInterface
             $event = new Event();
             $event->category_id = $eventDetails['category_id'];
             $event->frequency_id = $eventDetails['frequency_id'];
+            $event->user_id = Auth::user()->id;
             $event->name = $eventDetails['name'];
             $event->venue = $eventDetails['venue'];
             $event->start_date = $eventDetails['event_date'];
@@ -38,20 +39,13 @@ class EventRepository implements EventRepositoryInterface
                 $activity->save();
             }
 
-            //create owner
-            $eventTeamMember = new EventTeamMember;
-            $eventTeamMember->event_id = $event->id;
-            $eventTeamMember->user_id = Auth::user()->id;
-            $eventTeamMember->is_owner = 1;
-            $eventTeamMember->designation = 'owner';
-            $eventTeamMember->save();
+
 
 //        team member
             foreach ($eventDetails['teamMembers'] as $teamMember) {
                 $eventTeamMember = new EventTeamMember;
                 $eventTeamMember->event_id = $event->id;
                 $eventTeamMember->user_id = $teamMember['user']['id'];
-                $eventTeamMember->is_owner = 0;
                 $eventTeamMember->designation = $teamMember['designation'];
                 $eventTeamMember->save();
             }
@@ -74,21 +68,20 @@ class EventRepository implements EventRepositoryInterface
         $departmentId = Auth::user()->department_id;
         if (Auth()->user()->is_admin == 1) {
             return Event::whereHas('department')
-                ->with('department','teamMembers.user')->orderBy('created_at', 'DESC')->get();
+                ->with('department', 'teamMembers.user')->orderBy('created_at', 'DESC')->get();
 
         } else {
             return Event::whereHas('department', function ($query) use ($departmentId) {
                 $query->where('department_id', $departmentId);
             })->with('teamMembers.user')->orderBy('created_at', 'DESC')->get();
         }
-
-
     }
+
 
     public function getEventById($event)
     {
         return Event::where('id', $event)
-            ->with('activities', 'teamMembers.user', 'category', 'frequency')
+            ->with('activities','creator', 'teamMembers.user', 'category', 'frequency')
             ->get();
     }
 

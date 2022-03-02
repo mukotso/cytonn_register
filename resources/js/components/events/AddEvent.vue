@@ -42,14 +42,16 @@
         <div class="md:flex">
 
             <div class="sm:w-full md:w-1/2 ">
-                <label>Lead Date</label>
-                <input type="datetime-local" required v-model="form.lead_date">
-            </div>
-
-            <div class="sm:w-full md:w-1/2 ">
                 <label>Event Date</label>
                 <input type="datetime-local" required v-model="form.event_date">
             </div>
+
+            <div class="sm:w-full md:w-1/2 ">
+                <label>When Should Preparations Start</label>
+                <input type="date" required v-model="form.lead_date">
+            </div>
+
+
         </div>
 
         <div class="md:flex  ">

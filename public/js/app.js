@@ -2585,6 +2585,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addEvent",
@@ -3210,6 +3212,28 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8287,7 +8311,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "h1[data-v-fb766a1c] {\n  color: gray;\n  font-weight: bold;\n  font-size: 20px;\n}\nh2[data-v-fb766a1c] {\n  color: black;\n  font-weight: bold;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "h1[data-v-fb766a1c] {\n  color: gray;\n  font-weight: bold;\n  font-size: 20px;\n}\n.heading[data-v-fb766a1c]{\n  color:black !important;\n}\nh2[data-v-fb766a1c] {\n  color: black;\n  font-weight: bold;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -44329,31 +44353,6 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "md:flex" }, [
         _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
-          _c("label", [_vm._v("Lead Date")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.lead_date,
-                expression: "form.lead_date",
-              },
-            ],
-            attrs: { type: "datetime-local", required: "" },
-            domProps: { value: _vm.form.lead_date },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "lead_date", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
           _c("label", [_vm._v("Event Date")]),
           _vm._v(" "),
           _c("input", {
@@ -44373,6 +44372,31 @@ var render = function () {
                   return
                 }
                 _vm.$set(_vm.form, "event_date", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "sm:w-full md:w-1/2 " }, [
+          _c("label", [_vm._v("When Should Preparations Start")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.lead_date,
+                expression: "form.lead_date",
+              },
+            ],
+            attrs: { type: "date", required: "" },
+            domProps: { value: _vm.form.lead_date },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "lead_date", $event.target.value)
               },
             },
           }),
@@ -45664,11 +45688,47 @@ var render = function () {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("h1", [_vm._v("EVENT TEAM MEMBERS")]),
+      _c("h1", { staticClass: "heading" }, [_vm._v("EVENT TEAM MEMBERS")]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
+      _c("h1", { staticClass: "heading" }, [_vm._v("Event Host")]),
+      _vm._v(" "),
       _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex" }, [
+        _c("div", { staticClass: "md:w-1/3" }, [
+          _c("h1", [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("h2", [
+            _vm._v(
+              _vm._s(_vm.event[0].creator.first_name) +
+                " " +
+                _vm._s(_vm.event[0].creator.last_name)
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "md:w-1/3" }, [
+          _c("h1", [_vm._v("Email")]),
+          _vm._v(" "),
+          _c("h2", [_vm._v(_vm._s(_vm.event[0].creator.email))]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "md:w-1/3" }, [
+          _c("h1", [_vm._v("Tel")]),
+          _vm._v(" "),
+          _c("h2", [_vm._v(_vm._s(_vm.event[0].creator.phone_number))]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("h1", { staticClass: "heading" }, [_vm._v("Members")]),
+      _vm._v(" "),
+      _c("br"),
       _vm._v(" "),
       _c("div", { staticClass: "flex" }, [
         _c(

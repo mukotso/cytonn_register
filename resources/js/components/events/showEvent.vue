@@ -72,10 +72,32 @@
 
 
         <br>
-        <h1>EVENT TEAM MEMBERS</h1>
+        <h1 class="heading">EVENT TEAM MEMBERS</h1>
         <br>
+        <h1 class="heading">Event Host</h1>
         <hr>
 
+        <div class="flex">
+            <div class="md:w-1/3">
+                <h1>Name</h1>
+                <h2>{{event[0].creator.first_name}} {{event[0].creator.last_name}}</h2>
+            </div>
+
+            <div class="md:w-1/3">
+                <h1>Email</h1>
+                <h2>{{event[0].creator.email}}</h2>
+            </div>
+
+            <div class="md:w-1/3">
+                <h1>Tel</h1>
+                <h2>{{event[0].creator.phone_number}}</h2>
+            </div>
+
+        </div>
+<hr>
+        <br>
+        <h1 class="heading">Members</h1>
+        <br>
         <div class="flex">
 
             <table>
@@ -154,13 +176,11 @@ export default {
         },
 
         getTeamMembersUserIds() {
-
                 let teamMembersUserIds=[];
                 this.event[0].team_members.forEach(teamMember => {
                     teamMembersUserIds.push(teamMember.user_id);
                 });
                 this.event.teamMembersUserIds=teamMembersUserIds;
-
         },
 
     }
@@ -174,6 +194,9 @@ h1 {
     color: gray;
     font-weight: bold;
     font-size: 20px;
+}
+.heading{
+    color:black !important;
 }
 
 h2 {

@@ -50,20 +50,14 @@
                 <label>When Should Preparations Start</label>
                 <input type="date" required v-model="form.lead_date">
             </div>
-
-
         </div>
 
-        <div class="md:flex  ">
-            <br>
-
-            <div v-for="department in departments" :key="department.id" class="md:w-1/3" >
-                <input type="checkbox"  :value="department.id" v-model="departmentIds">
-                <span>{{ department.name }}</span>
+        <div class="md:flex">
+            <div  v-for="department in departments" :key="department.id">
+                <input type="checkbox" :value="department.id" v-model="departmentIds">
+                <span>{{ department.name }}</span> <br>
 
             </div>
-            <span>Checked names: {{ departmentIds }}</span>
-
         </div>
 
         <br>
@@ -265,16 +259,16 @@ export default {
             axios.post('/event', this.form).then((response) => {
                 console.log(response)
 
-                    Swal.fire({
-                        title: 'Success!',
-                        text: response.data['message'],
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "/events";
-                        }
-                    })
+                Swal.fire({
+                    title: 'Success!',
+                    text: response.data['message'],
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/events";
+                    }
+                })
 
 
                 this.isShowAddEventForm = false;

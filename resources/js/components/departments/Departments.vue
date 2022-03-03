@@ -1,10 +1,6 @@
 <template>
     <div>
 
-
-        <!--        <div class="max-w-2xl mx-auto">-->
-
-
         <button v-if="showDepartments"
                 class="btn"
                 type="button" @click="toggleAddDepartmentForm">
@@ -26,6 +22,13 @@
             </add-department>
         </div>
 
+
+        <div v-else-if="!departments.length && !isShowAddDepartmentForm">
+            <div class=" m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                <p class=" m-5 font-bold">NO DEPARTMENTS ADDED</p>
+                <p>Please add Departments to view them from here</p>
+            </div>
+        </div>
 
         <section v-if="showDepartments" class="container px-6 py-4 mx-auto">
             <div class="grid gap-6 mb-8 md:grid-cols-1 lg:grid-cols-2">

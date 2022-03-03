@@ -21,8 +21,14 @@
             </add-event>
         </div>
 
+        <div v-if="!events.length && !isShowAddEventForm">
+            <div class=" m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                <p class=" m-5 font-bold">NO EVENTS ADDED</p>
+                <p>Please add events to view them from here</p>
+            </div>
+        </div>
 
-        <div v-if="showEvents" class=" md:mx-20  p-4">
+        <div  v-if="showEvents && events.length" class=" md:mx-20  p-4">
 
             <table>
                 <tr>
@@ -65,6 +71,8 @@
             </table>
 
         </div>
+
+
     </div>
 </template>
 

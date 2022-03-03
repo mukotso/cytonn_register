@@ -26,8 +26,8 @@ class addUserRequest extends FormRequest
         return [
             'first_name' => 'required|max:155',
             'last_name' => 'required|max:155',
-            'email' => 'email|required|unique:users,email,{$this->User->id}',
-            'phone_number' => 'required|regex:/([0-9\s\-\+\(\)]*)$/|min:10|numeric',
+            'email' => 'email|required|unique:users,email',
+            'phone_number' => 'required|regex:/([0-9\s\-\+\(\)]*)$/|numeric',
             'department_id' => 'required|integer',
         ];
     }
@@ -40,6 +40,7 @@ class addUserRequest extends FormRequest
             'email.required' => 'The Email input is required',
             'email.unique' => 'The  Email is Already  registered into the system',
             'phone_number.required' => 'Please Enter your phone number!',
+            'phone_number.min' => 'Phone Number should Atleast 10 digits!',
             'department_id.required' => 'Please select the department',
         ];
     }

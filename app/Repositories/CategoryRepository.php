@@ -11,7 +11,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 {
     public function getAllCategories()
     {
-        return Category::orderBy('created_at', 'ASC')->get();
+        return Category::orderBy('created_at', 'DESC')->get();
     }
 
     public function deleteCategory($CategoryId)

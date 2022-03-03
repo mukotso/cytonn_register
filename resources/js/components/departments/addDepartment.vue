@@ -67,6 +67,7 @@ export default {
                     })
 
             }).catch((error) => {
+                console.log(Object.values(error.response.data.errors)[0][0])
                 Swal.fire({
                     title: 'Error!',
                     text: Object.values(error.response.data.errors)[0],

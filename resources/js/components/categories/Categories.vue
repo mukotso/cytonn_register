@@ -23,7 +23,13 @@
             </add-category>
         </div>
 
-
+        <div v-if="!ready">Loading...</div>
+        <div v-else-if="!categories.length && !isShowAddCategoryForm">
+            <div class=" m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                <p class=" m-5 font-bold">NO CATEGORIES ADDED</p>
+                <p>Please add event categories to view them from here</p>
+            </div>
+        </div>
         <section v-if="showCategories" class="container px-6 py-4 mx-auto">
             <div class="grid gap-6 mb-8 md:grid-cols-1 lg:grid-cols-2">
 
@@ -54,6 +60,8 @@
 
             </div>
         </section>
+
+
     </div>
 </template>
 
@@ -70,6 +78,7 @@ export default {
             isShowAddCategoryForm: false,
             showCategories: true,
             isEditCategory: false,
+            ready:true,
             form: {
                 name: '',
                 description:'',

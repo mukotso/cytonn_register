@@ -1980,40 +1980,45 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/category', this.form).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Category added successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/categories";
-            }
-          });
-        }
-
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/categories";
+          }
+        });
         _this.isShowAddCategoryForm = false;
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     updateCategory: function updateCategory() {
       axios.put('/category/' + this.form.id, this.form).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Category Details Updated successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/categories";
-            }
-          });
-        }
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/categories";
+          }
+        });
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     }
   }
@@ -2092,6 +2097,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2105,6 +2118,7 @@ __webpack_require__.r(__webpack_exports__);
       isShowAddCategoryForm: false,
       showCategories: true,
       isEditCategory: false,
+      ready: true,
       form: {
         name: '',
         description: '',
@@ -2146,22 +2160,23 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]('category/' + category.id).then(function (response) {
-            if (response.status === 200) {
-              console.log(response);
-              _this.categories = _this.categories.filter(function (response) {
-                return response.id !== category.id;
-              });
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Deleted!', 'Category has been deleted.', 'success');
-            } else {
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-                title: 'Error!',
-                text: 'Something went wrong',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              });
-            }
+            console.log(response);
+            _this.categories = _this.categories.filter(function (response) {
+              return response.id !== category.id;
+            });
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+              title: 'Deleted!',
+              text: response.data['message'],
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            });
           })["catch"](function (error) {
-            console.log('An error occured');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+              title: 'Error!',
+              text: Object.values(error.response.data.errors)[0],
+              icon: 'error',
+              confirmButtonText: 'Try Again'
+            });
           });
         }
       });
@@ -2183,6 +2198,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _addDepartment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addDepartment */ "./resources/js/components/departments/addDepartment.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
 //
 //
 //
@@ -2295,22 +2313,23 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]('department/' + department.id).then(function (response) {
-            if (response.status === 200) {
-              console.log(response);
-              _this.departments = _this.departments.filter(function (response) {
-                return response.id !== department.id;
-              });
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Deleted!', 'Department has been deleted.', 'success');
-            } else {
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-                title: 'Error!',
-                text: 'Something went wrong',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              });
-            }
+            console.log(response);
+            _this.departments = _this.departments.filter(function (response) {
+              return response.id !== department.id;
+            });
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+              title: 'Success!',
+              text: response.data['message'],
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            });
           })["catch"](function (error) {
-            console.log('An error occured');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+              title: 'Error!',
+              text: Object.values(error.response.data.errors)[0],
+              icon: 'error',
+              confirmButtonText: 'Try Again'
+            });
           });
         }
       });
@@ -2363,40 +2382,46 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/department', this.form).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Department added successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/departments";
-            }
-          });
-        }
-
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/departments";
+          }
+        });
         _this.isShowAddDepartmentForm = false;
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     updateDepartment: function updateDepartment() {
       axios.put('/department/' + this.form.id, this.form).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Department Details Updated successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/departments";
-            }
-          });
-        }
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/departments";
+          }
+        });
       })["catch"](function (error) {
-        console.log(error);
+        console.log(Object.values(error.response.data.errors)[0][0]);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     }
   }
@@ -2415,21 +2440,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2678,22 +2688,24 @@ __webpack_require__.r(__webpack_exports__);
       this.form.departmentIds = this.departmentIds;
       axios.post('/event', this.form).then(function (response) {
         console.log(response);
-
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Event added successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/events";
-            }
-          });
-        }
-
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/events";
+          }
+        });
         _this5.isShowAddEventForm = false;
-      })["catch"](function (error) {// console.log(error);
+      })["catch"](function (error) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     }
   }
@@ -2962,18 +2974,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this5 = this;
 
       axios.get('/event/remove-activity/' + activity.id).then(function (response) {
-        if (response.status === 200) {
-          _this5.activities.splice(index, 1);
+        _this5.activities.splice(index, 1);
 
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Activity Removed successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          });
-        }
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     saveTeamMember: function saveTeamMember() {
@@ -2984,17 +2999,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this6 = this;
 
       axios.get('/event/remove-team-member/' + teamMember.id).then(function (response) {
-        if (response.status === 200) {
-          _this6.teamMembers.splice(index, 1);
+        _this6.teamMembers.splice(index, 1);
 
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Member Removed successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          });
-        }
-      })["catch"](function (error) {// console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+      })["catch"](function (error) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     updateEvent: function updateEvent() {
@@ -3005,22 +3024,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       console.log(this.form);
       axios.put('/event/' + this.form.id, this.form).then(function (response) {
         console.log(response);
-
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Event Details Updated successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/events";
-            }
-          });
-        }
-
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/events";
+          }
+        });
         _this7.isShowAddEventForm = false;
-      })["catch"](function (error) {// console.log(error);
+      })["catch"](function (error) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     }
   }
@@ -3040,6 +3061,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddEvent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddEvent */ "./resources/js/components/events/AddEvent.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3177,21 +3206,17 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]('event/' + event.id).then(function (response) {
-            if (response.status === 200) {
-              _this.events = _this.events.filter(function (response) {
-                return response.id !== event.id;
-              });
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Deleted!', 'Event has been deleted.', 'success');
-            } else {
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-                title: 'Error!',
-                text: 'Something went wrong',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              });
-            }
+            _this.events = _this.events.filter(function (response) {
+              return response.id !== event.id;
+            });
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Deleted!', 'Event has been deleted.', 'success');
           })["catch"](function (error) {
-            console.log('An error occured');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+              title: 'Error!',
+              text: Object.values(error.response.data.errors)[0],
+              icon: 'error',
+              confirmButtonText: 'Try Again'
+            });
           });
         }
       });
@@ -3335,6 +3360,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "showEvent",
@@ -3346,38 +3379,44 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     completeActivity: function completeActivity(activity) {
       axios.get('/event/complete-activity/' + activity.id).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Activity completed successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/event/" + activity.event_id;
-            }
-          });
-        }
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/event/" + activity.event_id;
+          }
+        });
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     activityNotHappening: function activityNotHappening(activity) {
       axios.get('/event/activity-not-happening/' + activity.id).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'Updated successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/event/" + activity.event_id;
-            }
-          });
-        }
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/event/" + activity.event_id;
+          }
+        });
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     getTeamMembersUserIds: function getTeamMembersUserIds() {
@@ -3500,11 +3539,14 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/departments').then(function (response) {
-      if (response.status === 200) {
-        _this.departments = response.data;
-      }
+      _this.departments = response.data;
     })["catch"](function (error) {
-      console.log(error);
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: 'Error!',
+        text: Object.values(error.response.data.errors)[0],
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
     });
   },
   methods: {
@@ -3513,13 +3555,22 @@ __webpack_require__.r(__webpack_exports__);
         if (response.status === 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
             title: 'Success!',
-            text: 'Profile Updated successfully',
+            text: response.data['message'],
             icon: 'success',
             confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "/profile";
+            }
           });
         }
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     updatePassword: function updatePassword() {
@@ -3529,9 +3580,12 @@ __webpack_require__.r(__webpack_exports__);
           text: response.data['message'],
           icon: 'success',
           confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/profile";
+          }
         });
       })["catch"](function (error) {
-        // console.log(error.response.data)
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Error!',
           text: Object.values(error.response.data.errors)[0],
@@ -3708,9 +3762,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/departments').then(function (response) {
-      if (response.status === 200) {
-        _this.departments = response.data;
-      }
+      _this.departments = response.data;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -3721,40 +3773,45 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(this.form);
       axios.post('/user', this.form).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'User added successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/users";
-            }
-          });
-        }
-
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/users";
+          }
+        });
         _this2.isShowAddUserForm = false;
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     },
     updateUser: function updateUser() {
       axios.put('/user/' + this.form.id, this.form).then(function (response) {
-        if (response.status === 200) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-            title: 'Success!',
-            text: 'User Details Updated successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = "/users";
-            }
-          });
-        }
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Success!',
+          text: response.data['message'],
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/users";
+          }
+        });
       })["catch"](function (error) {
-        console.log(error);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error!',
+          text: Object.values(error.response.data.errors)[0],
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       });
     }
   }
@@ -3908,21 +3965,22 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]('user/' + user.id).then(function (response) {
-            if (response.status === 200) {
-              _this.users = _this.users.filter(function (response) {
-                return response.id !== user.id;
-              });
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Deleted!', 'User has been deleted.', 'success');
-            } else {
-              sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-                title: 'Error!',
-                text: 'Something went wrong',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              });
-            }
+            _this.users = _this.users.filter(function (response) {
+              return response.id !== user.id;
+            });
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+              title: 'Deleted!',
+              text: response.data['message'],
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            });
           })["catch"](function (error) {
-            console.log('An error occured');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+              title: 'Error!',
+              text: Object.values(error.response.data.errors)[0],
+              icon: 'error',
+              confirmButtonText: 'Try Again'
+            });
           });
         }
       });
@@ -8311,7 +8369,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "h1[data-v-fb766a1c] {\n  color: gray;\n  font-weight: bold;\n  font-size: 20px;\n}\n.heading[data-v-fb766a1c]{\n  color:black !important;\n}\nh2[data-v-fb766a1c] {\n  color: black;\n  font-weight: bold;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "h1[data-v-fb766a1c] {\n  color: gray;\n  font-weight: bold;\n  font-size: 20px;\n}\n.heading[data-v-fb766a1c] {\n  color: black !important;\n}\nh2[data-v-fb766a1c] {\n  color: black;\n  font-weight: bold;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -43825,6 +43883,12 @@ var render = function () {
         )
       : _vm._e(),
     _vm._v(" "),
+    !_vm.ready
+      ? _c("div", [_vm._v("Loading...")])
+      : !_vm.categories.length && !_vm.isShowAddCategoryForm
+      ? _c("div", [_vm._m(0)])
+      : _vm._e(),
+    _vm._v(" "),
     _vm.showCategories
       ? _c("section", { staticClass: "container px-6 py-4 mx-auto" }, [
           _c(
@@ -43913,7 +43977,28 @@ var render = function () {
       : _vm._e(),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          " m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4",
+        attrs: { role: "alert" },
+      },
+      [
+        _c("p", { staticClass: " m-5 font-bold" }, [
+          _vm._v("NO CATEGORIES ADDED"),
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Please add event categories to view them from here")]),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -43976,6 +44061,8 @@ var render = function () {
           ],
           1
         )
+      : !_vm.departments.length && !_vm.isShowAddDepartmentForm
+      ? _c("div", [_vm._m(0)])
       : _vm._e(),
     _vm._v(" "),
     _vm.showDepartments
@@ -44058,7 +44145,28 @@ var render = function () {
       : _vm._e(),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          " m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4",
+        attrs: { role: "alert" },
+      },
+      [
+        _c("p", { staticClass: " m-5 font-bold" }, [
+          _vm._v("NO DEPARTMENTS ADDED"),
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Please add Departments to view them from here")]),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -44289,7 +44397,7 @@ var render = function () {
                     expression: "form.category_id",
                   },
                 },
-                [_vm._v(_vm._s(category.name) + "\n                    ")]
+                [_vm._v(_vm._s(category.name) + "\n                ")]
               )
             }),
             0
@@ -44343,7 +44451,7 @@ var render = function () {
                     expression: "form.frequency_id",
                   },
                 },
-                [_vm._v(_vm._s(frequency.name) + "\n                    ")]
+                [_vm._v(_vm._s(frequency.name) + "\n                ")]
               )
             }),
             0
@@ -44405,58 +44513,54 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "md:flex  " },
-        [
-          _c("br"),
-          _vm._v(" "),
-          _vm._l(_vm.departments, function (department) {
-            return _c("div", { key: department.id, staticClass: "md:w-1/3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.departmentIds,
-                    expression: "departmentIds",
-                  },
-                ],
-                attrs: { type: "checkbox" },
-                domProps: {
-                  value: department.id,
-                  checked: Array.isArray(_vm.departmentIds)
-                    ? _vm._i(_vm.departmentIds, department.id) > -1
-                    : _vm.departmentIds,
+        { staticClass: "md:flex" },
+        _vm._l(_vm.departments, function (department) {
+          return _c("div", { key: department.id }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.departmentIds,
+                  expression: "departmentIds",
                 },
-                on: {
-                  change: function ($event) {
-                    var $$a = _vm.departmentIds,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = department.id,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.departmentIds = $$a.concat([$$v]))
-                      } else {
-                        $$i > -1 &&
-                          (_vm.departmentIds = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
-                      }
+              ],
+              attrs: { type: "checkbox" },
+              domProps: {
+                value: department.id,
+                checked: Array.isArray(_vm.departmentIds)
+                  ? _vm._i(_vm.departmentIds, department.id) > -1
+                  : _vm.departmentIds,
+              },
+              on: {
+                change: function ($event) {
+                  var $$a = _vm.departmentIds,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = department.id,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.departmentIds = $$a.concat([$$v]))
                     } else {
-                      _vm.departmentIds = $$c
+                      $$i > -1 &&
+                        (_vm.departmentIds = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
                     }
-                  },
+                  } else {
+                    _vm.departmentIds = $$c
+                  }
                 },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(department.name))]),
-            ])
-          }),
-          _vm._v(" "),
-          _c("span", [_vm._v("Checked names: " + _vm._s(_vm.departmentIds))]),
-        ],
-        2
+              },
+            }),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(department.name))]),
+            _vm._v(" "),
+            _c("br"),
+          ])
+        }),
+        0
       ),
       _vm._v(" "),
       _c("br"),
@@ -44536,7 +44640,7 @@ var render = function () {
                           },
                         },
                       },
-                      [_vm._v("Remove\n                    ")]
+                      [_vm._v("Remove\n                ")]
                     ),
                   ]),
                 ])
@@ -44610,7 +44714,7 @@ var render = function () {
                         _vm._s(user.first_name) +
                           " " +
                           _vm._s(user.last_name) +
-                          "\n                        "
+                          "\n                    "
                       ),
                     ]
                   )
@@ -44682,7 +44786,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Remove\n                        ")]
+                        [_vm._v("Remove\n                    ")]
                       ),
                     ]),
                   ])
@@ -44700,7 +44804,7 @@ var render = function () {
       _c("br"),
       _vm._v(" "),
       _c("button", { staticClass: "btn-submit", attrs: { type: "submit" } }, [
-        _vm._v("\n            " + _vm._s("SAVE EVENT") + "\n        "),
+        _vm._v("\n        " + _vm._s("SAVE EVENT") + "\n    "),
       ]),
     ]
   )
@@ -45382,12 +45486,16 @@ var render = function () {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.showEvents
+    !_vm.events.length && !_vm.isShowAddEventForm
+      ? _c("div", [_vm._m(0)])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showEvents && _vm.events.length
       ? _c("div", { staticClass: " md:mx-20  p-4" }, [
           _c(
             "table",
             [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _vm._l(_vm.events, function (event, index) {
                 return _c("tr", [
@@ -45478,6 +45586,24 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          " m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4",
+        attrs: { role: "alert" },
+      },
+      [
+        _c("p", { staticClass: " m-5 font-bold" }, [_vm._v("NO EVENTS ADDED")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Please add events to view them from here")]),
+      ]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -45636,7 +45762,7 @@ var render = function () {
                               },
                             },
                           },
-                          [_vm._v("Mark As Completed")]
+                          [_vm._v("Mark As Completed\n                ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -45653,7 +45779,7 @@ var render = function () {
                               },
                             },
                           },
-                          [_vm._v("Not Happening")]
+                          [_vm._v("Not Happening\n                ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -45664,7 +45790,7 @@ var render = function () {
                             staticClass:
                               "text-bold text-green-400 text-bold px-2 py-1",
                           },
-                          [_vm._v("DONE")]
+                          [_vm._v("\n                    DONE")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -45675,7 +45801,7 @@ var render = function () {
                             staticClass:
                               "text-bold text-red-400 text-bold px-2 py-1",
                           },
-                          [_vm._v("NOT HAPPENING")]
+                          [_vm._v("NOT\n                    HAPPENING")]
                         )
                       : _vm._e(),
                   ])
@@ -45769,7 +45895,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("del", [
       _c("span", { staticClass: "statusDone" }),
-      _vm._v("Done "),
+      _vm._v("Done"),
     ])
   },
   function () {

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddDepartmentRequest;
 use App\Http\Requests\DepartmentRequest;
+use App\Http\Requests\EditDepartmentRequest;
 use App\Interfaces\DepartmentRepositoryInterface;
 use App\Models\Department;
 
@@ -27,12 +29,12 @@ class DepartmentsController extends Controller
 
     }
 
-    public function store(DepartmentRequest $request)
+    public function store(AddDepartmentRequest $request)
     {
         return $this->departmentRepository->createDepartment($request->all());
     }
 
-    public function update(DepartmentRequest $request, Department $department)
+    public function update(EditDepartmentRequest $request, Department $department)
     {
         return $this->departmentRepository->updateDepartment($department, $request->all());
     }

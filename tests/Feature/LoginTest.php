@@ -6,9 +6,10 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
+
+    /** @test */
     public function test_user_can_view_login_form()
     {
-
         $response = $this->get('/login');
         $response->assertSuccessful();
         $response->assertViewIs('auth.login');

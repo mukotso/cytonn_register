@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddCategoryRequest;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\EditCategoryRequest;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -28,12 +30,12 @@ class CategoriesController extends Controller
 
     }
 
-    public function store(CategoryRequest $request)
+    public function store(AddCategoryRequest $request)
     {
         return $this->categoryRepository->createCategory($request->all());
     }
 
-    public function update(CategoryRequest $request, Category $category)
+    public function update(EditCategoryRequest $request, Category $category)
     {
        return  $this->categoryRepository->updateCategory($category, $request->all());
     }

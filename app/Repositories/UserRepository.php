@@ -56,14 +56,8 @@ class UserRepository implements UserRepositoryInterface
 
     public function updateUser($user, $newDetails)
     {
-        $user = Auth::user();
-        if ($user->is_admin == 1) {
             $user->update($newDetails);
             return response()->json(['message' => "Details Updated successfully"], 200);
-        } else {
-            abort(401);
-        }
-
     }
 
     public function deleteUser($userId)

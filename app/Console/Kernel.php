@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Mail\EventPreparation;
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Mail;
@@ -39,6 +40,35 @@ class Kernel extends ConsoleKernel
                     'activities' => $event->activities,
                 ];
                 Mail::to($event->creator->email)->send(new EventPreparation($details));
+            }
+
+        })->everyMinute();
+
+
+        $schedule->call(function () {
+            $events = Event::whereDate('event_date', date("Y-m-d"))
+                ->with('frequency')->get();
+
+            foreach ($events as $event) {
+                $frequency = $event->frequency->name;
+                if ($frequency == 'daily') {
+                    $event->update(['event_date' => Carbon::now()->addDay()]);
+                }
+                if ($frequency == 'weekly') {
+                    $event->update(['event_date' => Carbon::now()->addWeek()]);
+                }
+                if ($frequency == 'bi-weekly') {
+                    $event->update(['event_date' => Carbon::now()->addWeeks(2)]);
+                }
+                if ($frequency == 'monthly') {
+                    $event->update(['event_date' => Carbon::now()->addMonth()]);
+                }
+                if ($frequency == 'bi-monthly') {
+                    $event->update(['event_date' => Carbon::now()->addMonths(2)]);
+                }
+                if ($frequency == 'annualy') {
+                    $event->update(['event_date' => Carbon::now()->addYear()]);
+                }
             }
 
         })->everyMinute();

@@ -57,8 +57,8 @@
         <div class="md:flex">
             <div class="md:w-1/4"  v-for="department in departments" :key="department.id">
                <div class="md:w-full">
-                   <div>
-                       <input class="checkbox" type="checkbox" :value="department.id" v-model="departmentIds">
+                   <div class="checkbox-group required">
+                       <input class="checkbox" type="checkbox" :value="department.id" v-model="departmentIds" >
                        <span>{{ department.name }}</span> <br>
                    </div>
                </div>
@@ -78,7 +78,9 @@
                 </div>
 
                 <div class="md:w-1/4">
-                    <button class="btn-submit">SAVE</button>
+                    <button class="btn-submit">
+                        <i class="fa fa-plus"></i> ADD
+                    </button>
                 </div>
             </div>
         </form>
@@ -123,7 +125,9 @@
                 </div>
 
                 <div class="md:w-1/3">
-                    <button class="btn-submit">SAVE</button>
+                    <button class="btn-submit">
+                        <i class="fa fa-plus"></i> ADD
+                    </button>
                 </div>
             </div>
         </form>
@@ -165,7 +169,7 @@ import Swal from "sweetalert2";
 
 export default {
     name: "addEvent",
-    props: ['form', 'isEditEvent'],
+    props: ['form'],
     data() {
         return {
             departments: '',

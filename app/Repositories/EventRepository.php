@@ -105,7 +105,7 @@ class EventRepository implements EventRepositoryInterface
             $event->venue = $eventDetails['venue'];
             $event->start_date = $eventDetails['event_date'];
             $event->event_date = $eventDetails['event_date'];
-            $event->lead_time = $eventDetails['lead_time'];
+            $event->lead_time = $eventDetails['lead_date'];
             $event->update();
 
             //activity

@@ -1,16 +1,18 @@
 <template>
     <div>
-        <button v-if="showUsers"
-                class="btn"
-                type="button" @click="toggleAddUserForm">
-            <i class="fa fa-plus "></i> New User
-        </button>
+       <div class="add-btn-div">
+           <button v-if="showUsers"
+                   class="btn"
+                   type="button" @click="toggleAddUserForm">
+               <i class="fa fa-plus "></i> New
+           </button>
 
-        <button v-if="isShowAddUserForm"
-                class="btn"
-                type="button" @click="toggleshowUsers">
-            <i class="fa fa-plus "></i> View All Users
-        </button>
+           <button v-if="isShowAddUserForm"
+                   class="btn"
+                   type="button" @click="toggleshowUsers">
+               <i class="fa fa-plus "></i> All Users
+           </button>
+       </div>
 
         <div v-if="isShowAddUserForm">
             <add-user

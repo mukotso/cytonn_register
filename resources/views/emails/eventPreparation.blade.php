@@ -9,7 +9,7 @@
 <body>
 <h3>Hello {{ $details['name'] }}</h3>
 <p>
-    Event {{ $details['eventName'] }} is coming up on {{ $details['eventDate'] }}
+   Your Event <b>{{ $details['eventName'] }} </b> is coming up on  <b>{{ $details['eventDate'] }} </b>
 </p>
 <p>To prepare for the events the following activities are required</p>
 <ol>

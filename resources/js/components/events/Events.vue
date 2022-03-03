@@ -1,18 +1,19 @@
 <template>
     <div>
-       <div class="container mx-auto">
+        <div class="add-btn-div">
            <button v-if="showEvents"
                    class="btn"
                    type="button" @click="toggleAddEventForm">
-               <i class="fa fa-plus "></i>New Event
+               <i class="fa fa-plus "></i>New
            </button>
 
            <button v-if="isShowAddEventForm"
                    class="btn"
                    type="button" @click="toggleshowEvents">
-               <i class="fa fa-plus "></i> View All Events
+               <i class="fa fa-plus "></i> All Events
            </button>
-       </div>
+
+            </div>
 
         <div v-if="isShowAddEventForm">
             <add-event
@@ -30,15 +31,15 @@
             </div>
         </div>
 
-        <div class="bg-white p-4 rounded-md">
-            <div>
-                <h2 class="mb-4 text-xl font-bold text-gray-700">Events</h2>
 
-            </div>
-            <div>
 
                 <div v-if="showEvents && events.length" class=" md:mx-20  p-4">
+                    <div class="bg-white p-4 rounded-md">
+                        <div>
+                            <h2 class="mb-4 text-xl font-bold text-gray-700">Events</h2>
 
+                        </div>
+                        <div>
                     <table>
                         <tr>
                             <th>Event Name</th>

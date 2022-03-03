@@ -1,17 +1,19 @@
 <template>
     <div>
-
+        <div class="add-btn-div">
         <button v-if="showDepartments"
                 class="btn"
                 type="button" @click="toggleAddDepartmentForm">
-            <i class="fa fa-plus "></i> New Department
+            <i class="fa fa-plus "></i> New
         </button>
 
         <button v-if="isShowAddDepartmentForm"
                 class="btn"
                 type="button" @click="toggleshowDepartments">
-            <i class="fa fa-plus "></i> View All Departments
+            <i class="fa fa-plus "></i>  All Departments
         </button>
+
+            </div>
 
         <div v-if="isShowAddDepartmentForm">
             <add-department

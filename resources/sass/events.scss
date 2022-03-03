@@ -5,10 +5,12 @@
     margin: 5px;
 }
 
+
 .statusActive{
     @include status;
     background-color: green;
 }
+
 .statusInactive{
     @include status;
     background-color: Red;

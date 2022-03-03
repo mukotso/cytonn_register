@@ -1,10 +1,11 @@
 <template>
     <div>
+        <div class="add-btn-div">
         <div v-if="user.is_admin ==1">
             <button v-if="showCategories"
                     class="btn"
                     type="button" @click="toggleAddCategoryForm">
-                <i class="fa fa-plus "></i> New Category
+                <i class="fa fa-plus "></i> New
             </button>
 
             <button v-if="isShowAddCategoryForm"
@@ -13,6 +14,7 @@
                 <i class="fa fa-plus "></i> View All Categories
             </button>
         </div>
+            </div>
 
         <div v-if="isShowAddCategoryForm">
             <add-category
@@ -23,7 +25,7 @@
             </add-category>
         </div>
 
-        <div v-if="!ready">Loading...</div>
+
         <div v-else-if="!categories.length && !isShowAddCategoryForm">
             <div class=" m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
                 <p class=" m-5 font-bold">NO CATEGORIES ADDED</p>

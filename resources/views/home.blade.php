@@ -12,8 +12,6 @@
                     With  Cytonn Register, no event is a surprise
                 </p>
             </div>
-
-
         </div>
     </div>
 </div>

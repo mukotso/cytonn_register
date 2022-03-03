@@ -1,4 +1,6 @@
 <template>
+<div>
+ <div>
     <form @submit.prevent="isEditUser ? updateUser() : createUser()" class=" container mx-auto" action="#">
         <h3>
             {{ isEditUser ? "UPDATE USER DETAILS" : "CREATE A NEW USER" }}</h3>
@@ -44,6 +46,8 @@
         </button>
 
     </form>
+    </div>
+</div>
 </template>
 
 <script>
@@ -56,6 +60,7 @@ export default {
             departments:'',
         }
     },
+
     beforeMount() {
         axios.get('/departments')
             .then((response) => {
@@ -69,7 +74,6 @@ export default {
     methods:{
 
         createUser() {
-            console.log(this.form);
             axios.post('/user', this.form).then((response) => {
 
                     Swal.fire({
@@ -91,6 +95,7 @@ export default {
                     confirmButtonText: 'Try Again'
                 })
             })
+
         },
 
         updateUser() {

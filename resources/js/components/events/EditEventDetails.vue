@@ -52,14 +52,14 @@
 
             <div class="sm:w-full md:w-1/2 ">
                 <label>Event Date</label>
-                <input type="datetime-local" required v-model="form.event_date">
+                <input type="date" required v-model="form.event_date">
             </div>
         </div>
 
         <div class="flex">
             <div class="sm:w-full md:w-1/2 ">
                 <label>Lead Date</label>
-                <input type="datetime-local" required v-model="form.lead_time">
+                <input type="date" required v-model="form.lead_date">
             </div>
         </div>
 

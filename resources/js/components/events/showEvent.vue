@@ -44,7 +44,13 @@
         <br>
         <hr>
 
-        <table>
+        <div v-if="!event[0].activities.length">
+            <div class=" m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                <p class=" m-5 font-bold">NO EVENT ACTIVITIES ADDED</p>
+            </div>
+        </div>
+
+        <table v-else>
             <tr>
                 <th>Activity</th>
                 <th>Status</th>
@@ -106,7 +112,12 @@
         <br>
         <h1 class="heading">Members</h1>
         <br>
-        <div class="flex">
+        <div v-if="!event[0].team_members.length">
+            <div class=" m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                <p class=" m-5 font-bold">NO EVENT TEAM MEMBERS ADDED</p>
+            </div>
+        </div>
+        <div v-else class="flex">
 
             <table>
                 <tr>

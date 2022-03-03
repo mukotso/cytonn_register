@@ -78,7 +78,9 @@ components:{editProfile},
 </script>
 
 <style scoped>
-
+form{
+    margin: 30px;
+}
 
 h1 {
     color: gray;

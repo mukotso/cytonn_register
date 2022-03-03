@@ -1912,7 +1912,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NavBar",
   props: ['user'],
@@ -2105,6 +2104,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2198,6 +2199,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _addDepartment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addDepartment */ "./resources/js/components/departments/addDepartment.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
 //
 //
 //
@@ -2602,10 +2605,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addEvent",
-  props: ['form', 'isEditEvent'],
+  props: ['form'],
   data: function data() {
     return {
       departments: '',
@@ -3157,6 +3164,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3255,6 +3263,17 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3814,6 +3833,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addUser",
@@ -3836,7 +3859,6 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser() {
       var _this2 = this;
 
-      console.log(this.form);
       axios.post('/user', this.form).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
@@ -3896,6 +3918,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddUser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddUser */ "./resources/js/components/users/AddUser.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
 //
 //
 //
@@ -8450,7 +8474,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "h1[data-v-fda4c446] {\n  color: gray;\n  font-weight: bold;\n  font-size: 20px;\n}\nh2[data-v-fda4c446] {\n  color: black;\n  font-weight: bold;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "form[data-v-fda4c446]{\n  margin: 30px;\n}\nh1[data-v-fda4c446] {\n  color: gray;\n  font-weight: bold;\n  font-size: 20px;\n}\nh2[data-v-fda4c446] {\n  color: black;\n  font-weight: bold;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -43899,39 +43923,41 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.user.is_admin == 1
-      ? _c("div", [
-          _vm.showCategories
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn",
-                  attrs: { type: "button" },
-                  on: { click: _vm.toggleAddCategoryForm },
-                },
-                [
-                  _c("i", { staticClass: "fa fa-plus " }),
-                  _vm._v(" New Category\n        "),
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.isShowAddCategoryForm
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn",
-                  attrs: { type: "button" },
-                  on: { click: _vm.toggleshowCategories },
-                },
-                [
-                  _c("i", { staticClass: "fa fa-plus " }),
-                  _vm._v(" View All Categories\n        "),
-                ]
-              )
-            : _vm._e(),
-        ])
-      : _vm._e(),
+    _c("div", { staticClass: "add-btn-div" }, [
+      _vm.user.is_admin == 1
+        ? _c("div", [
+            _vm.showCategories
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    attrs: { type: "button" },
+                    on: { click: _vm.toggleAddCategoryForm },
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-plus " }),
+                    _vm._v(" New\n        "),
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.isShowAddCategoryForm
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    attrs: { type: "button" },
+                    on: { click: _vm.toggleshowCategories },
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-plus " }),
+                    _vm._v(" View All Categories\n        "),
+                  ]
+                )
+              : _vm._e(),
+          ])
+        : _vm._e(),
+    ]),
     _vm._v(" "),
     _vm.isShowAddCategoryForm
       ? _c(
@@ -43943,10 +43969,6 @@ var render = function () {
           ],
           1
         )
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.ready
-      ? _c("div", [_vm._v("Loading...")])
       : !_vm.categories.length && !_vm.isShowAddCategoryForm
       ? _c("div", [_vm._m(0)])
       : _vm._e(),
@@ -44083,35 +44105,34 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.showDepartments
-      ? _c(
-          "button",
-          {
-            staticClass: "btn",
-            attrs: { type: "button" },
-            on: { click: _vm.toggleAddDepartmentForm },
-          },
-          [
-            _c("i", { staticClass: "fa fa-plus " }),
-            _vm._v(" New Department\n    "),
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.isShowAddDepartmentForm
-      ? _c(
-          "button",
-          {
-            staticClass: "btn",
-            attrs: { type: "button" },
-            on: { click: _vm.toggleshowDepartments },
-          },
-          [
-            _c("i", { staticClass: "fa fa-plus " }),
-            _vm._v(" View All Departments\n    "),
-          ]
-        )
-      : _vm._e(),
+    _c("div", { staticClass: "add-btn-div" }, [
+      _vm.showDepartments
+        ? _c(
+            "button",
+            {
+              staticClass: "btn",
+              attrs: { type: "button" },
+              on: { click: _vm.toggleAddDepartmentForm },
+            },
+            [_c("i", { staticClass: "fa fa-plus " }), _vm._v(" New\n    ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isShowAddDepartmentForm
+        ? _c(
+            "button",
+            {
+              staticClass: "btn",
+              attrs: { type: "button" },
+              on: { click: _vm.toggleshowDepartments },
+            },
+            [
+              _c("i", { staticClass: "fa fa-plus " }),
+              _vm._v("  All Departments\n    "),
+            ]
+          )
+        : _vm._e(),
+    ]),
     _vm._v(" "),
     _vm.isShowAddDepartmentForm
       ? _c(
@@ -44583,7 +44604,7 @@ var render = function () {
         _vm._l(_vm.departments, function (department) {
           return _c("div", { key: department.id, staticClass: "md:w-1/4" }, [
             _c("div", { staticClass: "md:w-full" }, [
-              _c("div", [
+              _c("div", { staticClass: "checkbox-group required" }, [
                 _c("input", {
                   directives: [
                     {
@@ -44886,7 +44907,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "md:w-1/4" }, [
-      _c("button", { staticClass: "btn-submit" }, [_vm._v("SAVE")]),
+      _c("button", { staticClass: "btn-submit" }, [
+        _c("i", { staticClass: "fa fa-plus" }),
+        _vm._v(" ADD\n                "),
+      ]),
     ])
   },
   function () {
@@ -44904,7 +44928,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "md:w-1/3" }, [
-      _c("button", { staticClass: "btn-submit" }, [_vm._v("SAVE")]),
+      _c("button", { staticClass: "btn-submit" }, [
+        _c("i", { staticClass: "fa fa-plus" }),
+        _vm._v(" ADD\n                "),
+      ]),
     ])
   },
   function () {
@@ -45184,7 +45211,7 @@ var render = function () {
                 expression: "form.event_date",
               },
             ],
-            attrs: { type: "datetime-local", required: "" },
+            attrs: { type: "date", required: "" },
             domProps: { value: _vm.form.event_date },
             on: {
               input: function ($event) {
@@ -45207,18 +45234,18 @@ var render = function () {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.form.lead_time,
-                expression: "form.lead_time",
+                value: _vm.form.lead_date,
+                expression: "form.lead_date",
               },
             ],
-            attrs: { type: "datetime-local", required: "" },
-            domProps: { value: _vm.form.lead_time },
+            attrs: { type: "date", required: "" },
+            domProps: { value: _vm.form.lead_date },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.form, "lead_time", $event.target.value)
+                _vm.$set(_vm.form, "lead_date", $event.target.value)
               },
             },
           }),
@@ -45518,7 +45545,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "container mx-auto" }, [
+    _c("div", { staticClass: "add-btn-div" }, [
       _vm.showEvents
         ? _c(
             "button",
@@ -45527,10 +45554,7 @@ var render = function () {
               attrs: { type: "button" },
               on: { click: _vm.toggleAddEventForm },
             },
-            [
-              _c("i", { staticClass: "fa fa-plus " }),
-              _vm._v("New Event\n       "),
-            ]
+            [_c("i", { staticClass: "fa fa-plus " }), _vm._v("New\n       ")]
           )
         : _vm._e(),
       _vm._v(" "),
@@ -45544,7 +45568,7 @@ var render = function () {
             },
             [
               _c("i", { staticClass: "fa fa-plus " }),
-              _vm._v(" View All Events\n       "),
+              _vm._v(" All Events\n       "),
             ]
           )
         : _vm._e(),
@@ -45566,12 +45590,12 @@ var render = function () {
       ? _c("div", [_vm._m(0)])
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "bg-white p-4 rounded-md" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", [
-        _vm.showEvents && _vm.events.length
-          ? _c("div", { staticClass: " md:mx-20  p-4" }, [
+    _vm.showEvents && _vm.events.length
+      ? _c("div", { staticClass: " md:mx-20  p-4" }, [
+          _c("div", { staticClass: "bg-white p-4 rounded-md" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", [
               _c(
                 "table",
                 [
@@ -45661,10 +45685,10 @@ var render = function () {
                 ],
                 2
               ),
-            ])
-          : _vm._e(),
-      ]),
-    ]),
+            ]),
+          ]),
+        ])
+      : _vm._e(),
   ])
 }
 var staticRenderFns = [
@@ -45803,106 +45827,108 @@ var render = function () {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c(
-        "table",
-        [
-          _c("tr", [
-            _c("th", [_vm._v("Activity")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Status")]),
-            _vm._v(" "),
-            _vm.user.is_admin == 1 ||
-            _vm.event.teamMembersUserIds.includes(_vm.user.id)
-              ? _c("th", [_vm._v("Action")])
-              : _vm._e(),
-          ]),
-          _vm._l(_vm.event[0].activities, function (activity, index) {
-            return _c("tr", [
-              _c("td", [_vm._v(_vm._s(activity.description))]),
-              _vm._v(" "),
-              activity.status == "active"
-                ? _c("td", [
-                    _c("span", { staticClass: "statusActive" }),
-                    _vm._v(" On time"),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              activity.status == "inactive"
-                ? _c("td", [
-                    _c("span", { staticClass: "statusInactive" }),
-                    _vm._v("Not happpening"),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              activity.status == "completed"
-                ? _c("td", [_vm._m(0, true)])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.user.is_admin == 1 ||
-              _vm.event.teamMembersUserIds.includes(_vm.user.id)
-                ? _c("td", [
-                    activity.status == "active"
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-green-400 text-white text-bold px-2 py-1",
-                            on: {
-                              click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.completeActivity(activity)
+      !_vm.event[0].activities.length
+        ? _c("div", [_vm._m(0)])
+        : _c(
+            "table",
+            [
+              _c("tr", [
+                _c("th", [_vm._v("Activity")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Status")]),
+                _vm._v(" "),
+                _vm.user.is_admin == 1 ||
+                _vm.event.teamMembersUserIds.includes(_vm.user.id)
+                  ? _c("th", [_vm._v("Action")])
+                  : _vm._e(),
+              ]),
+              _vm._l(_vm.event[0].activities, function (activity, index) {
+                return _c("tr", [
+                  _c("td", [_vm._v(_vm._s(activity.description))]),
+                  _vm._v(" "),
+                  activity.status == "active"
+                    ? _c("td", [
+                        _c("span", { staticClass: "statusActive" }),
+                        _vm._v(" On time"),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  activity.status == "inactive"
+                    ? _c("td", [
+                        _c("span", { staticClass: "statusInactive" }),
+                        _vm._v("Not happpening"),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  activity.status == "completed"
+                    ? _c("td", [_vm._m(1, true)])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.user.is_admin == 1 ||
+                  _vm.event.teamMembersUserIds.includes(_vm.user.id)
+                    ? _c("td", [
+                        activity.status == "active"
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-green-400 text-white text-bold px-2 py-1",
+                                on: {
+                                  click: function ($event) {
+                                    $event.preventDefault()
+                                    return _vm.completeActivity(activity)
+                                  },
+                                },
                               },
-                            },
-                          },
-                          [_vm._v("Mark As Completed\n                ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    activity.status == "active"
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-red-400 text-white text-bold px-2 py-1",
-                            on: {
-                              click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.activityNotHappening(activity)
+                              [_vm._v("Mark As Completed\n                ")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        activity.status == "active"
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-red-400 text-white text-bold px-2 py-1",
+                                on: {
+                                  click: function ($event) {
+                                    $event.preventDefault()
+                                    return _vm.activityNotHappening(activity)
+                                  },
+                                },
                               },
-                            },
-                          },
-                          [_vm._v("Not Happening\n                ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    activity.status == "completed"
-                      ? _c(
-                          "h2",
-                          {
-                            staticClass:
-                              "text-bold text-green-400 text-bold px-2 py-1",
-                          },
-                          [_vm._v("\n                    DONE")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    activity.status == "inactive"
-                      ? _c(
-                          "h2",
-                          {
-                            staticClass:
-                              "text-bold text-red-400 text-bold px-2 py-1",
-                          },
-                          [_vm._v("NOT\n                    HAPPENING")]
-                        )
-                      : _vm._e(),
-                  ])
-                : _vm._e(),
-            ])
-          }),
-        ],
-        2
-      ),
+                              [_vm._v("Not Happening\n                ")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        activity.status == "completed"
+                          ? _c(
+                              "h2",
+                              {
+                                staticClass:
+                                  "text-bold text-green-400 text-bold px-2 py-1",
+                              },
+                              [_vm._v("\n                    DONE")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        activity.status == "inactive"
+                          ? _c(
+                              "h2",
+                              {
+                                staticClass:
+                                  "text-bold text-red-400 text-bold px-2 py-1",
+                              },
+                              [_vm._v("NOT\n                    HAPPENING")]
+                            )
+                          : _vm._e(),
+                      ])
+                    : _vm._e(),
+                ])
+              }),
+            ],
+            2
+          ),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -45948,29 +45974,31 @@ var render = function () {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "flex" }, [
-        _c(
-          "table",
-          [
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._l(_vm.event[0].team_members, function (teamMember, index) {
-              return _c("tr", [
-                _c("td", [
-                  _vm._v(
-                    _vm._s(teamMember.user.first_name) +
-                      " " +
-                      _vm._s(teamMember.user.last_name)
-                  ),
-                ]),
+      !_vm.event[0].team_members.length
+        ? _c("div", [_vm._m(2)])
+        : _c("div", { staticClass: "flex" }, [
+            _c(
+              "table",
+              [
+                _vm._m(3),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(teamMember.designation))]),
-              ])
-            }),
-          ],
-          2
-        ),
-      ]),
+                _vm._l(_vm.event[0].team_members, function (teamMember, index) {
+                  return _c("tr", [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(teamMember.user.first_name) +
+                          " " +
+                          _vm._s(teamMember.user.last_name)
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(teamMember.designation))]),
+                  ])
+                }),
+              ],
+              2
+            ),
+          ]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -45985,10 +46013,46 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          " m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4",
+        attrs: { role: "alert" },
+      },
+      [
+        _c("p", { staticClass: " m-5 font-bold" }, [
+          _vm._v("NO EVENT ACTIVITIES ADDED"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("del", [
       _c("span", { staticClass: "statusDone" }),
       _vm._v("Done"),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          " m-10 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4",
+        attrs: { role: "alert" },
+      },
+      [
+        _c("p", { staticClass: " m-5 font-bold" }, [
+          _vm._v("NO EVENT TEAM MEMBERS ADDED"),
+        ]),
+      ]
+    )
   },
   function () {
     var _vm = this
@@ -46534,213 +46598,223 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      staticClass: " container mx-auto",
-      attrs: { action: "#" },
-      on: {
-        submit: function ($event) {
-          $event.preventDefault()
-          _vm.isEditUser ? _vm.updateUser() : _vm.createUser()
-        },
-      },
-    },
-    [
-      _c("h3", [
-        _vm._v(
-          "\n        " +
-            _vm._s(_vm.isEditUser ? "UPDATE USER DETAILS" : "CREATE A NEW USER")
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "md:flex" }, [
-        _c("div", { staticClass: "md:w-1/2" }, [
-          _c("label", [_vm._v("First Name")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.first_name,
-                expression: "form.first_name",
-              },
-            ],
-            attrs: {
-              type: "text",
-              name: "first_name",
-              placeholder: "first name",
-              required: "",
-            },
-            domProps: { value: _vm.form.first_name },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "first_name", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "md:w-1/2" }, [
-          _c("label", [_vm._v("Last Name")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.last_name,
-                expression: "form.last_name",
-              },
-            ],
-            attrs: {
-              type: "text",
-              name: "last_name",
-              placeholder: " last name",
-              required: "",
-            },
-            domProps: { value: _vm.form.last_name },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "last_name", $event.target.value)
-              },
-            },
-          }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "md:flex" }, [
-        _c("div", { staticClass: "md:w-1/2" }, [
-          _c("label", [_vm._v("Email Address")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.email,
-                expression: "form.email",
-              },
-            ],
-            attrs: {
-              type: "email",
-              name: "email",
-              placeholder: "email@gmail.com",
-              required: "",
-            },
-            domProps: { value: _vm.form.email },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "email", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "md:w-1/2" }, [
-          _c("label", [_vm._v("Phone Number")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.phone_number,
-                expression: "form.phone_number",
-              },
-            ],
-            attrs: {
-              type: "number",
-              name: "email",
-              placeholder: "e.g 07895674324",
-              required: "",
-            },
-            domProps: { value: _vm.form.phone_number },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "phone_number", $event.target.value)
-              },
-            },
-          }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "md:w-1/2" }, [
-        _c("label", [_vm._v("Department")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.department_id,
-                expression: "form.department_id",
-              },
-            ],
-            attrs: { id: "department", required: "" },
-            on: {
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.form,
-                  "department_id",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
-              },
+  return _c("div", [
+    _c("div", [
+      _c(
+        "form",
+        {
+          staticClass: " container mx-auto",
+          attrs: { action: "#" },
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              _vm.isEditUser ? _vm.updateUser() : _vm.createUser()
             },
           },
-          _vm._l(_vm.departments, function (department) {
-            return _c(
-              "option",
-              {
-                key: department.id,
-                domProps: { value: department.id },
-                model: {
-                  value: _vm.form.department_id,
-                  callback: function ($$v) {
-                    _vm.$set(_vm.form, "department_id", $$v)
+        },
+        [
+          _c("h3", [
+            _vm._v(
+              "\n            " +
+                _vm._s(
+                  _vm.isEditUser ? "UPDATE USER DETAILS" : "CREATE A NEW USER"
+                )
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "md:flex" }, [
+            _c("div", { staticClass: "md:w-1/2" }, [
+              _c("label", [_vm._v("First Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.first_name,
+                    expression: "form.first_name",
                   },
-                  expression: "form.department_id",
+                ],
+                attrs: {
+                  type: "text",
+                  name: "first_name",
+                  placeholder: "first name",
+                  required: "",
+                },
+                domProps: { value: _vm.form.first_name },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "first_name", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "md:w-1/2" }, [
+              _c("label", [_vm._v("Last Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.last_name,
+                    expression: "form.last_name",
+                  },
+                ],
+                attrs: {
+                  type: "text",
+                  name: "last_name",
+                  placeholder: " last name",
+                  required: "",
+                },
+                domProps: { value: _vm.form.last_name },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "last_name", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "md:flex" }, [
+            _c("div", { staticClass: "md:w-1/2" }, [
+              _c("label", [_vm._v("Email Address")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.email,
+                    expression: "form.email",
+                  },
+                ],
+                attrs: {
+                  type: "email",
+                  name: "email",
+                  placeholder: "email@gmail.com",
+                  required: "",
+                },
+                domProps: { value: _vm.form.email },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "email", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "md:w-1/2" }, [
+              _c("label", [_vm._v("Phone Number")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.phone_number,
+                    expression: "form.phone_number",
+                  },
+                ],
+                attrs: {
+                  type: "number",
+                  name: "email",
+                  placeholder: "e.g 07895674324",
+                  required: "",
+                },
+                domProps: { value: _vm.form.phone_number },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "phone_number", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "md:w-1/2" }, [
+            _c("label", [_vm._v("Department")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.department_id,
+                    expression: "form.department_id",
+                  },
+                ],
+                attrs: { id: "department", required: "" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.form,
+                      "department_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-              [_vm._v(_vm._s(department.name))]
-            )
-          }),
-          0
-        ),
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn-submit", attrs: { type: "submit" } }, [
-        _vm._v(
-          "\n        " +
-            _vm._s(_vm.isEditUser ? "UPDATE USER DETAILS" : "SAVE USER") +
-            "\n    "
-        ),
-      ]),
-    ]
-  )
+              _vm._l(_vm.departments, function (department) {
+                return _c(
+                  "option",
+                  {
+                    key: department.id,
+                    domProps: { value: department.id },
+                    model: {
+                      value: _vm.form.department_id,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.form, "department_id", $$v)
+                      },
+                      expression: "form.department_id",
+                    },
+                  },
+                  [_vm._v(_vm._s(department.name))]
+                )
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn-submit", attrs: { type: "submit" } },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.isEditUser ? "UPDATE USER DETAILS" : "SAVE USER") +
+                  "\n        "
+              ),
+            ]
+          ),
+        ]
+      ),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46765,32 +46839,34 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.showUsers
-      ? _c(
-          "button",
-          {
-            staticClass: "btn",
-            attrs: { type: "button" },
-            on: { click: _vm.toggleAddUserForm },
-          },
-          [_c("i", { staticClass: "fa fa-plus " }), _vm._v(" New User\n    ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.isShowAddUserForm
-      ? _c(
-          "button",
-          {
-            staticClass: "btn",
-            attrs: { type: "button" },
-            on: { click: _vm.toggleshowUsers },
-          },
-          [
-            _c("i", { staticClass: "fa fa-plus " }),
-            _vm._v(" View All Users\n    "),
-          ]
-        )
-      : _vm._e(),
+    _c("div", { staticClass: "add-btn-div" }, [
+      _vm.showUsers
+        ? _c(
+            "button",
+            {
+              staticClass: "btn",
+              attrs: { type: "button" },
+              on: { click: _vm.toggleAddUserForm },
+            },
+            [_c("i", { staticClass: "fa fa-plus " }), _vm._v(" New\n       ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isShowAddUserForm
+        ? _c(
+            "button",
+            {
+              staticClass: "btn",
+              attrs: { type: "button" },
+              on: { click: _vm.toggleshowUsers },
+            },
+            [
+              _c("i", { staticClass: "fa fa-plus " }),
+              _vm._v(" All Users\n       "),
+            ]
+          )
+        : _vm._e(),
+    ]),
     _vm._v(" "),
     _vm.isShowAddUserForm
       ? _c(

@@ -43,7 +43,7 @@
 
             <div class="sm:w-full md:w-1/2 ">
                 <label>Event Date</label>
-                <input type="datetime-local" required v-model="form.event_date">
+                <input type="date" required v-model="form.event_date">
             </div>
 
             <div class="sm:w-full md:w-1/2 ">
@@ -52,11 +52,16 @@
             </div>
         </div>
 
+        <br>
+        <label>Select Departments That Apply</label>
         <div class="md:flex">
-            <div  v-for="department in departments" :key="department.id">
-                <input type="checkbox" :value="department.id" v-model="departmentIds">
-                <span>{{ department.name }}</span> <br>
-
+            <div class="md:w-1/4"  v-for="department in departments" :key="department.id">
+               <div class="md:w-full">
+                   <div>
+                       <input class="checkbox" type="checkbox" :value="department.id" v-model="departmentIds">
+                       <span>{{ department.name }}</span> <br>
+                   </div>
+               </div>
             </div>
         </div>
 

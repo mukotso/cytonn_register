@@ -1,16 +1,18 @@
 <template>
     <div>
-        <button v-if="showEvents"
-                class="btn"
-                type="button" @click="toggleAddEventForm">
-            <i class="fa fa-plus "></i>New Event
-        </button>
+       <div class="container mx-auto">
+           <button v-if="showEvents"
+                   class="btn"
+                   type="button" @click="toggleAddEventForm">
+               <i class="fa fa-plus "></i>New Event
+           </button>
 
-        <button v-if="isShowAddEventForm"
-                class="btn"
-                type="button" @click="toggleshowEvents">
-            <i class="fa fa-plus "></i> View All Events
-        </button>
+           <button v-if="isShowAddEventForm"
+                   class="btn"
+                   type="button" @click="toggleshowEvents">
+               <i class="fa fa-plus "></i> View All Events
+           </button>
+       </div>
 
         <div v-if="isShowAddEventForm">
             <add-event
@@ -28,50 +30,61 @@
             </div>
         </div>
 
-        <div  v-if="showEvents && events.length" class=" md:mx-20  p-4">
+        <div class="bg-white p-4 rounded-md">
+            <div>
+                <h2 class="mb-4 text-xl font-bold text-gray-700">Events</h2>
 
-            <table>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Category</th>
-                    <th>Venue</th>
-                    <th>Event Date</th>
-                    <th> No. Activities</th>
-                    <th>Frequency</th>
-                    <th>Actions</th>
-                </tr>
-                <tr v-for="(event, index) in events">
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.category.name }}</td>
-                    <td>{{ event.venue }}</td>
-                    <td>{{ event.event_date }}</td>
-                    <td>{{ event.activities.length }}</td>
-                    <td>{{ event.frequency.name }}</td>
-                    <td><div class="flex mt-2">
-                        <button
-                            class=" m-4 block text-white bg-green-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
-                            @click.prevent="showEvent(event)">
-                            VIEW MORE
-                        </button>
+            </div>
+            <div>
 
-                        <button v-if=" user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)" @click="editEvent(event)"
-                                class="m-4 block text-white bg-blue-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center"
-                        >
-                            EDIT
-                        </button>
+                <div v-if="showEvents && events.length" class=" md:mx-20  p-4">
 
-                        <button v-if=" user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)"
-                            class="  m-4 block text-white bg-red-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
-                            @click.prevent="deleteEvent(event)">
-                            DELETE
-                        </button>
-                    </div></td>
-                </tr>
+                    <table>
+                        <tr>
+                            <th>Event Name</th>
+                            <th>Category</th>
+                            <th>Venue</th>
+                            <th>Event Date</th>
+                            <th> No. Activities</th>
+                            <th>Frequency</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr v-for="(event, index) in events">
+                            <td>{{ event.name }}</td>
+                            <td>{{ event.category.name }}</td>
+                            <td>{{ event.venue }}</td>
+                            <td>{{ event.event_date }}</td>
+                            <td>{{ event.activities.length }}</td>
+                            <td>{{ event.frequency.name }}</td>
+                            <td>
+                                <div class="flex mt-2">
+                                    <button
+                                        class=" m-4 block text-white bg-green-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
+                                        @click.prevent="showEvent(event)">
+                                        VIEW MORE
+                                    </button>
 
-            </table>
+                                    <button v-if=" user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)"
+                                            @click="editEvent(event)"
+                                            class="m-4 block text-white bg-blue-400 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center"
+                                    >
+                                        EDIT
+                                    </button>
 
+                                    <button v-if=" user.is_admin==1 ||event.teamMembersUserIds.includes(user.id)"
+                                            class="  m-4 block text-white bg-red-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-3 text-center "
+                                            @click.prevent="deleteEvent(event)">
+                                        DELETE
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
         </div>
-
 
     </div>
 </template>
@@ -82,7 +95,7 @@ import Swal from "sweetalert2";
 
 export default {
     name: "Events",
-    props: ['events','user'],
+    props: ['events', 'user'],
     components: {addEvent},
 
     data() {
@@ -91,14 +104,14 @@ export default {
             showEvents: true,
             isEditEvent: false,
             form: {
-                    id:'',
-                    name: '',
-                    venue: '',
-                    category_id: '',
-                    frequency_id: '',
-                    event_date: '',
-                    lead_date: '',
-                    description: '',
+                id: '',
+                name: '',
+                venue: '',
+                category_id: '',
+                frequency_id: '',
+                event_date: '',
+                lead_date: '',
+                description: '',
             }
         }
 
@@ -106,16 +119,16 @@ export default {
     beforeMount() {
         this.getTeamMembersUserIds();
         this.form.name = '',
-        this.form.venue = '',
-        this.form.category_id = '',
-        this.form.frequency_id = '',
-        this.form.start_date = '',
-        this.form.event_date = '',
-        this.form.description = '',
-        this.form.status = 'active',
-        this.form.user_id = '',
-        this.form.is_owner = '',
-        this.form.designation = ''
+            this.form.venue = '',
+            this.form.category_id = '',
+            this.form.frequency_id = '',
+            this.form.start_date = '',
+            this.form.event_date = '',
+            this.form.description = '',
+            this.form.status = 'active',
+            this.form.user_id = '',
+            this.form.is_owner = '',
+            this.form.designation = ''
     },
 
     methods: {
@@ -137,11 +150,11 @@ export default {
         },
         getTeamMembersUserIds() {
             this.events.forEach(event => {
-                let teamMembersUserIds=[];
+                let teamMembersUserIds = [];
                 event.team_members.forEach(teamMembers => {
-                        teamMembersUserIds.push(teamMembers.user_id);
-                    });
-                event.teamMembersUserIds=teamMembersUserIds;
+                    teamMembersUserIds.push(teamMembers.user_id);
+                });
+                event.teamMembersUserIds = teamMembersUserIds;
             });
         },
 
@@ -157,8 +170,8 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('event/' + event.id).then((response) => {
-                            this.events = this.events.filter(response => response.id !== event.id)
-                            Swal.fire('Deleted!', 'Event has been deleted.', 'success')
+                        this.events = this.events.filter(response => response.id !== event.id)
+                        Swal.fire('Deleted!', 'Event has been deleted.', 'success')
 
                     }).catch((error) => {
                         Swal.fire({

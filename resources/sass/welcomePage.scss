@@ -1,9 +1,15 @@
 #header {
-    //background-image: url('/images/bg2.jpeg');
-    background-image:linear-gradient(to bottom right, lightblue,lightblue);
+    //background-image: url('/images/TBC1.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/TBC1.jpeg');
+
+    //background-image:linear-gradient(to bottom right, lightblue,lightblue);
     background-size:cover;
     height: 100vh;
 margin-top: -20px;
+    p{
+        padding-top: 10%;
+
+}
 }
 .welcome {
     font-family: sans-serif;

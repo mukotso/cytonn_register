@@ -28,7 +28,7 @@ class EventRequest extends FormRequest
             'venue' => 'required',
             'frequency_id' => 'required',
             'event_date' => 'required',
-            'lead_time' => 'required',
+            'lead_date' => 'required',
         ];
     }
 

@@ -5,12 +5,14 @@
     <div id="header" >
 
         <div>
-            <div class=" md:container md:mx-auto welcome">
-                <p>CYTONN REGISTER  <br>
-                REGISTER YOUR EVENTS, SCHEDULE REMINDER LIKE A PRO
+            <div class="container mx-auto text-white welcome">
+                <p>
+                    Cytonn Register is a central registry of
+                    all critical Cytonn events and activities.
+                    With  Cytonn Register, no event is a surprise
                 </p>
             </div>
-            <hr>
+
 
         </div>
     </div>

@@ -16,7 +16,12 @@ class EventRepository implements EventRepositoryInterface
 {
     public function createEvent(array $eventDetails)
     {
-//       dd($eventDetails['teamMembers']);
+
+        if($eventDetails['lead_date']>=$eventDetails['event_date']){
+            return response()->json([
+                'errors' => json_decode('{ "error": "Preparation start Date can not be more than the actual Event Date" }'),
+            ], 400);
+        }
         try {
             $event = new Event();
             $event->category_id = $eventDetails['category_id'];

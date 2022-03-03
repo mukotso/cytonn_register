@@ -21670,13 +21670,9 @@ label {
   border-radius: 50px;
   background-image: linear-gradient(to bottom right, teal, lightgreen);
   color: #fff;
-  padding: 15px 60px;
+  padding: 10px 60px;
   font-weight: bolder;
   margin-top: 15px;
-}
-
-#loginForm #loginBtn:hover {
-  background-color: red;
 }
 
 #loginForm .login-btn-div {
@@ -21750,31 +21746,48 @@ nav a {
   background-color: Orange;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  overflow-x: hidden;
+}
+
 table {
-  font-family: arial, sans-serif;
+  font-family: serif;
   border-collapse: collapse;
   width: 100%;
   display: block;
   overflow-x: auto;
   white-space: nowrap;
+  table-layout: fixed;
+  overflow-wrap: break-word;
 }
 
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 4px;
-  width: 100%;
 }
 
 tr:nth-child(even) {
-  background-color: gainsboro;
+  background-color: #f3f2f2;
 }
 
 #header {
-  background-image: linear-gradient(to bottom right, lightblue, lightblue);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/images/TBC1.jpeg");
   background-size: cover;
   height: 100vh;
   margin-top: -20px;
+}
+
+#header p {
+  padding-top: 10%;
 }
 
 .welcome {
@@ -21806,18 +21819,6 @@ tr:nth-child(even) {
     margin-left: 10px;
     font-size: 22px;
   }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  height: 100%;
-  font-family: "Lato", sans-serif;
-  overflow-x: hidden;
 }
 
 @media (min-width: 640px) {

@@ -30,9 +30,6 @@
                         </div>
                         <div>
 
-
-
-
                             <table>
                                 <tr>
                                     <th>Name</th>

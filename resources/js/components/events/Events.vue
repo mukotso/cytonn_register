@@ -144,10 +144,10 @@ export default {
         },
 
         editEvent(event) {
-            window.location.href = "/event/" + event.id + "/edit";
+            window.location.href = "/events/" + event.id + "/edit";
         },
         showEvent(event) {
-            window.location.href = "/event/" + event.id;
+            window.location.href = "/events/" + event.id;
         },
         getTeamMembersUserIds() {
             this.events.forEach(event => {
@@ -170,7 +170,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete('event/' + event.id).then((response) => {
+                    axios.delete('events/' + event.id).then((response) => {
                         this.events = this.events.filter(response => response.id !== event.id)
                         Swal.fire('Deleted!', 'Event has been deleted.', 'success')
 

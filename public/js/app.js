@@ -1978,7 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
     createCategory: function createCategory() {
       var _this = this;
 
-      axios.post('/category', this.form).then(function (response) {
+      axios.post('/categories', this.form).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
           text: response.data['message'],
@@ -2000,7 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateCategory: function updateCategory() {
-      axios.put('/category/' + this.form.id, this.form).then(function (response) {
+      axios.put('/categories/' + this.form.id, this.form).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
           text: response.data['message'],
@@ -2160,7 +2160,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]('category/' + category.id).then(function (response) {
+          axios["delete"]('categories/' + category.id).then(function (response) {
             console.log(response);
             _this.categories = _this.categories.filter(function (response) {
               return response.id !== category.id;
@@ -2315,7 +2315,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]('department/' + department.id).then(function (response) {
+          axios["delete"]('departments/' + department.id).then(function (response) {
             console.log(response);
             _this.departments = _this.departments.filter(function (response) {
               return response.id !== department.id;
@@ -2384,7 +2384,7 @@ __webpack_require__.r(__webpack_exports__);
     createDepartment: function createDepartment() {
       var _this = this;
 
-      axios.post('/department', this.form).then(function (response) {
+      axios.post('/departments', this.form).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
           text: response.data['message'],
@@ -2406,7 +2406,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateDepartment: function updateDepartment() {
-      axios.put('/department/' + this.form.id, this.form).then(function (response) {
+      axios.put('/departments/' + this.form.id, this.form).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
           text: response.data['message'],
@@ -2698,7 +2698,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.activities = this.activities;
       this.form.teamMembers = this.teamMembers;
       this.form.departmentIds = this.departmentIds;
-      axios.post('/event', this.form).then(function (response) {
+      axios.post('/events', this.form).then(function (response) {
         console.log(response);
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
@@ -3034,7 +3034,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.form.activities = this.activities;
       this.form.teamMembers = this.teamMembers;
       console.log(this.form);
-      axios.put('/event/' + this.form.id, this.form).then(function (response) {
+      axios.put('/events/' + this.form.id, this.form).then(function (response) {
         console.log(response);
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
@@ -3204,10 +3204,10 @@ __webpack_require__.r(__webpack_exports__);
       this.showEvents = true;
     },
     editEvent: function editEvent(event) {
-      window.location.href = "/event/" + event.id + "/edit";
+      window.location.href = "/events/" + event.id + "/edit";
     },
     showEvent: function showEvent(event) {
-      window.location.href = "/event/" + event.id;
+      window.location.href = "/events/" + event.id;
     },
     getTeamMembersUserIds: function getTeamMembersUserIds() {
       this.events.forEach(function (event) {
@@ -3231,7 +3231,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]('event/' + event.id).then(function (response) {
+          axios["delete"]('events/' + event.id).then(function (response) {
             _this.events = _this.events.filter(function (response) {
               return response.id !== event.id;
             });
@@ -3635,7 +3635,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateProfile: function updateProfile() {
-      axios.put('/user/' + this.form.id, this.form).then(function (response) {
+      axios.put('/users/' + this.form.id, this.form).then(function (response) {
         if (response.status === 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
             title: 'Success!',
@@ -3859,7 +3859,7 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser() {
       var _this2 = this;
 
-      axios.post('/user', this.form).then(function (response) {
+      axios.post('/users', this.form).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
           text: response.data['message'],
@@ -3881,7 +3881,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateUser: function updateUser() {
-      axios.put('/user/' + this.form.id, this.form).then(function (response) {
+      axios.put('/users/' + this.form.id, this.form).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
           text: response.data['message'],
@@ -4050,7 +4050,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]('user/' + user.id).then(function (response) {
+          axios["delete"]('users/' + user.id).then(function (response) {
             _this.users = _this.users.filter(function (response) {
               return response.id !== user.id;
             });
@@ -43876,7 +43876,6 @@ var render = function () {
             required: "",
             name: "description",
             rows: "5",
-            required: "",
           },
           domProps: { value: _vm.form.description },
           on: {

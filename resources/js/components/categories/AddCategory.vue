@@ -12,7 +12,7 @@
             <label >Description</label>
             <textarea type="text" v-model="form.description"
                       placeholder="brief category description"
-                      required name="description" rows="5" required></textarea>
+                      required name="description" rows="5" ></textarea>
 
         </div>
 
@@ -37,7 +37,7 @@ export default {
     methods:{
 
         createCategory() {
-            axios.post('/category', this.form).then((response) => {
+            axios.post('/categories', this.form).then((response) => {
 
                     Swal.fire({
                         title: 'Success!',
@@ -62,7 +62,7 @@ export default {
         },
 
         updateCategory() {
-            axios.put('/category/'+this.form.id, this.form).then((response) => {
+            axios.put('/categories/'+this.form.id, this.form).then((response) => {
                     Swal.fire({
                         title: 'Success!',
                         text: response.data['message'],

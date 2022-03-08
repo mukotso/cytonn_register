@@ -74,7 +74,7 @@ export default {
     methods:{
 
         createUser() {
-            axios.post('/user', this.form).then((response) => {
+            axios.post('/users', this.form).then((response) => {
 
                     Swal.fire({
                         title: 'Success!',
@@ -99,7 +99,7 @@ export default {
         },
 
         updateUser() {
-            axios.put('/user/'+this.form.id, this.form).then((response) => {
+            axios.put('/users/'+this.form.id, this.form).then((response) => {
 
                     Swal.fire({
                         title: 'Success!',

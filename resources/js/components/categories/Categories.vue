@@ -124,7 +124,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete('category/'+category.id).then((response) => {
+                    axios.delete('categories/'+category.id).then((response) => {
 
                             console.log(response);
                             this.categories = this.categories.filter(response => response.id !== category.id)
@@ -144,10 +144,7 @@ export default {
                     })
                 }
             })
-
         },
-
-
     }
 
 }

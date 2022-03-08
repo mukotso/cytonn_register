@@ -110,7 +110,7 @@ export default {
 
     methods:{
         updateProfile() {
-            axios.put('/user/'+this.form.id, this.form).then((response) => {
+            axios.put('/users/'+this.form.id, this.form).then((response) => {
                 if (response.status === 200) {
                     Swal.fire({
                         title: 'Success!',

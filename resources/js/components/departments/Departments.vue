@@ -117,7 +117,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete('department/'+department.id).then((response) => {
+                    axios.delete('departments/'+department.id).then((response) => {
 
                             console.log(response);
                             this.departments = this.departments.filter(response => response.id !== department.id)

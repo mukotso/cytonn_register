@@ -286,7 +286,7 @@ export default {
             this.form.activities = this.activities;
             this.form.teamMembers = this.teamMembers;
             console.log(this.form);
-            axios.put('/event/'+this.form.id, this.form).then((response) => {
+            axios.put('/events/'+this.form.id, this.form).then((response) => {
                 console.log(response)
                     Swal.fire({
                         title: 'Success!',

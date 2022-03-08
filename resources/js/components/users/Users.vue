@@ -133,7 +133,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete('user/'+user.id).then((response) => {
+                    axios.delete('users/'+user.id).then((response) => {
 
                             this.users = this.users.filter(response => response.id !== user.id)
                             Swal.fire({

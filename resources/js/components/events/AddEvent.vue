@@ -265,7 +265,7 @@ export default {
             this.form.activities = this.activities;
             this.form.teamMembers = this.teamMembers;
             this.form.departmentIds = this.departmentIds;
-            axios.post('/event', this.form).then((response) => {
+            axios.post('/events', this.form).then((response) => {
                 console.log(response)
 
                 Swal.fire({

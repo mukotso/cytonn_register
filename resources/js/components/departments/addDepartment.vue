@@ -30,7 +30,7 @@ export default {
     methods: {
 
         createDepartment() {
-            axios.post('/department', this.form).then((response) => {
+            axios.post('/departments', this.form).then((response) => {
                     Swal.fire({
                         title: 'Success!',
                         text: response.data['message'],
@@ -54,7 +54,7 @@ export default {
         },
 
         updateDepartment() {
-            axios.put('/department/' + this.form.id, this.form).then((response) => {
+            axios.put('/departments/' + this.form.id, this.form).then((response) => {
                     Swal.fire({
                         title: 'Success!',
                         text: response.data['message'],

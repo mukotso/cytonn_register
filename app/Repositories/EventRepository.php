@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Interfaces\EventRepositoryInterface;
 use App\Models\Activity;
-use App\Models\Department;
 use App\Models\DepartmentEvent;
 use App\Models\Event;
 use App\Models\EventTeamMember;
@@ -16,59 +15,36 @@ class EventRepository implements EventRepositoryInterface
 {
     public function createEvent(array $eventDetails)
     {
-
-        if($eventDetails['lead_date']>=$eventDetails['event_date']){
+        if ($eventDetails['lead_date'] >= $eventDetails['event_date']) {
             return response()->json([
                 'errors' => json_decode('{ "error": "Preparation start Date can not be more than the actual Event Date" }'),
             ], 400);
         }
         try {
-            $event = new Event();
-            $event->category_id = $eventDetails['category_id'];
-            $event->frequency_id = $eventDetails['frequency_id'];
-            $event->user_id = Auth::user()->id;
-            $event->name = $eventDetails['name'];
-            $event->venue = $eventDetails['venue'];
-            $event->start_date = $eventDetails['event_date'];
-            $event->event_date = $eventDetails['event_date'];
-            $event->lead_time = $eventDetails['lead_date'];
-            $event->save();
-
-            //activity
-
-            foreach ($eventDetails['activities'] as $activityDescription) {
-                $activity = new Activity();
-                $activity->event_id = $event->id;
-                $activity->description = $activityDescription['description'];
-                $activity->status = 'active';
-                $activity->save();
+            $eventDetails['user_id'] = Auth()->User()->id;
+            $eventDetails['start_date'] = $eventDetails['event_date'];
+            $event = Event::create($eventDetails);
+            foreach ($eventDetails['activities'] as $activity) {
+                $activity['event_id'] = $event->id;
+                Activity::create($activity);
             }
-
-
-
-//        team member
             foreach ($eventDetails['teamMembers'] as $teamMember) {
-                $eventTeamMember = new EventTeamMember;
-                $eventTeamMember->event_id = $event->id;
-                $eventTeamMember->user_id = $teamMember['user']['id'];
-                $eventTeamMember->designation = $teamMember['designation'];
-                $eventTeamMember->save();
+                $teamMember['event_id'] = $event->id;
+                $teamMember['user_id'] = $teamMember['user']['id'];
+                EventTeamMember::create($teamMember);
             }
-
-            foreach ($eventDetails['departmentIds'] as $departmentId) {
-                $departmentEvent = new DepartmentEvent();
-                $departmentEvent->event_id = $event->id;
-                $departmentEvent->department_id = $departmentId;
-                $departmentEvent->save();
+            foreach ($eventDetails['departmentIds'] as $department_id) {
+                $department['event_id'] = $event->id;
+                $department['department_id'] = $department_id;
+                DepartmentEvent::create($department);
             }
             return response()->json(['message' => "Event Created successfully"], 200);
-
         } catch (Exception $ex) {
             DB::rollBack();
             return response()->json([
                 'errors' => json_decode('{ "error": "An error occurred Please Try again" }'),
             ], 400);
-             }
+        }
     }
 
     public function getAllEvents()
@@ -89,7 +65,7 @@ class EventRepository implements EventRepositoryInterface
     public function getEventById($event)
     {
         return Event::where('id', $event)
-            ->with('activities','creator', 'teamMembers.user', 'category', 'frequency')
+            ->with('activities', 'creator', 'teamMembers.user', 'category', 'frequency')
             ->get();
     }
 
@@ -99,57 +75,21 @@ class EventRepository implements EventRepositoryInterface
         $user = Auth::user();
         if (in_array($user->id, $teamMembersUserIds) || $user->is_admin == 1) {
             $event = Event::where('id', $eventId)->first();
-            $event->category_id = $eventDetails['category_id'];
-            $event->frequency_id = $eventDetails['frequency_id'];
-            $event->name = $eventDetails['name'];
-            $event->venue = $eventDetails['venue'];
-            $event->start_date = $eventDetails['event_date'];
-            $event->event_date = $eventDetails['event_date'];
-            $event->lead_time = $eventDetails['lead_date'];
-            $event->update();
-
+            $event->update($eventDetails);
             //activity
-            $eventActivities = Activity::where('event_id', $eventId)->get()->toArray();
-            $eventActivitiesArray = [];
-            foreach ($eventActivities as $activity) {
-                array_push($eventActivitiesArray, $activity['description']);
+            foreach ($eventDetails['activities'] as $activity) {
+                $activity['event_id'] = $event->id;
+                Activity::updateOrCreate(['description' => $activity['description']], $activity);
             }
-
-            foreach ($eventDetails['activities'] as $activityDescription) {
-                if (in_array($activityDescription['description'], $eventActivitiesArray)) {
-                    continue;
-                } else {
-                    $activity = new Activity();
-                    $activity->event_id = $eventId;
-                    $activity->description = $activityDescription['description'];
-                    $activity->status = 'active';
-                    $activity->save();
-                }
-            }
-
-//        team member
-            $eventTeamMembers = EventTeamMember::where('event_id', $eventId)->get()->toArray();
-            $eventTeamMembersUserIds = [];
-            foreach ($eventTeamMembers as $teamMember) {
-                array_push($eventTeamMembersUserIds, $teamMember['user_id']);
-            }
-
             foreach ($eventDetails['teamMembers'] as $teamMember) {
-                if (in_array($teamMember['user']['id'], $eventTeamMembersUserIds)) {
-                    continue;
-                } else {
-                    $eventTeamMember = new EventTeamMember;
-                    $eventTeamMember->event_id = $eventId;
-                    $eventTeamMember->user_id = $teamMember['user']['id'];
-                    $eventTeamMember->is_owner = 0;
-                    $eventTeamMember->designation = $teamMember['designation'];
-                    $eventTeamMember->save();
-                }
+                $teamMember['event_id'] = $event->id;
+                $teamMember['user_id'] = $teamMember['user']['id'];
+                EventTeamMember::updateOrCreate(['user_id' => $teamMember['user_id']], $teamMember);
             }
-            return response()->json(['message' => "Event Details Updated successfully"], 200);
 
+            return response()->json(['message' => "Event Details Updated successfully"], 200);
         } else {
-                abort(401);
+            abort(401);
         }
 
 
@@ -159,12 +99,13 @@ class EventRepository implements EventRepositoryInterface
 //        $departmentEvent->save();
     }
 
-    public function deleteEvent($eventId)
+    public
+    function deleteEvent($eventId)
     {
         $teamMembersUserIds = $this->getEventTeamMembers($eventId);
         $user = Auth::user();
         if (in_array($user->id, $teamMembersUserIds) || $user->is_admin == 1) {
-             Event::destroy($eventId);
+            Event::destroy($eventId);
             return response()->json(['message' => "Event Deleted successfully"], 200);
         } else {
             abort(401);
@@ -172,7 +113,8 @@ class EventRepository implements EventRepositoryInterface
 
     }
 
-    public function getEventTeamMembers($eventId)
+    public
+    function getEventTeamMembers($eventId)
     {
         $members = Event::where('id', $eventId)->with('teamMembers.user')->first();
         $teamMembersUserIds = [];

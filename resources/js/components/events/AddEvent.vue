@@ -266,7 +266,7 @@ export default {
             this.form.teamMembers = this.teamMembers;
             this.form.departmentIds = this.departmentIds;
             axios.post('/events', this.form).then((response) => {
-                console.log(response)
+                console.log(response.data)
 
                 Swal.fire({
                     title: 'Success!',
@@ -278,7 +278,6 @@ export default {
                         window.location.href = "/events";
                     }
                 })
-
 
                 this.isShowAddEventForm = false;
             }).catch((error) => {

@@ -9,13 +9,14 @@ class Event extends Model
 {
     protected $with=['activities','category','frequency','creator'];
     protected $fillable=[
-        'category-id',
+        'category_id',
         'frequency_id',
+        'user_id',
         'name',
         'venue',
         'start_date',
         'event_date',
-        'lead_time'
+        'lead_date'
         ];
 
     public function activities(){

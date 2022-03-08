@@ -26,10 +26,7 @@ class UserRepository implements UserRepositoryInterface
 
                 try {
                     $randomPassword = Str::random(9);
-                    $hashedPassword = bcrypt($randomPassword);
-                    $userDetails['password'] = $hashedPassword;
-                    $userDetails['phone_number'] = '+254' . $userDetails['phone_number'];
-                    $userDetails['email'] = strtolower(trim($userDetails['email']));
+                    $userDetails['password'] = bcrypt($randomPassword);
                     $userDetails['is_admin'] = false;
                     $user = User::create($userDetails);
                     $details = [
@@ -37,9 +34,7 @@ class UserRepository implements UserRepositoryInterface
                         'email' => $user->email,
                         'password' => $randomPassword,
                     ];
-
                     Mail::to($user->email)->send(new UserRegistration($details));
-
                     return response()->json(['message' => "User Created successfully"], 200);
                 } catch (Exception $ex) {
                     DB::rollBack();

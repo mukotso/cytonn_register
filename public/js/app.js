@@ -2699,7 +2699,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.teamMembers = this.teamMembers;
       this.form.departmentIds = this.departmentIds;
       axios.post('/events', this.form).then(function (response) {
-        console.log(response);
+        console.log(response.data);
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           title: 'Success!',
           text: response.data['message'],

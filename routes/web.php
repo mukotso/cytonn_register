@@ -9,7 +9,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware('auth')->group(function () {
+//Route::middleware('auth')->group(function () {
     Route::resource('users','UsersController');
     Route::resource('departments','DepartmentsController');
     Route::resource('categories','CategoriesController');
@@ -23,4 +23,4 @@ Route::middleware('auth')->group(function () {
     Route::get('event/remove-activity/{activity}', 'EventActivitiesController@destroy');
     Route::get('event/complete-activity/{activity}', 'EventActivitiesController@complete');
     Route::get('event/activity-not-happening/{activity}', 'EventActivitiesController@activityNotHappening');
-    });
+//    });
